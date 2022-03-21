@@ -26,32 +26,24 @@ class _ProfileState extends State<Profile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: EdgeInsets.all(15),
-              child: Center(
-                child: Text(
-                  'Perfil',
-                  style: generalText(Colors.black, 32),
-                ),
-              ),
-            ),
+            const SizedBox(height: 20),
             //Imagen de perfil
             const SizedBox(
                 height: 115,
                 width: 115,
                 child: CircleAvatar(
                     backgroundImage: AssetImage('assets/profile_example.jpg'))),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             //Nombre del usuario
             Text('John Doe', style: generalText(Colors.black, 20)),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             //Descripción
             Text('Me gustan las películas de suspenso y los libros',
                 style: generalText(Colors.grey, 15)),
             const SizedBox(height: 30),
             //Celular
             Container(
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -88,7 +80,7 @@ class _ProfileState extends State<Profile> {
               height: 15,
             ),
             Container(
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -100,10 +92,10 @@ class _ProfileState extends State<Profile> {
                   ],
                 )),
             const SizedBox(height: 10),
-            Container(
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: Image(image: AssetImage('assets/horario.png'))),
             SizedBox(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: const Image(image: AssetImage('assets/horario.png'))),
+            const SizedBox(
               height: 15,
             ),
             Container(
@@ -124,11 +116,11 @@ class _ProfileState extends State<Profile> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.edit,
                           color: Colors.white,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
                           'Editar Perfil',
                           style: generalText(Colors.white, 15),
@@ -137,11 +129,11 @@ class _ProfileState extends State<Profile> {
                     )),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: Padding(
                 padding: const EdgeInsets.only(right: 220),
                 child: ElevatedButton(
@@ -158,11 +150,11 @@ class _ProfileState extends State<Profile> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.logout,
                           color: Colors.white,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
                           'Cerrar Sesión',
                           style: generalText(Colors.white, 15),

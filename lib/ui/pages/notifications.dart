@@ -44,22 +44,26 @@ class _NotificationsState extends State<Notifications> {
                 ),
               ],
             ),
-            estiloBtn('Aceptar', Colors.blue),
-            estiloBtn('Rechazar', Colors.black)
+            estiloBtn('Aceptar', Colors.amber, Colors.black),
+            estiloBtn('Rechazar', Colors.black, Colors.white)
           ],
         ),
       ),
     ));
   }
 
-  ElevatedButton estiloBtn(String text, Color color) {
+  ElevatedButton estiloBtn(String text, Color color, Color txtColor) {
     return ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) => color),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)))),
-      onPressed: () {},
-      child: Text(text),
-    );
+        style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.resolveWith((states) => color),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)))),
+        onPressed: () {},
+        child: Text(
+          text,
+          style: TextStyle(color: txtColor),
+        ));
   }
 }
