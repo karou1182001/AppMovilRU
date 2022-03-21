@@ -15,6 +15,16 @@ class MyCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70.0),
+        child: AppBar(
+          backgroundColor: white,
+          title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
+          actions: const [
+            IconButton(onPressed: null, icon: Icon(Icons.search))
+          ],
+        ),
+      ),
       body: SfCalendar(
           view: CalendarView.month, //Vista de mes por defecto
           initialSelectedDate: DateTime.now(),
