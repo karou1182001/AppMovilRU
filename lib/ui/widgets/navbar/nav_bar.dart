@@ -14,6 +14,7 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   @override
+  //Colocamos que inicie en el menú 2, para que por defecto salga el calendario
   int selectBtn = 2;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +27,7 @@ class _NavBarState extends State<NavBar> {
   }
 
   //--------------------WIDGET NAVBAR------------------------------------
+  //Navbar
   AnimatedContainer navigationBar() {
     return AnimatedContainer(
       //Altura de la Navbar respecto a la pantalla
@@ -34,7 +36,7 @@ class _NavBarState extends State<NavBar> {
       duration: const Duration(milliseconds: 0),
       //Forma de la cajita de la navbar(bordeado, etc))
       decoration: BoxDecoration(
-        color: purple,
+        color: colorp1,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(selectBtn == 0 ? 0.0 : 30.0),
           topRight:
@@ -59,6 +61,7 @@ class _NavBarState extends State<NavBar> {
     );
   }
 
+  //Cada uno de los iconos de la Navbar
   SizedBox iconBtn(int i) {
     //Verifica si ese botón ha sido seleccionado o no
     bool isActive = selectBtn == i ? true : false;
@@ -87,12 +90,12 @@ class _NavBarState extends State<NavBar> {
               alignment: Alignment.center,
               child: Icon(
                 navBtn[i].icon,
-                color: isActive ? selectColor : black,
+                color: isActive ? white : black,
                 //size: 2,
               )
               /*child: Image.asset(
               navBtn[i].imagePath,
-              color: isActive ? selectColor : black,
+              color: isActive ? white : black,
               scale: 2,
             ),*/
               ),
@@ -100,7 +103,7 @@ class _NavBarState extends State<NavBar> {
             alignment: Alignment.bottomCenter,
             child: Text(
               navBtn[i].name,
-              style: isActive ? bntText.copyWith(color: selectColor) : bntText,
+              style: isActive ? bntText.copyWith(color: white) : bntText,
             ),
           )
         ],
