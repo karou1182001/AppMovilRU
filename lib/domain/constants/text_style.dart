@@ -6,3 +6,7 @@ const TextStyle bntText = TextStyle(
   color: black,
   fontWeight: FontWeight.w500,
 );
+
+TextStyle generalText(Color color, double size) {
+  return TextStyle(color: color, fontSize: size, fontWeight: FontWeight.w300);
+}
