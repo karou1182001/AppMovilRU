@@ -32,32 +32,44 @@ class _NotificationsState extends State<Notifications> {
   Widget getCard(String username) {
     return Card(
         child: Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.only(top: 8),
       child: ListTile(
         title: Row(
-          children: <Widget>[
-            Container(),
-            SizedBox(width: 20),
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: [
                 Text(
                   "$username",
                   style: TextStyle(fontSize: 17),
                 ),
                 SizedBox(height: 10),
                 Container(
-                  width: 250,
+                  width: 160,
                   child: Text(
                     "Quiere ser tu amigo",
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
               ],
-            )
+            ),
+            estiloBtn('Aceptar', Colors.blue),
+            estiloBtn('Rechazar', Colors.black)
           ],
         ),
       ),
     ));
+  }
+
+  ElevatedButton estiloBtn(String text, Color color) {
+    return ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) => color),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)))),
+      onPressed: () {},
+      child: Text(text),
+    );
   }
 }

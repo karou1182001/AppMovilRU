@@ -112,6 +112,10 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.only(right: 220),
                 child: ElevatedButton(
                     style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => Colors.black)),
                     onPressed: () {
@@ -142,6 +146,10 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.only(right: 220),
                 child: ElevatedButton(
                     style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => Colors.black)),
                     onPressed: () {
