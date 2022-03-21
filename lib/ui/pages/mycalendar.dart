@@ -12,13 +12,13 @@ class MyCalendar extends StatelessWidget {
       body: const Center(
         child: Text("MyCalendar"),
       ),
-      /*floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {
           print("Hola");
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ),*/
+      ),
     );
   }
 }
