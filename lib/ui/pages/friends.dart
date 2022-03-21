@@ -17,6 +17,23 @@ class _FriendsState extends State<Friends> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: getBody(),
+    );
+  }
+
+  Widget getBody() {
+    if (widgetType == 0) {
+      return friendsList();
+      
+    } else {
+      return getFriendWidget(
+          actualFriendName, actualFriendMail, actualFriendImg);
+    }
+  }
+
+
+  Widget friendsList(){
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
         child: AppBar(
@@ -27,26 +44,18 @@ class _FriendsState extends State<Friends> {
           ],
         ),
       ),
-      body: getBody(),
-    );
-  }
-
-  Widget getBody() {
-    if (widgetType == 0) {
-      return ListView(
+      body: (
+        ListView(
         children: [
           getCard(),
           getCard(),
           getCard(),
           getCard(),
         ],
-      );
-    } else {
-      return getFriendWidget(
-          actualFriendName, actualFriendMail, actualFriendImg);
-    }
+      )
+      )
+    );
   }
-
   void getFriendInfo(String fullName, String email, String imgUrl) {
     setState(() {
       widgetType = 1;
@@ -58,6 +67,16 @@ class _FriendsState extends State<Friends> {
 
   Widget getFriendWidget(String name, String email, String imgUrl) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70.0),
+        child: AppBar(
+          backgroundColor: white,
+          title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
+          actions:  [
+            IconButton(onPressed: () => setState(() => widgetType = 0), icon: const Icon(Icons.arrow_back),color: Colors.amber,)
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
