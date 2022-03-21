@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:flutter/material.dart';
+import 'package:app_ru/domain/constants/text_style.dart';
 
 class Friends extends StatefulWidget {
   const Friends({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class _FriendsState extends State<Friends> {
   int widgetType = 0;
   String actualFriendName = "gg";
   String actualFriendMail = "gg";
+  String actualFriendImg = "gg";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,26 +34,113 @@ class _FriendsState extends State<Friends> {
       ],
     );
     }else{
-      return getFriendWidget(actualFriendName,actualFriendMail);
+      return getFriendWidget(actualFriendName,actualFriendMail, actualFriendImg);
     }
     
   }
 
-  void getFriendInfo(String fullName,String email){
+  void getFriendInfo(String fullName,String email, String imgUrl){
     setState(() {
       widgetType = 1;
       actualFriendName = fullName;
       actualFriendMail = email;
+      actualFriendImg = imgUrl;
     });
   }
 
-  Widget getFriendWidget(String name,String email){
+  Widget getFriendWidget(String name,String email, String imgUrl){
     
-    return  Row(
-      children: <Widget>[
-        Text(name),
-        Text(email),
-      ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.all(15),
+              child: Center(
+                child: Text(
+                  'Perfil',
+                  style: generalText(Colors.black, 32),
+                ),
+              ),
+            ),
+            //Imagen de perfil
+             SizedBox(
+                height: 115,
+                width: 115,
+                child: CircleAvatar(
+                    backgroundImage: NetworkImage(imgUrl),
+                    radius: 60,
+                    )),
+            SizedBox(height: 10),
+            //Nombre del usuario
+            Text(name, style: generalText(Colors.black, 18)),
+            SizedBox(height: 15),
+            //Descripción
+            Text('Me gustan las tortugas',
+                style: generalText(Colors.grey, 15)),
+            const SizedBox(height: 30),
+            //Celular
+            Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.phone),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('Celular: 3183762809',
+                        style: generalText(Colors.black, 15)),
+                  ],
+                )),
+            const SizedBox(
+              height: 15,
+            ),
+            //Parte del switch de RU?, que indica si el usuario se encuentra en la U o no.
+            Container(
+                padding: const EdgeInsets.only(left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.location_on),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('RU?', style: generalText(Colors.black, 15)),
+                    Container(
+                      decoration: new BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    )
+                  ],
+                )),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.calendar_today),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('Horario', style: generalText(Colors.black, 15)),
+                  ],
+                )),
+            const SizedBox(height: 10),
+            Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Image(image: AssetImage('assets/horario.png'))),
+            SizedBox(
+              height: 15,
+            ),
+          ],
+        ),
+      ),
     );
     
   }
@@ -57,10 +148,11 @@ class _FriendsState extends State<Friends> {
   Widget getCard(){
     String fullName = "Alejandro Vertel";
     String email = "vertel@uninorte.edu.co"; 
+    String imgUrl = "https://pps.whatsapp.net/v/t61.24694-24/255159378_1025571168234367_8655761191054013483_n.jpg?ccb=11-4&oh=b9dda4905db512f22fcd0fc126f0b18b&oe=623B8155";
     return GestureDetector(
       onTap:() =>  setState(() {
         widgetType = 1;
-        getFriendInfo(fullName,email);
+        getFriendInfo(fullName,email,imgUrl);
       }),
       child:
       Card(
