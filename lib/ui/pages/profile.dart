@@ -102,12 +102,12 @@ class _ProfileState extends State<Profile> {
             Container(
               padding: EdgeInsets.only(left: 10),
               child: Padding(
-                padding: const EdgeInsets.only(right: 200),
+                padding: const EdgeInsets.only(right: 220),
                 child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => Colors.black)),
-                    onPressed: () {},
+                    onPressed: () {print('Navegar hacia la pantalla de editar perfil');},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -117,13 +117,41 @@ class _ProfileState extends State<Profile> {
                         ),
                         SizedBox(width: 10),
                         Text(
-                          'Hola',
+                          'Editar Perfil',
                           style: generalText(Colors.white, 15),
                         )
                       ],
                     )),
               ),
-            )
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 220),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateColor.resolveWith(
+                            (states) => Colors.black)),
+                    onPressed: () {print('Navegar hacia la pantalla de inicio de sesión');},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Cerrar Sesión',
+                          style: generalText(Colors.white, 15),
+                        )
+                      ],
+                    )),
+              ),
+            ),
           ],
         ),
       ),
