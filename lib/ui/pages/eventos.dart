@@ -6,7 +6,17 @@ class Eventos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70.0),
+        child: AppBar(
+          backgroundColor: white,
+          title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
+          actions: const [
+            IconButton(onPressed: null, icon: Icon(Icons.search))
+          ],
+        ),
+      ),
       body: Center(
         child: Text("Eventos"),
       ),

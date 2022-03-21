@@ -12,7 +12,21 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(children: [getCard('John Doe'), getCard('Joanna Doe'), getCard('Piter Doe')]));
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(70.0),
+          child: AppBar(
+            backgroundColor: white,
+            title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
+            actions: const [
+              IconButton(onPressed: null, icon: Icon(Icons.search))
+            ],
+          ),
+        ),
+        body: ListView(children: [
+          getCard('John Doe'),
+          getCard('Joanna Doe'),
+          getCard('Piter Doe')
+        ]));
   }
 
   Widget getCard(String username) {
