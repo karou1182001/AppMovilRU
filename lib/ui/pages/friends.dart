@@ -114,7 +114,7 @@ class _FriendsState extends State<Friends> {
                         width: 20,
                         height: 20,
                         decoration: new BoxDecoration(
-                          color: Colors.green,
+                          color: Colors.red,
                           shape: BoxShape.circle,
                         ),
                       ),
