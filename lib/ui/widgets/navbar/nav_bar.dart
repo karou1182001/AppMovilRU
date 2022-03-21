@@ -18,7 +18,6 @@ class _NavBarState extends State<NavBar> {
   int selectBtn = 2;
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("RU")),
       //Aquí se pone el widget que se seleccione en la NavBar
       body: navBtn[selectBtn].widget,
       //Aquí se pone la NavBar
