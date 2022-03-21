@@ -108,10 +108,15 @@ class _FriendsState extends State<Friends> {
                       width: 10,
                     ),
                     Text('RU?', style: generalText(Colors.black, 15)),
-                    Container(
-                      decoration: new BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 20,
+                        height: 20,
+                        decoration: new BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     )
                   ],
