@@ -17,21 +17,21 @@ class _NavBarState extends State<NavBar> {
   //Colocamos que inicie en el menú 2, para que por defecto salga el calendario
   int selectBtn = 2;
   Widget build(BuildContext context) {
+    double tam = (MediaQuery.of(context).size.width / 5).floor().toDouble();
     return Scaffold(
-      appBar: AppBar(title: const Text("RU")),
       //Aquí se pone el widget que se seleccione en la NavBar
       body: navBtn[selectBtn].widget,
       //Aquí se pone la NavBar
-      bottomNavigationBar: navigationBar(),
+      bottomNavigationBar: navigationBar(tam),
     );
   }
 
   //--------------------WIDGET NAVBAR------------------------------------
   //Navbar
-  AnimatedContainer navigationBar() {
+  AnimatedContainer navigationBar(double tam) {
     return AnimatedContainer(
       //Altura de la Navbar respecto a la pantalla
-      height: 80.0,
+      height: 75.0,
       //Tiempo que dura en pasar de un icono a otro
       duration: const Duration(milliseconds: 0),
       //Forma de la cajita de la navbar(bordeado, etc))
@@ -46,7 +46,6 @@ class _NavBarState extends State<NavBar> {
       //Lo que se va a encontrar dentro del contenedor, una fila con cada uno de
       //los menú
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           //Vaa  recorrer cada  uno de  los menú que están en la clase navbar
           //y los va a poner en una cajita iconBtn
@@ -54,7 +53,7 @@ class _NavBarState extends State<NavBar> {
             GestureDetector(
               //Con el set State activa el botón seleccionado
               onTap: () => setState(() => selectBtn = i),
-              child: iconBtn(i),
+              child: iconBtn(i, tam),
             ),
         ],
       ),
@@ -62,13 +61,14 @@ class _NavBarState extends State<NavBar> {
   }
 
   //Cada uno de los iconos de la Navbar
-  SizedBox iconBtn(int i) {
+  Container iconBtn(int i, double tam) {
     //Verifica si ese botón ha sido seleccionado o no
     bool isActive = selectBtn == i ? true : false;
     var height = isActive ? 60.0 : 0.0;
     var width = isActive ? 50.0 : 0.0;
-    return SizedBox(
-      width: 80.0,
+    return Container(
+      //Tamaño total de la pantalla sobre la cantidad de elementos en la navbar
+      width: tam,
       //Stack pone widgets encima de otros
       child: Stack(
         children: [
@@ -77,7 +77,7 @@ class _NavBarState extends State<NavBar> {
             child: AnimatedContainer(
               height: height,
               width: width,
-              duration: const Duration(milliseconds: 100),
+              duration: const Duration(milliseconds: 50),
               //Si el botón está activado lo pinta
               child: isActive
                   ? CustomPaint(
@@ -92,13 +92,7 @@ class _NavBarState extends State<NavBar> {
                 navBtn[i].icon,
                 color: isActive ? white : black,
                 //size: 2,
-              )
-              /*child: Image.asset(
-              navBtn[i].imagePath,
-              color: isActive ? white : black,
-              scale: 2,
-            ),*/
-              ),
+              )),
           Align(
             alignment: Alignment.bottomCenter,
             child: Text(

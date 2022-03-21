@@ -24,7 +24,7 @@ List<Model> navBtn = [
   Model(
       id: 0,
       icon: CupertinoIcons.person_2_fill,
-      name: 'Friends',
+      name: 'Amigos',
       widget:  Friends()),
   Model(
       id: 1,
@@ -34,7 +34,7 @@ List<Model> navBtn = [
   Model(
       id: 2,
       icon: CupertinoIcons.calendar,
-      name: 'Calendar',
+      name: 'Calendario',
       widget: const MyCalendar()),
   Model(
       id: 3,
@@ -44,6 +44,6 @@ List<Model> navBtn = [
   Model(
       id: 4,
       icon: CupertinoIcons.profile_circled,
-      name: 'Profile',
+      name: 'Perfil',
       widget: const Profile()),
 ];
