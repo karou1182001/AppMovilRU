@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:flutter/material.dart';
