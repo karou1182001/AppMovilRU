@@ -107,7 +107,7 @@ class _ProfileState extends State<Profile> {
                     style: ButtonStyle(
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => Colors.black)),
-                    onPressed: () {},
+                    onPressed: () {print('Navegar hacia la pantalla de editar perfil');},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -135,7 +135,7 @@ class _ProfileState extends State<Profile> {
                     style: ButtonStyle(
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => Colors.black)),
-                    onPressed: () {},
+                    onPressed: () {print('Navegar hacia la pantalla de inicio de sesión');},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
