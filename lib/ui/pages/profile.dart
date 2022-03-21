@@ -105,9 +105,15 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.only(right: 220),
                 child: ElevatedButton(
                     style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => Colors.black)),
-                    onPressed: () {print('Navegar hacia la pantalla de editar perfil');},
+                    onPressed: () {
+                      print('Navegar hacia la pantalla de editar perfil');
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -133,9 +139,15 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.only(right: 220),
                 child: ElevatedButton(
                     style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => Colors.black)),
-                    onPressed: () {print('Navegar hacia la pantalla de inicio de sesión');},
+                    onPressed: () {
+                      print('Navegar hacia la pantalla de inicio de sesión');
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
