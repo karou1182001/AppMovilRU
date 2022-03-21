@@ -36,7 +36,7 @@ class _ProfileState extends State<Profile> {
                     backgroundImage: AssetImage('assets/profile_example.jpg'))),
             SizedBox(height: 10),
             //Nombre del usuario
-            Text('John Doe', style: generalText(Colors.black, 18)),
+            Text('John Doe', style: generalText(Colors.black, 20)),
             SizedBox(height: 15),
             //Descripción
             Text('Me gustan las películas de suspenso y los libros',
