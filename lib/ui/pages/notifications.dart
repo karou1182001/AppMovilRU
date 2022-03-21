@@ -13,13 +13,13 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(children: [
-      getCard('John Doe'),
-      getCard('Joanna Doe'),
-      getCard('Piter Doe')
+      getCardFriend('John Doe'),
+      getCardFriend('Joanna Doe'),
+      getCardFriend('Piter Doe')
     ]));
   }
 
-  Widget getCard(String username) {
+  Widget getCardFriend(String username) {
     return Card(
         child: Padding(
       padding: EdgeInsets.only(top: 8),
