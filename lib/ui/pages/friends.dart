@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
@@ -23,23 +21,23 @@ class _FriendsState extends State<Friends> {
     );
   }
 
-  Widget getBody(){
-    if (widgetType == 0){
+  Widget getBody() {
+    if (widgetType == 0) {
       return ListView(
-      children: [
-        getCard(),
-        getCard(),
-        getCard(),
-        getCard(),
-      ],
-    );
-    }else{
-      return getFriendWidget(actualFriendName,actualFriendMail, actualFriendImg);
+        children: [
+          getCard(),
+          getCard(),
+          getCard(),
+          getCard(),
+        ],
+      );
+    } else {
+      return getFriendWidget(
+          actualFriendName, actualFriendMail, actualFriendImg);
     }
-    
   }
 
-  void getFriendInfo(String fullName,String email, String imgUrl){
+  void getFriendInfo(String fullName, String email, String imgUrl) {
     setState(() {
       widgetType = 1;
       actualFriendName = fullName;
@@ -48,8 +46,7 @@ class _FriendsState extends State<Friends> {
     });
   }
 
-  Widget getFriendWidget(String name,String email, String imgUrl){
-    
+  Widget getFriendWidget(String name, String email, String imgUrl) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -65,20 +62,19 @@ class _FriendsState extends State<Friends> {
               ),
             ),
             //Imagen de perfil
-             SizedBox(
+            SizedBox(
                 height: 115,
                 width: 115,
                 child: CircleAvatar(
-                    backgroundImage: NetworkImage(imgUrl),
-                    radius: 60,
-                    )),
+                  backgroundImage: NetworkImage(imgUrl),
+                  radius: 60,
+                )),
             SizedBox(height: 10),
             //Nombre del usuario
             Text(name, style: generalText(Colors.black, 18)),
             SizedBox(height: 15),
             //Descripción
-            Text('Me gustan las tortugas',
-                style: generalText(Colors.grey, 15)),
+            Text('Me gustan las tortugas', style: generalText(Colors.grey, 15)),
             const SizedBox(height: 30),
             //Celular
             Container(
@@ -147,54 +143,47 @@ class _FriendsState extends State<Friends> {
         ),
       ),
     );
-    
   }
 
-  Widget getCard(){
+  Widget getCard() {
     String fullName = "Alejandro Vertel";
-    String email = "vertel@uninorte.edu.co"; 
-    String imgUrl = "https://pps.whatsapp.net/v/t61.24694-24/255159378_1025571168234367_8655761191054013483_n.jpg?ccb=11-4&oh=b9dda4905db512f22fcd0fc126f0b18b&oe=623B8155";
+    String email = "vertel@uninorte.edu.co";
+    String imgUrl =
+        "https://pps.whatsapp.net/v/t61.24694-24/255159378_1025571168234367_8655761191054013483_n.jpg?ccb=11-4&oh=b9dda4905db512f22fcd0fc126f0b18b&oe=623B8155";
     return GestureDetector(
-      onTap:() =>  setState(() {
-        widgetType = 1;
-        getFriendInfo(fullName,email,imgUrl);
-      }),
-      child:
-      Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            title: Row(
-              children: <Widget>[
-                Container(
-                  
-                ),
-                SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "$fullName",
-                      style: TextStyle(fontSize: 17),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      width: 250,
-                      child: Text(
-                        "$email",
-                        style: TextStyle(color: Colors.grey),
+        onTap: () => setState(() {
+              widgetType = 1;
+              getFriendInfo(fullName, email, imgUrl);
+            }),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              title: Row(
+                children: <Widget>[
+                  Container(),
+                  SizedBox(width: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "$fullName",
+                        style: TextStyle(fontSize: 17),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                      SizedBox(height: 10),
+                      Container(
+                        width: 250,
+                        child: Text(
+                          "$email",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
-          ),
-      )
-    );
-
-    
-    
+        ));
   }
 }
