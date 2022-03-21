@@ -19,7 +19,6 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     double tam = (MediaQuery.of(context).size.width / 5).floor().toDouble();
     return Scaffold(
-      appBar: AppBar(title: const Text("RU")),
       //Aquí se pone el widget que se seleccione en la NavBar
       body: navBtn[selectBtn].widget,
       //Aquí se pone la NavBar
