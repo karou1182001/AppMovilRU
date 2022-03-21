@@ -28,6 +28,7 @@ class _EventosListState extends State<EventosList> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: Container(
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
