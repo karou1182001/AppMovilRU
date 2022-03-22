@@ -69,7 +69,8 @@ class _ProfileState extends State<Profile> {
                       width: 10,
                     ),
                     Text('RU?', style: generalText(Colors.black, 15)),
-                    Switch(activeColor: Colors.amber,
+                    Switch(
+                        activeColor: selectColor,
                         value: isSwitched,
                         onChanged: (value) => setState(() {
                               isSwitched = value;

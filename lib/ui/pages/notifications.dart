@@ -12,11 +12,18 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(70.0),
+          child: AppBar(
+            backgroundColor: white,
+            title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
+          ),
+        ),
         body: ListView(children: [
-      getCardFriend('John Doe'),
-      getCardFriend('Joanna Doe'),
-      getCardFriend('Piter Doe')
-    ]));
+          getCardFriend('John Doe'),
+          getCardFriend('Joanna Doe'),
+          getCardFriend('Piter Doe')
+        ]));
   }
 
   Widget getCardFriend(String username) {
@@ -37,15 +44,15 @@ class _NotificationsState extends State<Notifications> {
                 SizedBox(height: 10),
                 Container(
                   width: 160,
-                  child: Text(
+                  child: const Text(
                     "Quiere ser tu amigo",
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
               ],
             ),
-            estiloBtn('Aceptar', Colors.amber, Colors.black),
-            estiloBtn('Rechazar', Colors.black, Colors.white)
+            estiloBtn('Aceptar', selectColor, white),
+            estiloBtn('Rechazar', black, white)
           ],
         ),
       ),
