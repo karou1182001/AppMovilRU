@@ -44,15 +44,15 @@ class _NotificationsState extends State<Notifications> {
                 SizedBox(height: 10),
                 Container(
                   width: 160,
-                  child: Text(
+                  child: const Text(
                     "Quiere ser tu amigo",
                     style: TextStyle(color: Colors.grey),
                   ),
                 ),
               ],
             ),
-            estiloBtn('Aceptar', Colors.amber, Colors.black),
-            estiloBtn('Rechazar', Colors.black, Colors.white)
+            estiloBtn('Aceptar', selectColor, white),
+            estiloBtn('Rechazar', black, white)
           ],
         ),
       ),
