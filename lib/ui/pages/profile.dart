@@ -1,6 +1,8 @@
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:app_ru/ui/pages/inicio.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -149,17 +151,20 @@ class _ProfileState extends State<Profile> {
                       print('Navegar hacia la pantalla de inicio de sesión');
                     },
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Icon(
-                          Icons.logout,
-                          color: Colors.white,
+                        GestureDetector(
+                          onTap: () => Get.to(() => const MenuInicio()),
+                          child: const Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                          ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 50),
                         Text(
                           'Cerrar Sesión',
                           style: generalText(Colors.white, 15),
-                        )
+                        ),
                       ],
                     )),
               ),
