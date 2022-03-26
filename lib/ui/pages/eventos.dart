@@ -19,7 +19,7 @@ class _EventosListState extends State<EventosList> {
     entries.add(Events("Salir de clase", DateTime.now(),
         "Salir de clase y no volver más", Colors.blue, "1"));
     entries.add(Events("Discución intelectual", DateTime.now(),
-        "Nos creemos intelectuales y dicutimos", Colors.green, "0"));
+        "Nos creemos intelectuales y discutimos", Colors.green, "0"));
     entries
         .add(Events("Sufrimiento", DateTime.now(), "Si", Colors.yellow, "1"));
     entries.add(Events("Intercambio de rocas", DateTime.now(),
