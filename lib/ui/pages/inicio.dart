@@ -1,5 +1,6 @@
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/ui/pages/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_ru/ui/pages/registro.dart';
@@ -27,49 +28,49 @@ class MenuInicio extends StatelessWidget{
             const SizedBox(
               height: 15,
             ),
-          Text("Iniciar Sesión", style: generalText(Colors.black, 32)),
-          Text("¡Qué gusto verte!", style: generalText(Colors.grey, 32)),
+          const Text("Iniciar Sesión", style: TextStyle(color: Colors.black, fontSize:25, fontWeight: FontWeight.bold)),
+          Text("¡Qué gusto verte!", style: generalText(Colors.grey, 20)),
             const SizedBox(
               height: 15,
             ),
-          Text("Email", style: generalText(Colors.black, 32)),
-          const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-              border: OutlineInputBorder(),)
+          const Text("Email", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
+          TextFormField(
           ),
           const SizedBox(
               height: 15,
           ),
-          Text("Contraseña", style: generalText(Colors.black, 32)),
-          const TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-              border: OutlineInputBorder(),)
+          const Text("Contraseña", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
+          TextFormField(
           ),
           const SizedBox(
               height: 15,
           ),
           GestureDetector(
-            onTap: () => Get.to(() => const MenuRegistro()),
-            child: ElevatedButton(onPressed: () {}, child: const Text("Ingresar"),)
+            onTap: () => Get.to(() => const Profile()),
+            child: MaterialButton(height: 30, minWidth: 60, onPressed: () {}, color: const Color.fromARGB(255, 1, 53, 96), child: const Text("Ingresar", style: TextStyle(color: Colors.white),),)
           ),
           const SizedBox(
               height: 15,
           ),
-          Text("O", style: generalText(Colors.grey, 32)),
+          Text("O", style: generalText(Colors.grey, 15)),
           const SizedBox(
               height: 15,
           ),
           GestureDetector(
             onTap: () => Get.to(() => const MenuRegistroGoogle()),
-            child: ElevatedButton(onPressed: () {}, child: const Text("Inicia Sesión con Google"),)
+            child: MaterialButton(height: 30, minWidth: 60, onPressed: () {}, color: Colors.white, child: const Text("Inicia Sesión con Google", style: TextStyle(color: Color.fromARGB(255, 1, 53, 96))))
           ),
           const SizedBox(
               height: 15,
           ),
-          Text("Si aún no tienes una cuenta, ¿qué esperas?", style: generalText(Colors.grey, 32)),
-          Text("Regístrate", style: generalText(Colors.black, 32)),
+          Text("Si aún no tienes una cuenta, ¿qué esperas?", style: generalText(Colors.grey, 15)),
+          const SizedBox(
+              height: 15,
+          ),
+          GestureDetector(
+          onTap: () => Get.to(() => const MenuRegistro()),
+          child: const Text("Regístrate", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
+          ),
         ]
         ),
       ),
