@@ -47,7 +47,7 @@ class MenuInicio extends StatelessWidget{
           ),
           GestureDetector(
             onTap: () => Get.to(() => const Profile()),
-            child: MaterialButton(height: 30, minWidth: 60, onPressed: () {}, color: const Color.fromARGB(255, 1, 53, 96), child: const Text("Ingresar", style: TextStyle(color: Colors.white),),)
+            child: MaterialButton(height: 30, minWidth: 60, onPressed: () => Get.to(() => const Profile()), color: const Color.fromARGB(255, 1, 53, 96), child: const Text("Ingresar", style: TextStyle(color: Colors.white),),)
           ),
           const SizedBox(
               height: 15,
@@ -58,7 +58,7 @@ class MenuInicio extends StatelessWidget{
           ),
           GestureDetector(
             onTap: () => Get.to(() => const MenuRegistroGoogle()),
-            child: MaterialButton(height: 30, minWidth: 60, onPressed: () {}, color: Colors.white, child: const Text("Inicia Sesión con Google", style: TextStyle(color: Color.fromARGB(255, 1, 53, 96))))
+            child: MaterialButton(height: 30, minWidth: 60, onPressed: () => Get.to(() => const MenuRegistroGoogle()), color: Colors.white, child: const Text("Inicia Sesión con Google", style: TextStyle(color: Color.fromARGB(255, 1, 53, 96))))
           ),
           const SizedBox(
               height: 15,
@@ -68,7 +68,7 @@ class MenuInicio extends StatelessWidget{
               height: 15,
           ),
           GestureDetector(
-          onTap: () => Get.to(() => const MenuRegistro()),
+          onTap: () => Get.to(() =>  MenuRegistro()),
           child: const Text("Regístrate", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
           ),
         ]
