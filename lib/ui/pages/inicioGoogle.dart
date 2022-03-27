@@ -12,6 +12,7 @@ class MenuRegistroGoogle extends StatelessWidget{
   Widget build(BuildContext context){
     return const Scaffold(
       body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(100,200,0,0),
         child: Text("Pantalla con libreria de Google"),
       ),
     );

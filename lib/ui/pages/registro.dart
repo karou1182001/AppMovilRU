@@ -21,15 +21,16 @@ class MenuRegistro extends StatelessWidget{
   @override 
   Widget build(BuildContext context){
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
+      body: SingleChildScrollView( 
+        child: Container( margin: const EdgeInsets.fromLTRB(50, 80, 50, 0),
+          child: Column( crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
               height: 30,
             ),
             const Text("Regístrate", style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold)),
             const SizedBox(
-              height: 15,
+              height: 25,
             ),
             const Text("Email", style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
             TextFormField(
@@ -49,7 +50,10 @@ class MenuRegistro extends StatelessWidget{
             const SizedBox(
               height: 15,
             ),
-            Row(
+            Container(
+              child: Column( mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row( mainAxisAlignment: MainAxisAlignment.start,
               children: [
               ChangeNotifierProvider(
               create: (_) => CheckboxProvider(),
@@ -76,9 +80,12 @@ class MenuRegistro extends StatelessWidget{
             ),
             GestureDetector(
             onTap: () => Get.to(() => const Profile()),
-            child: MaterialButton(height: 30, minWidth: 60, onPressed: () => Get.to(() => const Profile()), color: const Color.fromARGB(255, 1, 53, 96), child: const Text("Regístrate", style: TextStyle(color: Colors.white),),)
+            child: MaterialButton(height: 40, minWidth: 270, onPressed: () => Get.to(() => const Profile()), color: const Color.fromARGB(255, 1, 53, 96), child: const Text("Regístrate", style: TextStyle(color: Colors.white),),)
           ),
-          Row(
+          const SizedBox(
+            height: 7,
+          ),
+          Row( mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text("Si ya tienes una cuenta, "),
               GestureDetector(
@@ -87,7 +94,11 @@ class MenuRegistro extends StatelessWidget{
               ),
             ],
           ),
-          ], 
+                ],
+              ),
+            ),
+          ],
+          ), 
         ),
       ),
     );

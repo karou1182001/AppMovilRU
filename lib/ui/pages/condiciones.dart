@@ -14,7 +14,10 @@ class Condiciones extends StatelessWidget{
   @override 
   Widget build(BuildContext context){
     return const Scaffold(
-      body: Text("aquí van las condiciones"),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(100,200,0,0),
+        child: Text("aquí van las condiciones"),
+      ),
     );
   }
 }
