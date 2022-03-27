@@ -47,10 +47,7 @@ class _FriendsState extends State<Friends> {
       body: (
         ListView(
         children: [
-          getCard(),
-          getCard(),
-          getCard(),
-          getCard(),
+          getCard("Alejandro Vertel","vertel@uninorte.edu.co","https://pps.whatsapp.net/v/t61.24694-24/255159378_1025571168234367_8655761191054013483_n.jpg?ccb=11-4&oh=b9dda4905db512f22fcd0fc126f0b18b&oe=623B8155"),
         ],
       )
       )
@@ -174,11 +171,7 @@ class _FriendsState extends State<Friends> {
     );
   }
 
-  Widget getCard() {
-    String fullName = "Alejandro Vertel";
-    String email = "vertel@uninorte.edu.co";
-    String imgUrl =
-        "https://pps.whatsapp.net/v/t61.24694-24/255159378_1025571168234367_8655761191054013483_n.jpg?ccb=11-4&oh=b9dda4905db512f22fcd0fc126f0b18b&oe=623B8155";
+  Widget getCard(String fullName, String email, String imgUrl) {
     return GestureDetector(
         onTap: () => setState(() {
               widgetType = 1;
