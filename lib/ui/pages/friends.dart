@@ -136,8 +136,11 @@ class _FriendsState extends State<Friends> {
                         width: 20,
                         height: 20,
                         decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
                           color: Colors.red,
-                          shape: BoxShape.circle,
+                          border: Border.all(
+                            width: 1
+                          )
                         ),
                       ),
                     )
