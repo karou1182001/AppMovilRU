@@ -1,9 +1,9 @@
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/models/events.dart';
-import 'package:app_ru/ui/pages/selectedevent.dart';
+import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/navbar/eventcard.dart';
+import '../../widgets/eventcard.dart';
 
 class EventosList extends StatefulWidget {
   EventosList({Key? key}) : super(key: key);

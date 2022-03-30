@@ -2,7 +2,7 @@ import 'package:app_ru/models/events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/constants/color.dart';
+import '../../../domain/constants/color.dart';
 
 class SelectedEvent extends StatelessWidget {
   Events selectedevent;

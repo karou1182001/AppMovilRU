@@ -1,9 +1,9 @@
 //Esta clase va a tener la información para mostrar cada uno de los widget de la navbar
-import 'package:app_ru/ui/pages/eventos.dart';
-import 'package:app_ru/ui/pages/friends.dart';
-import 'package:app_ru/ui/pages/mycalendar.dart';
-import 'package:app_ru/ui/pages/notifications.dart';
-import 'package:app_ru/ui/pages/profile.dart';
+import 'package:app_ru/ui/pages/pageEvents/eventos.dart';
+import 'package:app_ru/ui/pages/pageFriends/friends.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
+import 'package:app_ru/ui/pages/pageNotifications/notifications.dart';
+import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ List<Model> navBtn = [
       id: 0,
       icon: CupertinoIcons.person_2_fill,
       name: 'Amigos',
-      widget:  Friends()),
+      widget: Friends()),
   Model(
       id: 1,
       icon: CupertinoIcons.calendar_circle,

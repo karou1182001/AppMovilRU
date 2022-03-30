@@ -2,7 +2,7 @@ import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:app_ru/ui/pages/inicio.dart';
+import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
