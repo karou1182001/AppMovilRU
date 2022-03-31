@@ -1,5 +1,5 @@
 import 'package:app_ru/domain/constants/color.dart';
-import 'package:app_ru/models/events.dart';
+import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:flutter/material.dart';
 
@@ -13,17 +13,40 @@ class EventosList extends StatefulWidget {
 }
 
 class _EventosListState extends State<EventosList> {
-  List<Events> entries = <Events>[];
+  List<Event> entries = <Event>[];
 
   void initState() {
-    entries.add(Events("Salir de clase", DateTime.now(),
-        "Salir de clase y no volver más", Colors.blue, "1"));
-    entries.add(Events("Discución intelectual", DateTime.now(),
-        "Nos creemos intelectuales y discutimos", Colors.green, "0"));
-    entries
-        .add(Events("Sufrimiento", DateTime.now(), "Si", Colors.yellow, "1"));
-    entries.add(Events("Intercambio de rocas", DateTime.now(),
-        "Reunion anual de entusiastas de rocas", Colors.red, "0"));
+    entries.add(Event(
+        name: "Salir de clase",
+        from: DateTime.now(),
+        to: DateTime.now(),
+        description: "Salir de clase y no volver más",
+        color: Colors.blue,
+        imgName: "1"));
+
+    entries.add(Event(
+        name: "Discución intelectual",
+        from: DateTime.now(),
+        to: DateTime.now(),
+        description: "Nos creemos intelectuales y discutimos",
+        color: Colors.green,
+        imgName: "0"));
+
+    entries.add(Event(
+        name: "Sufrimiento",
+        from: DateTime.now(),
+        to: DateTime.now(),
+        description: "Sí",
+        color: Colors.yellow,
+        imgName: "1"));
+
+    entries.add(Event(
+        name: "Intercambio de rocas",
+        from: DateTime.now(),
+        to: DateTime.now(),
+        description: "Reunion anual de entusiastas de rocas",
+        color: Colors.red,
+        imgName: "0"));
   }
 
   Widget build(BuildContext context) {
@@ -41,8 +64,8 @@ class _EventosListState extends State<EventosList> {
       body: Container(
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
+          const Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
                 'Eventos',
                 textAlign: TextAlign.center,

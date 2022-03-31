@@ -1,11 +1,11 @@
-import 'package:app_ru/models/events.dart';
+import 'package:app_ru/models/event.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/constants/color.dart';
 
 class SelectedEvent extends StatelessWidget {
-  Events selectedevent;
+  Event selectedevent;
 
   SelectedEvent({required this.selectedevent});
 
@@ -59,7 +59,7 @@ class SelectedEvent extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: Row(children: <Widget>[
                     Text('Fecha de inicio: ' +
-                        this.selectedevent.date.toString()),
+                        this.selectedevent.from.toString()),
                     Spacer()
                   ]),
                 )

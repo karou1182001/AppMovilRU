@@ -1,8 +1,8 @@
-import 'package:app_ru/models/events.dart';
+import 'package:app_ru/models/event.dart';
 import 'package:flutter/material.dart';
 
 class Eventcard extends StatelessWidget {
-  Events event;
+  Event event;
 
   Function onEventClick;
 
@@ -12,7 +12,7 @@ class Eventcard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        this.onEventClick();
+        onEventClick();
       },
       child: Container(
           margin: EdgeInsets.all(20),
@@ -32,14 +32,14 @@ class Eventcard extends StatelessWidget {
                   child: Container(
                       height: 120,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(20),
                               bottomRight: Radius.circular(20)),
                           gradient: LinearGradient(
                               begin: Alignment.bottomCenter,
                               end: Alignment.topCenter,
                               colors: [
-                                this.event.color.withOpacity(0.7),
+                                event.color.withOpacity(0.7),
                                 Colors.transparent
                               ])))),
               Positioned(
@@ -50,18 +50,19 @@ class Eventcard extends StatelessWidget {
                       children: [
                         ClipOval(
                           child: Container(
-                              color: this.event.color,
-                              padding: EdgeInsets.all(10),
-                              child: Icon(
+                              color: event.color,
+                              padding: const EdgeInsets.all(10),
+                              child: const Icon(
                                 Icons.add_outlined,
                                 size: 30,
                                 color: Colors.white,
                               )),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Text(
-                          this.event.name,
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          event.name,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 25),
                         )
                       ],
                     ),
