@@ -102,7 +102,7 @@ class _ProfileState extends State<Profile> {
               height: 15,
             ),
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: Padding(
                 padding: const EdgeInsets.only(right: 220),
                 child: ElevatedButton(
@@ -149,18 +149,13 @@ class _ProfileState extends State<Profile> {
                             (states) => Colors.black)),
                     onPressed: () {
                       print('Navegar hacia la pantalla de inicio de sesión');
+                      Get.to(() => const MenuInicio());
                     },
                     child: Row(
-                      //mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () => Get.to(() => const MenuInicio()),
-                          child: const Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 50),
+                        const Icon(Icons.logout, color: Colors.white),
+                        const SizedBox(width: 10),
                         Text(
                           'Cerrar Sesión',
                           style: generalText(Colors.white, 15),
