@@ -1,4 +1,4 @@
-//Esta clase es para mostrar en modo calendario los eventos de un día particular
+//Esta clase es para mostrar los eventos de un día particular como una timeline
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_data_source.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_viewing_page.dart';

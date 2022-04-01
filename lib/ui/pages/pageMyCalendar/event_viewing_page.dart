@@ -30,24 +30,43 @@ class EventViewingPage extends StatelessWidget {
 
       //--------------------------------BODY--------------------------------------
       body: ListView(
-        padding: EdgeInsets.all(32),
+        padding: const EdgeInsets.all(32),
         children: <Widget>[
           buildDateTime(event),
           const SizedBox(height: 32),
-          Text(
-            "Nombre: " + event.name,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          buildHeader(
+            header: "Nombre",
+            child: Text(
+              event.name,
+              style: const TextStyle(fontSize: 18),
             ),
           ),
           const SizedBox(height: 24),
-          Text(
-            event.description,
-            style: const TextStyle(
-              fontSize: 18,
+          buildHeader(
+            header: "Descripción",
+            child: Text(
+              event.description,
+              style: const TextStyle(fontSize: 18),
             ),
-          )
+          ),
+          const SizedBox(height: 24),
+          buildHeader(
+            header: "Autor",
+            child: Text(
+              event.persCreadora,
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          const SizedBox(height: 24),
+          buildHeader(
+            header: "Invitados",
+            child: Text(
+              event.invitados.join(","),
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          const SizedBox(height: 24),
+          showColor()
         ],
       ),
     );
@@ -61,17 +80,51 @@ class EventViewingPage extends StatelessWidget {
         const Text(
           "Información del evento",
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 18, fontWeight: FontWeight.bold, color: selectColor),
         ),
         const SizedBox(height: 32),
         buildDate("From:", event.from),
         const SizedBox(height: 32),
-        buildDate("To:", event.to)
+        buildDate("To:     ", event.to)
       ],
     );
   }
+
+  Widget buildHeader({required String header, required Widget child}) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            header,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          child,
+        ],
+      );
+
+  Widget showColor() => Row(
+        children: [
+          const Text(
+            "Color evento",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+          const SizedBox(width: 20),
+          ElevatedButton(
+            onPressed: () {},
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(event.color)),
+            child: const Text(""),
+          ),
+        ],
+      );
+  /*ElevatedButton(
+        onPressed: () {},
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(event.color)),
+        child: const Icon(Icons.color_lens),
+      );*/
 
   Widget buildDate(String title, DateTime date) {
     return Row(

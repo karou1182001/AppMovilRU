@@ -1,9 +1,10 @@
-//En esta clase podemos crear un evento nuevo y editarlo
+//En esta clase podemos crear un evento nuevo y editar sus datos
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/constants/color.dart';
@@ -18,11 +19,14 @@ class EventEditingPage extends StatefulWidget {
 }
 
 class _EventEditingPageState extends State<EventEditingPage> {
-  //Variables
+  //--------------------------Variables---------------------------------
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
+  final invitadosController = TextEditingController();
+  final descController = TextEditingController();
   late DateTime fromDate;
   late DateTime toDate;
+  Color colorEvento = selectColor;
 
   @override
   void initState() {
@@ -66,7 +70,19 @@ class _EventEditingPageState extends State<EventEditingPage> {
           key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[buildTitle(), buildDateTimePickers()],
+            children: <Widget>[
+              buildTitle(),
+              buildDateTimePickers(),
+              colorPicker(),
+              const SizedBox(
+                height: 20,
+              ),
+              parrafoDescripcion(),
+              const SizedBox(
+                height: 20,
+              ),
+              invitados()
+            ],
           ),
         ),
       ),
@@ -75,7 +91,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
     //--------------------------------OTROS WIDGETS---------------------------
   }
 
-  //Botón guardar
+  //Botón guardar en la esquina derecha
   List<Widget> buildEditingActions() => [
         ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
@@ -99,6 +115,20 @@ class _EventEditingPageState extends State<EventEditingPage> {
             : null,
         controller: titleController,
       );
+
+  //Invitados
+  Widget invitados() => TextFormField(
+        controller: invitadosController,
+        minLines: 2,
+        maxLines: 8,
+        keyboardType: TextInputType.multiline,
+        decoration: const InputDecoration(
+            hintText: 'Invitados',
+            hintStyle: TextStyle(color: Colors.grey),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            )),
+      );
   //Pone los calendarios
   Widget buildDateTimePickers() => Column(
         children: [
@@ -107,8 +137,67 @@ class _EventEditingPageState extends State<EventEditingPage> {
           ),
           buildFrom(),
           buildTo(),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       );
+  Widget parrafoDescripcion() => TextFormField(
+        controller: descController,
+        minLines: 2,
+        maxLines: 8,
+        keyboardType: TextInputType.multiline,
+        decoration: const InputDecoration(
+            hintText: 'Descripción del evento',
+            hintStyle: TextStyle(color: Colors.grey),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            )),
+      );
+  Widget colorPicker() => Row(
+        children: [
+          const Text(
+            "COLOR EVENTO",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 20),
+          ElevatedButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('¡Escoge el color de tu evento!'),
+                      content: SingleChildScrollView(
+                        child: BlockPicker(
+                          pickerColor: colorEvento, //default color
+                          onColorChanged: (Color color) {
+                            //on color picked
+                            setState(() {
+                              colorEvento = color;
+                            });
+                          },
+                        ),
+                      ),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: const Text('Listo'),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pop(); //dismiss the color picker
+                          },
+                        ),
+                      ],
+                    );
+                  });
+            },
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(colorEvento)),
+            child: const Icon(Icons.color_lens),
+          )
+        ],
+      );
+
   //Pone los calendarios del From
   Widget buildFrom() => buildHeader(
         header: "FROM",
@@ -245,8 +334,11 @@ class _EventEditingPageState extends State<EventEditingPage> {
         name: titleController.text,
         from: fromDate,
         to: toDate,
-        description: "Descripción",
-        color: Colors.blue,
+        description: descController.text,
+        //Se le pasa el usuario
+        persCreadora: "Usuario actual",
+        invitados: ["Julia"],
+        color: colorEvento,
         imgName: "1",
       );
 

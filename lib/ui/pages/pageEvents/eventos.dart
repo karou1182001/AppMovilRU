@@ -21,6 +21,8 @@ class _EventosListState extends State<EventosList> {
         from: DateTime.now(),
         to: DateTime.now(),
         description: "Salir de clase y no volver más",
+        persCreadora: "Mateo",
+        invitados: ["Chirstian", "Danna"],
         color: Colors.blue,
         imgName: "1"));
 
@@ -29,6 +31,8 @@ class _EventosListState extends State<EventosList> {
         from: DateTime.now(),
         to: DateTime.now(),
         description: "Nos creemos intelectuales y discutimos",
+        persCreadora: "Mateo",
+        invitados: ["Chirstian", "Danna"],
         color: Colors.green,
         imgName: "0"));
 
@@ -37,6 +41,8 @@ class _EventosListState extends State<EventosList> {
         from: DateTime.now(),
         to: DateTime.now(),
         description: "Sí",
+        persCreadora: "Mateo",
+        invitados: ["Chirstian", "Danna"],
         color: Colors.yellow,
         imgName: "1"));
 
@@ -45,6 +51,8 @@ class _EventosListState extends State<EventosList> {
         from: DateTime.now(),
         to: DateTime.now(),
         description: "Reunion anual de entusiastas de rocas",
+        persCreadora: "Mateo",
+        invitados: ["Chirstian", "Danna"],
         color: Colors.red,
         imgName: "0"));
   }
@@ -52,7 +60,7 @@ class _EventosListState extends State<EventosList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.0),
+        preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
           backgroundColor: white,
           title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
