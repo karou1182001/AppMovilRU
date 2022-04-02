@@ -13,5 +13,5 @@ class UserController {
   get email => user.value.getEmail;
   get name => user.value.getName;
   get password => user.value.getPassword;
-  
+  get number => user.value.getNumber;
 }

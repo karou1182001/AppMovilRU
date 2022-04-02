@@ -39,9 +39,8 @@ class _ProfileState extends State<Profile> {
                     backgroundImage: AssetImage('assets/profile_example.jpg'))),
             const SizedBox(height: 10),
             //Nombre del usuario
-            Obx(
-              () => Text(userController.name, style: generalText(Colors.black, 20))
-            ),
+            Obx(() => Text(userController.name,
+                style: generalText(Colors.black, 20))),
             const SizedBox(height: 15),
             //Descripción
             Text('Me gustan las películas de suspenso y los libros',
@@ -57,8 +56,10 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('Celular: 3005467812',
-                        style: generalText(Colors.black, 15)),
+                    Obx(
+                      () => Text(userController.number.toString(),
+                          style: generalText(Colors.black, 15)),
+                    )
                   ],
                 )),
             const SizedBox(
