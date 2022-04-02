@@ -42,8 +42,8 @@ class _ProfileState extends State<Profile> {
                 style: generalText(Colors.black, 20))),
             const SizedBox(height: 15),
             //Descripción
-            Text('Me gustan las películas de suspenso y los libros',
-                style: generalText(Colors.grey, 15)),
+            Obx(()=>Text(userController.description,
+                style: generalText(Colors.grey, 15))),
             const SizedBox(height: 30),
             //Celular
             Container(
