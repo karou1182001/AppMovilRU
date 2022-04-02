@@ -15,7 +15,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    bool isSwitched = true;
     UserController userController = Get.find();
 
     return Scaffold(
@@ -76,12 +75,10 @@ class _ProfileState extends State<Profile> {
                       width: 10,
                     ),
                     Text('RU?', style: generalText(Colors.black, 15)),
-                    Switch(
+                    Obx(() => Switch(
                         activeColor: selectColor,
-                        value: isSwitched,
-                        onChanged: (value) => setState(() {
-                              isSwitched = value;
-                            }))
+                        value: userController.ru,
+                        onChanged: (value) => userController.changeRU()))
                   ],
                 )),
             const SizedBox(
