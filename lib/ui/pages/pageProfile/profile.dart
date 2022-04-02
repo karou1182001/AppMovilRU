@@ -1,4 +1,5 @@
 import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     bool isSwitched = true;
+    UserController userController = Get.find();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -37,7 +39,9 @@ class _ProfileState extends State<Profile> {
                     backgroundImage: AssetImage('assets/profile_example.jpg'))),
             const SizedBox(height: 10),
             //Nombre del usuario
-            Text('John Doe', style: generalText(Colors.black, 20)),
+            Obx(
+              () => Text(userController.name, style: generalText(Colors.black, 20))
+            ),
             const SizedBox(height: 15),
             //Descripción
             Text('Me gustan las películas de suspenso y los libros',
@@ -149,7 +153,7 @@ class _ProfileState extends State<Profile> {
                             (states) => Colors.black)),
                     onPressed: () {
                       print('Navegar hacia la pantalla de inicio de sesión');
-                      Get.to(() => const MenuInicio());
+                      Get.to(() => MenuInicio());
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,

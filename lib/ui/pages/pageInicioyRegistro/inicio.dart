@@ -1,17 +1,22 @@
 import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageProfile/profile.dart';
+import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/registro.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicioGoogle.dart';
 
 void main() {
-  runApp(const MenuInicio());
+  runApp(MenuInicio());
 }
 
 class MenuInicio extends StatelessWidget {
-  const MenuInicio({Key? key}) : super(key: key);
+  MenuInicio({Key? key}) : super(key: key);
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  UserController userController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +53,8 @@ class MenuInicio extends StatelessWidget {
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
-                    TextFormField(),
+                    Obx(() =>
+                        TextFormField(initialValue: userController.email)),
                     const SizedBox(
                       height: 15,
                     ),
@@ -57,7 +63,9 @@ class MenuInicio extends StatelessWidget {
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
-                    TextFormField(),
+                    Obx(() => TextFormField(
+                        initialValue: userController.password,
+                        obscureText: true)),
                     const SizedBox(
                       height: 15,
                     ),
@@ -67,11 +75,10 @@ class MenuInicio extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                    onTap: () => Get.to(() => const Profile()),
                     child: MaterialButton(
                       height: 40,
                       minWidth: 270,
-                      onPressed: () => Get.to(() => const Profile()),
+                      onPressed: () => Get.to(() => const NavBar()),
                       color: const Color.fromARGB(255, 1, 53, 96),
                       child: const Text(
                         "Ingresar",
