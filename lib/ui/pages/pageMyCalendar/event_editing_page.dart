@@ -106,6 +106,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
   //Pone el título
   Widget buildTitle() => TextFormField(
+        key: Key('editableTitle'),
         style: const TextStyle(fontSize: 24),
         decoration: const InputDecoration(
             border: UnderlineInputBorder(), hintText: "Add title"),

@@ -20,6 +20,7 @@ class MyCalendar extends StatelessWidget {
   //-----------------------DISEÑO DE INTERFAZ-------------------------------
   @override
   Widget build(BuildContext context) {
+    Get.put(EventController());
     EventController eventCont = Get.find();
     final events = eventCont.events;
     return Scaffold(
@@ -68,6 +69,7 @@ class MyCalendar extends StatelessWidget {
 
       //Botón flotante que nos permite crear un nuevo evento
       floatingActionButton: FloatingActionButton(
+        key: Key('floatingbutton'),
         onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => const EventEditingPage())),
         backgroundColor: selectColor,

@@ -5,6 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,7 +14,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:app_ru/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  //Test para crear un nuevo evento en el calendario
+  testWidgets('Página del calendario', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(const MaterialApp(home: Scaffold(body: MyCalendar())));
+
+    expect(find.byKey(const Key('floatingbutton')), findsOneWidget);
+  });
+  testWidgets('Agregar nuevo evento', (WidgetTester tester) async {
+    await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: EventEditingPage())));
+
+    expect(find.byKey(const Key('editableTitle')), findsOneWidget);
+    await tester.pump();
+    await tester.enterText(find.byKey(const Key('editableTitle')), "Evento");
+  });
+
+  /*testWidgets('Counter increments smoke test', (WidgetTester tester
+  ) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
@@ -27,5 +46,5 @@ void main() {
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
-  });
+  });*/
 }
