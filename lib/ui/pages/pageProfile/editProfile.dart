@@ -2,7 +2,10 @@
 
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/ui/pages/pageProfile/profile.dart';
+import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class EditProfile extends StatelessWidget {
@@ -47,8 +50,10 @@ class EditProfile extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() => TextFormField(
-                  initialValue: userController.password, obscureText: true)),
+              TextFormField(
+                  decoration:
+                      InputDecoration(hintText: 'Digite una nueva contraseña'),
+                  obscureText: true),
               const SizedBox(
                 height: 15,
               ),
@@ -58,7 +63,8 @@ class EditProfile extends StatelessWidget {
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
               Obx(() => TextFormField(
-                  initialValue: userController.number.toString())),
+                  decoration: InputDecoration(
+                      hintText: userController.number.toString()))),
               const SizedBox(
                 height: 15,
               ),
@@ -67,13 +73,14 @@ class EditProfile extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() =>
-                  TextFormField(initialValue: userController.description)),
+              Obx(() => TextField(
+                  decoration:
+                      InputDecoration(hintText: userController.description),
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null)),
               ElevatedButton(
                   onPressed: () {
-                    print(nameController.text);
-                    userController.changeUserName(nameController.text);
-                    print(userController.name);
+                    Get.to(() => const NavBar());
                   },
                   child: Text(
                     'Editar Datos',
