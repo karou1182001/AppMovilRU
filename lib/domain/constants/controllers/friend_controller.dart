@@ -18,7 +18,7 @@ class FriendController extends GetxController {
       descripcion: "Me encantan las tortujas y bailar",
       number: "3183745902",
       online: true,
-      scheduleUrl: "",
+      scheduleUrl: AssetImage('assets/horario.png'),
     ));
 
     _friends.add(const Friend(
@@ -28,7 +28,7 @@ class FriendController extends GetxController {
       descripcion: "Me gustan los juegos de mesa",
       number: "3183762807",
       online: true,
-      scheduleUrl: "",
+      scheduleUrl: AssetImage('assets/horario.png'),
     ));
   }
   //Setters
