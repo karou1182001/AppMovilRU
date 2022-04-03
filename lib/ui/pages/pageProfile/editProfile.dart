@@ -2,7 +2,6 @@
 
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
-import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,8 +9,11 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({Key? key}) : super(key: key);
-  UserController userController = UserController();
+  UserController userController = Get.find();
   TextEditingController nameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class EditProfile extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
+              //Editar nombre
               const Text("Name",
                   style: TextStyle(
                       color: Colors.black,
@@ -45,38 +48,59 @@ class EditProfile extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
+              //Editar contraseña
               const Text("Contraseña",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() => TextFormField(
-                  initialValue: userController.password, obscureText: true)),
+              TextFormField(controller: passwordController),
               const SizedBox(
                 height: 15,
               ),
+              //Editar número
               const Text("Número de teléfono",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
               Obx(() => TextFormField(
-                  initialValue: userController.number.toString())),
+                  controller: numberController,
+                  decoration: InputDecoration(
+                      hintText: userController.number.toString()))),
               const SizedBox(
                 height: 15,
               ),
+              //Editar descripción
               const Text("Descripción",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() =>
-                  TextFormField(initialValue: userController.description)),
+              Obx(() => TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  controller: descriptionController,
+                  decoration:
+                      InputDecoration(hintText: userController.description))),
               ElevatedButton(
                   onPressed: () {
-                    print(nameController.text);
-                    userController.changeUserName('Hola');
-                    print(userController.name);
+                    if (nameController.text != '') {
+                      userController.changeUserName(nameController.text);
+                    }
+                    if (numberController.text != '') {
+                      userController
+                          .changeUserNumber(int.parse(numberController.text));
+                    }
+                    if (passwordController.text != '') {
+                      userController
+                          .changeUserPassword(passwordController.text);
+                    }
+                    if (descriptionController.text != '') {
+                      userController
+                          .changeUserDescription(descriptionController.text);
+                    }
+
                     Get.to(() => NavBar());
                   },
                   child: Text(
