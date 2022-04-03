@@ -1,3 +1,4 @@
+import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
@@ -28,6 +29,15 @@ void main() {
         "Al salir de clases ir a comer");
     await tester.pump();
     await tester.enterText(find.byKey(const Key('editableInvitados')), "Julia");
+  });
+
+  testWidgets('Ver lista amigos', (WidgetTester tester) async {
+    await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: FriendsList())));
+
+    expect(find.byKey(const Key('Alejandro Vertel')), findsOneWidget);
+    expect(find.byKey(const Key('Pepe Perez')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('Alejandro Vertel')));
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester

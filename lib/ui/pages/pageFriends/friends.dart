@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/friendcard.dart';
 
 class FriendsList extends StatefulWidget {
-  FriendsList({Key? key}) : super(key: key);
+  const FriendsList({Key? key}) : super(key: key);
 
   @override
   State<FriendsList> createState() => _FriendsListState();
