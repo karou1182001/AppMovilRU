@@ -8,6 +8,7 @@ import 'package:app_ru/ui/pages/pageEvents/eventos.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
+import 'package:app_ru/ui/pages/pageProfile/editProfile.dart';
 import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -114,6 +115,15 @@ void main() {
     await tester.tap(find.byKey(const Key('logout')));
     await tester.pump();
     await tester.tap(find.byKey(const Key('edit')));
+  });
+
+  testWidgets('Editar Perfil', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: EditProfile())));
+    expect(find.text('Nombre'), findsOneWidget);
+    expect(find.text('Contraseña'), findsOneWidget);
+    expect(find.text('Numero de teléfono'), findsOneWidget);
+    expect(find.text('Descripción'), findsOneWidget);
+    expect(find.byKey(const Key('editar')), findsOneWidget);
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester

@@ -9,7 +9,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({Key? key}) : super(key: key);
-  UserController userController = Get.find();
+
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController numberController = TextEditingController();
@@ -17,6 +17,8 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(UserController());
+    UserController userController = Get.find();
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -37,7 +39,7 @@ class EditProfile extends StatelessWidget {
                 height: 25,
               ),
               //Editar nombre
-              const Text("Name",
+              const Text("Nombre",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -84,6 +86,7 @@ class EditProfile extends StatelessWidget {
                   decoration:
                       InputDecoration(hintText: userController.description))),
               ElevatedButton(
+                key: Key('editar'),
                   onPressed: () {
                     if (nameController.text != '') {
                       userController.changeUserName(nameController.text);
