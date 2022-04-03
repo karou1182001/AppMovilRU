@@ -1,6 +1,7 @@
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/ui/pages/pageProfile/editProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
@@ -42,7 +43,7 @@ class _ProfileState extends State<Profile> {
                 style: generalText(Colors.black, 20))),
             const SizedBox(height: 15),
             //Descripción
-            Obx(()=>Text(userController.description,
+            Obx(() => Text(userController.description,
                 style: generalText(Colors.grey, 15))),
             const SizedBox(height: 30),
             //Celular
@@ -117,6 +118,7 @@ class _ProfileState extends State<Profile> {
                             (states) => Colors.black)),
                     onPressed: () {
                       print('Navegar hacia la pantalla de editar perfil');
+                      Get.to(() => EditProfile());
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
