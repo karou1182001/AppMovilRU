@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
@@ -20,7 +22,7 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.0),
+        preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
           backgroundColor: white,
           title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
