@@ -15,7 +15,7 @@ class UserController extends GetxController {
   //Indicador de si está en la U o no
   final RxBool _ru = false.obs;
 
-  final RxString nombre = 'David'.obs; 
+  RxString nombre = 'David'.obs; 
 
   //Getters
   User get getUser => user.value;
@@ -30,7 +30,7 @@ class UserController extends GetxController {
   void changeRU() {
     _ru.value = !_ru.value;
   }
-
+  //Función para que cambie el nombre
   void changeUserName(String name) {
     nombre.value = name; 
   }
