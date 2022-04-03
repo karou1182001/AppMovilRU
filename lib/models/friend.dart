@@ -1,10 +1,12 @@
 
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+
 class Friend {
   final String name;
   final String email;
-  final String imgUrl;
+  final AssetImage imgUrl;
   final String descripcion;
   final String number;
   final bool online;
