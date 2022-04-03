@@ -15,7 +15,6 @@ class Eventcard extends StatelessWidget {
         onEventClick();
       },
       child: Container(
-          key: Key('Event_Card' + this.event.imgName),
           margin: EdgeInsets.all(20),
           height: 150,
           child: Stack(

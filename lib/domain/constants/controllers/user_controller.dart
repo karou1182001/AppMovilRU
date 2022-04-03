@@ -28,6 +28,7 @@ class UserController {
     _ru.value = !_ru.value;
   }
 
+  //Función para cambiar el nombre
   void changeUserName(String name) {
     user.value.changeName(name);
   }
