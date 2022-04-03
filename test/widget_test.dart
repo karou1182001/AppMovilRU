@@ -1,19 +1,8 @@
-<<<<<<< HEAD
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageEvents/eventos.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
-=======
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
->>>>>>> 0d7ae06478cb6a9bd508ccd328e8de14e39336e0
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
-import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -44,7 +33,6 @@ void main() {
     await tester.enterText(find.byKey(const Key('editableInvitados')), "Julia");
   });
 
-<<<<<<< HEAD
 //Test de pagina de eventos
   testWidgets('Pagina de eventos', (WidgetTester tester) async {
     await tester
@@ -79,10 +67,6 @@ void main() {
     expect(find.byKey(const Key('Nombre evento')), findsOneWidget);
     expect(find.byKey(const Key('Descripcion evento')), findsOneWidget);
     expect(find.text("Inscribirse"), findsOneWidget);
-=======
-  testWidgets('Pagina del Perfil', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: Profile())));
->>>>>>> 0d7ae06478cb6a9bd508ccd328e8de14e39336e0
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester
