@@ -18,6 +18,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    Get.put(UserController());
     UserController userController = Get.find();
 
     return Scaffold(
@@ -113,6 +114,7 @@ class _ProfileState extends State<Profile> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 220),
                     child: ElevatedButton(
+                        key: const Key('edit'),
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(

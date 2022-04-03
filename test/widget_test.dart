@@ -8,13 +8,13 @@ import 'package:app_ru/ui/pages/pageEvents/eventos.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
+import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:app_ru/main.dart';
 
-void main()  {
-
+void main() {
   //Test para crear un nuevo evento en el calendario
   testWidgets('Página del calendario', (WidgetTester tester) async {
     await tester
@@ -54,24 +54,20 @@ void main()  {
 
   testWidgets('Amigo Especifico', (WidgetTester tester) async {
     // Se crea una variable de tipo friend para poder cumplir con los parametros de selectedfriend
-    var friend =  const Friend(
-      name: "Alejandro Vertel",
-      email: "vertel@uninorte.edu.co",
-      imgUrl: AssetImage('assets/perfilvertel.jpg'),
-      descripcion: "Me encantan las tortujas y bailar",
-      number: "3183745902",
-      online: true,
-      scheduleUrl: ""
-    );
-    await tester.pumpWidget(
-      MaterialApp(home: Scaffold(body: SelectedFriend(selectedfriend: friend)))
-    );
+    var friend = const Friend(
+        name: "Alejandro Vertel",
+        email: "vertel@uninorte.edu.co",
+        imgUrl: AssetImage('assets/perfilvertel.jpg'),
+        descripcion: "Me encantan las tortujas y bailar",
+        number: "3183745902",
+        online: true,
+        scheduleUrl: "");
+    await tester.pumpWidget(MaterialApp(
+        home: Scaffold(body: SelectedFriend(selectedfriend: friend))));
     //Se testean los valores de selected friend
 
     expect(find.text("Alejandro Vertel"), findsOneWidget);
     expect(find.text("Pepe Perez"), findsNothing);
-
-    
   });
 
 //Test de pagina de eventos
@@ -110,6 +106,17 @@ void main()  {
     expect(find.text("Inscribirse"), findsOneWidget);
   });
 
+  testWidgets('Ver Perfil', (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: Profile())));
+    expect(find.text('David Ocampo'), findsOneWidget);
+    expect(find.byKey(const Key('logout')), findsOneWidget);
+    await tester.pump();
+    await tester.tap(find.byKey(const Key('logout')));
+    await tester.pump();
+    await tester.tap(find.byKey(const Key('edit')));
+    await tester.pump();
+  });
+
   /*testWidgets('Counter increments smoke test', (WidgetTester tester
   ) async {
     // Build our app and trigger a frame.
@@ -128,4 +135,3 @@ void main()  {
     expect(find.text('1'), findsOneWidget);
   });*/
 }
-
