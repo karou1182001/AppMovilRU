@@ -46,7 +46,7 @@ void main()  {
     await tester
         .pumpWidget(const MaterialApp(home: Scaffold(body: FriendsList())));
     expect(find.byKey(const Key('Alejandro Vertel')), findsOneWidget);
-    expect(find.byKey(const Key('Pepe Perez')), findsOneWidget);
+    expect(find.byKey(const Key('David Ocampo')), findsOneWidget);
     expect(find.byKey(const Key('Joshua Angarita')), findsNothing);
     await tester.pump();
     await tester.tap(find.byKey(const Key('Alejandro Vertel')));
