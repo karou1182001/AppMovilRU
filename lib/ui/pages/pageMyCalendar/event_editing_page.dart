@@ -119,6 +119,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
   //Invitados
   Widget invitados() => TextFormField(
+        key: Key('editableInvitados'),
         controller: invitadosController,
         minLines: 2,
         maxLines: 8,
@@ -144,6 +145,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
         ],
       );
   Widget parrafoDescripcion() => TextFormField(
+        key: Key('editableDescription'),
         controller: descController,
         minLines: 2,
         maxLines: 8,

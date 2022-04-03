@@ -26,8 +26,15 @@ void main() {
         const MaterialApp(home: Scaffold(body: EventEditingPage())));
 
     expect(find.byKey(const Key('editableTitle')), findsOneWidget);
+    expect(find.byKey(const Key('editableDescription')), findsOneWidget);
+    expect(find.byKey(const Key('editableInvitados')), findsOneWidget);
     await tester.pump();
     await tester.enterText(find.byKey(const Key('editableTitle')), "Evento");
+    await tester.pump();
+    await tester.enterText(find.byKey(const Key('editableDescription')),
+        "Al salir de clases ir a comer");
+    await tester.pump();
+    await tester.enterText(find.byKey(const Key('editableInvitados')), "Julia");
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester
