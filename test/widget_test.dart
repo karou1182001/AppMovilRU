@@ -39,8 +39,14 @@ void main() {
 
     expect(find.byKey(const Key('Alejandro Vertel')), findsOneWidget);
     expect(find.byKey(const Key('Pepe Perez')), findsOneWidget);
+    expect(find.byKey(const Key('Joshua Angarita')), findsNothing);
+    await tester.pump();
     await tester.tap(find.byKey(const Key('Alejandro Vertel')));
+    await tester.pump();
+    await tester.tap(find.byKey(const Key('Pepe Perez')));
   });
+
+
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester
   ) async {
