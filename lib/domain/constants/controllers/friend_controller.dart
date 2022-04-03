@@ -31,7 +31,6 @@ class FriendController extends GetxController {
       scheduleUrl: "",
     ));
   }
-
   //Setters
   void addFriend(Friend friend) {
     _friends.add(friend);

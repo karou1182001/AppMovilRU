@@ -37,7 +37,6 @@ void main() {
   testWidgets('Ver lista amigos', (WidgetTester tester) async {
     await tester.pumpWidget(
         const MaterialApp(home: Scaffold(body: FriendsList())));
-
     expect(find.byKey(const Key('Alejandro Vertel')), findsOneWidget);
     expect(find.byKey(const Key('Pepe Perez')), findsOneWidget);
     expect(find.byKey(const Key('Joshua Angarita')), findsNothing);
