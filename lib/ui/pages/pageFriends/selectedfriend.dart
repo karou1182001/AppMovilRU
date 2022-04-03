@@ -33,11 +33,11 @@ class SelectedFriend extends StatelessWidget {
               ),
             ),
             //Imagen de perfil
-            SizedBox(
+             SizedBox(
                 height: 115,
                 width: 115,
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(this.selectedfriend.imgUrl),
+                  backgroundImage: selectedfriend.imgUrl,
                   radius: 60,
                 )),
             SizedBox(height: 10),
@@ -109,7 +109,8 @@ class SelectedFriend extends StatelessWidget {
             const SizedBox(height: 10),
             Container(
                 height: MediaQuery.of(context).size.height * 0.2,
-                child: Image(image: AssetImage('assets/horario.png'))),
+                child: Image(image: AssetImage('assets/horario.png'))
+                ),
             SizedBox(
               height: 15,
             ),

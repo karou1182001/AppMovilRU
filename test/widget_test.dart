@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:app_ru/models/friend.dart';
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:app_ru/models/event.dart';
@@ -9,8 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:app_ru/main.dart';
+import 'package:http/testing.dart';
 
-void main() {
+void main()  {
+
   //Test para crear un nuevo evento en el calendario
   testWidgets('Página del calendario', (WidgetTester tester) async {
     await tester
@@ -46,7 +51,28 @@ void main() {
     await tester.pump();
     await tester.tap(find.byKey(const Key('Alejandro Vertel')));
     await tester.pump();
-    expect(find.text('Pepe Perez'), findsNothing);
+  });
+
+  testWidgets('Amigo Especifico', (WidgetTester tester) async {
+    // Se crea una variable de tipo friend para poder cumplir con los parametros de selectedfriend
+    var friend =  const Friend(
+      name: "Alejandro Vertel",
+      email: "vertel@uninorte.edu.co",
+      imgUrl: AssetImage('assets/perfilvertel.jpg'),
+      descripcion: "Me encantan las tortujas y bailar",
+      number: "3183745902",
+      online: true,
+      scheduleUrl: ""
+    );
+    await tester.pumpWidget(
+      MaterialApp(home: Scaffold(body: SelectedFriend(selectedfriend: friend)))
+    );
+    //Se testean los valores de selected friend
+
+    expect(find.text("Alejandro Vertel"), findsOneWidget);
+    expect(find.text("Pepe Perez"), findsNothing);
+
+    
   });
 
 //Test de pagina de eventos
@@ -103,3 +129,4 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });*/
 }
+

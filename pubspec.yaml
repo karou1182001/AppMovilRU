@@ -35,6 +35,8 @@ dependencies:
   intl: ^0.17.0
   #Paquete para escoger colores
   flutter_colorpicker: ^1.0.3
+  #paquete para http request
+  http: any
 
 
   # The following adds the Cupertino Icons font to your application.
