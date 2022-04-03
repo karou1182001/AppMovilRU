@@ -1,13 +1,5 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
-import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -36,10 +28,6 @@ void main() {
         "Al salir de clases ir a comer");
     await tester.pump();
     await tester.enterText(find.byKey(const Key('editableInvitados')), "Julia");
-  });
-
-  testWidgets('Pagina del Perfil', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: Profile())));
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester

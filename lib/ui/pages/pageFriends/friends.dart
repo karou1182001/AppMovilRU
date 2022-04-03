@@ -1,15 +1,12 @@
 import 'package:app_ru/domain/constants/color.dart';
-import 'package:app_ru/domain/constants/controllers/friend_controller.dart';
 import 'package:app_ru/models/friend.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../widgets/friendcard.dart';
 
 class FriendsList extends StatefulWidget {
-  const FriendsList({Key? key}) : super(key: key);
+  FriendsList({Key? key}) : super(key: key);
 
   @override
   State<FriendsList> createState() => _FriendsListState();
@@ -18,10 +15,26 @@ class FriendsList extends StatefulWidget {
 class _FriendsListState extends State<FriendsList> {
   List<Friend> entries = <Friend>[];
 
-  FriendController friendsList = Get.find();
-
   void initState() {
-    entries = friendsList.friends;
+    entries.add(const Friend(
+        name: "Alejandro Vertel",
+        email: "vertel@uninorte.edu.co",
+        imgUrl: "",
+        descripcion: "Me encantan las tortujas y bailar",
+        number: "3183745902",
+        online: true,
+        scheduleUrl: "",
+        ));
+
+        entries.add(const Friend(
+        name: "Joshua Angarita",
+        email: "ajoshua@uninorte.edu.co",
+        imgUrl: "",
+        descripcion: "Me gustan los juegos de mesa",
+        number: "3183762807",
+        online: true,
+        scheduleUrl: "",
+        ));
   }
 
   Widget build(BuildContext context) {

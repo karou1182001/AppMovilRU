@@ -94,7 +94,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
   //Botón guardar en la esquina derecha
   List<Widget> buildEditingActions() => [
         ElevatedButton.icon(
-            key: Key('botonSave'),
             style: ElevatedButton.styleFrom(
               primary: Colors.transparent,
               shadowColor: Colors.transparent,
@@ -166,7 +165,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
           ),
           const SizedBox(width: 20),
           ElevatedButton(
-            key: Key('botonColor'),
             onPressed: () {
               showDialog(
                   context: context,
