@@ -1,16 +1,26 @@
+import 'package:get/get.dart';
+
 class User {
-  final String name;
-  final String password;
-  final int number;
-  final String email; 
-  final String description; 
+  String name;
+  String password;
+  int number;
+  String email;
+  String description;
 
-  const User(
-      {required this.name, required this.password, required this.number, required this.email, required this.description});
+  User(
+      {required this.name,
+      required this.password,
+      required this.number,
+      required this.email,
+      required this.description});
 
-  get getName => name; 
-  get getPassword => password; 
-  get getNumber => number; 
-  get getEmail => email; 
+  get getName => name;
+  get getPassword => password;
+  get getNumber => number;
+  get getEmail => email;
   get getDescription => description;
+
+  void changeName(String userName) {
+    name = userName;
+  }
 }
