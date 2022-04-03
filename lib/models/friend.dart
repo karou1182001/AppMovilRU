@@ -10,7 +10,7 @@ class Friend {
   final String descripcion;
   final String number;
   final bool online;
-  final String scheduleUrl;
+  final AssetImage scheduleUrl;
   const Friend({
     required this.name,
     required this.email,

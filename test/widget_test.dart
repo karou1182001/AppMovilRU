@@ -62,7 +62,7 @@ void main() {
         descripcion: "Me encantan las tortujas y bailar",
         number: "3183745902",
         online: true,
-        scheduleUrl: "");
+        scheduleUrl: AssetImage('assets/horario.png'));
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(body: SelectedFriend(selectedfriend: friend))));
     //Se testean los valores de selected friend

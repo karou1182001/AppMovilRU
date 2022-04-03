@@ -13,7 +13,7 @@ class SelectedFriend extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.0),
+        preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
           backgroundColor: white,
           title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
@@ -24,7 +24,7 @@ class SelectedFriend extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: Center(
                 child: Text(
                   'Profile',
@@ -40,16 +40,16 @@ class SelectedFriend extends StatelessWidget {
                   backgroundImage: selectedfriend.imgUrl,
                   radius: 60,
                 )),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             //Nombre del usuario
-            Text(this.selectedfriend.name, style: generalText(Colors.black, 18)),
-            SizedBox(height: 15),
+            Text(selectedfriend.name, style: generalText(Colors.black, 18)),
+            const SizedBox(height: 15),
             //Descripción
-            Text(this.selectedfriend.descripcion, style: generalText(Colors.grey, 15)),
+            Text(selectedfriend.descripcion, style: generalText(Colors.grey, 15)),
             const SizedBox(height: 30),
             //Celular
             Container(
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -57,7 +57,7 @@ class SelectedFriend extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('Celular: '+ this.selectedfriend.number,
+                    Text('Celular: '+ selectedfriend.number,
                         style: generalText(Colors.black, 15)),
                   ],
                 )),
@@ -80,7 +80,7 @@ class SelectedFriend extends StatelessWidget {
                       child: Container(
                         width: 20,
                         height: 20,
-                        decoration: new BoxDecoration(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: Colors.red,
                           border: Border.all(
@@ -109,9 +109,9 @@ class SelectedFriend extends StatelessWidget {
             const SizedBox(height: 10),
             Container(
                 height: MediaQuery.of(context).size.height * 0.2,
-                child: Image(image: AssetImage('assets/horario.png'))
+                child: Image(image: selectedfriend.scheduleUrl)
                 ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
           ],
