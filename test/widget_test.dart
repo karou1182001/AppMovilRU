@@ -121,7 +121,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: Scaffold(body: EditProfile())));
     expect(find.text('Nombre'), findsOneWidget);
     expect(find.text('Contraseña'), findsOneWidget);
-    expect(find.text('Numero de teléfono'), findsOneWidget);
+    expect(find.text('Número de teléfono'), findsOneWidget);
     expect(find.text('Descripción'), findsOneWidget);
     expect(find.byKey(const Key('editar')), findsOneWidget);
   });
