@@ -35,8 +35,7 @@ void main() {
   });
 
   testWidgets('Ver lista amigos', (WidgetTester tester) async {
-    await tester.pumpWidget(
-        const MaterialApp(home: Scaffold(body: FriendsList())));
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: FriendsList())));
     expect(find.byKey(const Key('Alejandro Vertel')), findsOneWidget);
     expect(find.byKey(const Key('Pepe Perez')), findsOneWidget);
     expect(find.byKey(const Key('Joshua Angarita')), findsNothing);
@@ -44,13 +43,7 @@ void main() {
     await tester.tap(find.byKey(const Key('Alejandro Vertel')));
     await tester.pump();
     expect(find.text('Pepe Perez'), findsNothing);
-  
   });
-
-
-  
-
-
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester
   ) async {
