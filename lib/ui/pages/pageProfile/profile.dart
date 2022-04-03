@@ -124,6 +124,7 @@ class _ProfileState extends State<Profile> {
                                 (states) => Colors.black)),
                         onPressed: () {
                           print('Navegar hacia la pantalla de editar perfil');
+                          Get.testMode = true; 
                           Get.to(() => EditProfile());
                         },
                         child: Row(
