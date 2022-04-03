@@ -1,5 +1,8 @@
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
+import 'package:app_ru/models/event.dart';
+import 'package:app_ru/ui/pages/pageEvents/eventos.dart';
+import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +38,8 @@ void main() {
   });
 
   testWidgets('Ver lista amigos', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: Scaffold(body: FriendsList())));
+    await tester
+        .pumpWidget(const MaterialApp(home: Scaffold(body: FriendsList())));
     expect(find.byKey(const Key('Alejandro Vertel')), findsOneWidget);
     expect(find.byKey(const Key('Pepe Perez')), findsOneWidget);
     expect(find.byKey(const Key('Joshua Angarita')), findsNothing);
@@ -43,6 +47,42 @@ void main() {
     await tester.tap(find.byKey(const Key('Alejandro Vertel')));
     await tester.pump();
     expect(find.text('Pepe Perez'), findsNothing);
+  });
+
+//Test de pagina de eventos
+  testWidgets('Pagina de eventos', (WidgetTester tester) async {
+    await tester
+        .pumpWidget(const MaterialApp(home: Scaffold(body: EventosList())));
+    expect(find.text("Eventos"), findsOneWidget);
+    expect(find.byKey(const Key('Event_Card0')), findsOneWidget);
+
+    //Aqui se selecciona un evento
+
+    await tester.tap(find.byKey(const Key('Event_Card0')));
+    await tester.pump();
+  });
+
+  //Test evento particular
+
+  testWidgets('Evento particualr', (WidgetTester tester) async {
+    // Se crea una variable de tipo evento para poder cumplir con los parametros de selectedevent
+    var event = Event(
+        name: "Salir de clase",
+        from: DateTime.now(),
+        to: DateTime.now(),
+        description: "Salir de clase y no volver más",
+        persCreadora: "Mateo",
+        invitados: ["Chirstian", "Danna"],
+        color: Colors.blue,
+        imgName: "1");
+    await tester.pumpWidget(
+        MaterialApp(home: Scaffold(body: SelectedEvent(selectedevent: event))));
+
+    //Se testean los widgets de selected event
+
+    expect(find.byKey(const Key('Nombre evento')), findsOneWidget);
+    expect(find.byKey(const Key('Descripcion evento')), findsOneWidget);
+    expect(find.text("Inscribirse"), findsOneWidget);
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester

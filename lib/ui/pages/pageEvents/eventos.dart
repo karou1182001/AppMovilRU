@@ -18,11 +18,7 @@ class EventosList extends StatefulWidget {
 class _EventosListState extends State<EventosList> {
   List<Event> entries = <Event>[];
 
-  // EventController eventslsit = Get.find();
-
-  void initState() {
-    //entries = eventslsit.events;
-  }
+  void initState() {}
 
   Widget build(BuildContext context) {
     Get.put(EventController());
