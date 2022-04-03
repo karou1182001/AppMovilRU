@@ -1,4 +1,5 @@
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
+import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,12 @@ void main() {
     await tester.pump();
     await tester.tap(find.byKey(const Key('Alejandro Vertel')));
     await tester.pump();
-    await tester.tap(find.byKey(const Key('Pepe Perez')));
+    expect(find.text('Pepe Perez'), findsNothing);
+  
   });
+
+
+  
 
 
 

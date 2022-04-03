@@ -18,13 +18,16 @@ class FriendsList extends StatefulWidget {
 class _FriendsListState extends State<FriendsList> {
   List<Friend> entries = <Friend>[];
 
-  FriendController friendsList = Get.find();
+  //FriendController friendsList = Get.find();
 
   void initState() {
-    entries = friendsList.friends;
+    //entries = friendsList.friends;
   }
 
   Widget build(BuildContext context) {
+    Get.put(FriendController());
+    FriendController friendsList = Get.find();
+    entries = friendsList.friends;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.0),
@@ -59,7 +62,9 @@ class _FriendsListState extends State<FriendsList> {
                             builder: (context) => SelectedFriend(
                                   selectedfriend: entries[index],
                                 )));
-                  });
+                  },
+                  
+                  );
             },
           ))
         ]),
