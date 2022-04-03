@@ -14,6 +14,7 @@ class Friendcard extends StatelessWidget {
         onTap: ()  {
               onEventClick();
             },
+        key: Key(this.friend.name),
         child: Card(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
