@@ -123,7 +123,7 @@ class MenuRegistro extends StatelessWidget {
                       children: [
                         const Text("Si ya tienes una cuenta, "),
                         GestureDetector(
-                          onTap: () => Get.to(() => const MenuInicio()),
+                          onTap: () => Get.to(() => MenuInicio()),
                           child: const Text("inicia sesión",
                               style: TextStyle(
                                   color: Color.fromARGB(255, 1, 53, 96),

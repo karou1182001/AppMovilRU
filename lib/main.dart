@@ -1,3 +1,4 @@
+import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'domain/constants/controllers/event_controller.dart';
 
 void main() {
   Get.put(EventController());
+  Get.put(UserController());
   runApp(const MyApp());
 }
 
