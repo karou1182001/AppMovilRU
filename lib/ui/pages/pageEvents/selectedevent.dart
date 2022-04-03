@@ -46,6 +46,7 @@ class SelectedEvent extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(selectedevent.name,
+                                key: const Key('Nombre evento'),
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 25)),
                           ],
@@ -53,6 +54,7 @@ class SelectedEvent extends StatelessWidget {
                         const SizedBox(height: 15),
                         Text(
                           selectedevent.description,
+                          key: const Key('Descripcion evento'),
                           style: const TextStyle(
                               color: Colors.black, fontSize: 15),
                         ),

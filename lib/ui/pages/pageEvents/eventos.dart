@@ -9,7 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../widgets/eventcard.dart';
 
 class EventosList extends StatefulWidget {
-  EventosList({Key? key}) : super(key: key);
+  const EventosList({Key? key}) : super(key: key);
 
   @override
   State<EventosList> createState() => _EventosListState();
@@ -18,13 +18,16 @@ class EventosList extends StatefulWidget {
 class _EventosListState extends State<EventosList> {
   List<Event> entries = <Event>[];
 
-  EventController eventslsit = Get.find();
+  // EventController eventslsit = Get.find();
 
   void initState() {
-    entries = eventslsit.events;
+    //entries = eventslsit.events;
   }
 
   Widget build(BuildContext context) {
+    Get.put(EventController());
+    EventController eventslsit = Get.find();
+    entries = eventslsit.events;
     return Scaffold(
       //AppBar
       appBar: PreferredSize(
@@ -53,15 +56,16 @@ class _EventosListState extends State<EventosList> {
             itemBuilder: (BuildContext ctx, int index) {
               //EventCard
               return Eventcard(
-                  event: entries[index],
-                  onEventClick: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SelectedEvent(
-                                  selectedevent: entries[index],
-                                )));
-                  });
+                event: entries[index],
+                onEventClick: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SelectedEvent(
+                                selectedevent: entries[index],
+                              )));
+                },
+              );
             },
           ))
         ]),

@@ -8,6 +8,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 class EditProfile extends StatelessWidget {
   EditProfile({Key? key}) : super(key: key);
   UserController userController = UserController();
+  TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +31,14 @@ class EditProfile extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              const Text("Email",
+              const Text("Name",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() => TextFormField(initialValue: userController.email)),
+              Obx(() => TextFormField(
+                  controller: nameController,
+                  decoration: InputDecoration(hintText: userController.name))),
               const SizedBox(
                 height: 15,
               ),
@@ -67,7 +70,11 @@ class EditProfile extends StatelessWidget {
               Obx(() =>
                   TextFormField(initialValue: userController.description)),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(nameController.text);
+                    userController.changeUserName(nameController.text);
+                    print(userController.name);
+                  },
                   child: Text(
                     'Editar Datos',
                     style: generalText(Colors.black, 18),
