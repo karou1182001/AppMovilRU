@@ -1,6 +1,5 @@
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
-import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -28,6 +27,9 @@ void main() {
         "Al salir de clases ir a comer");
     await tester.pump();
     await tester.enterText(find.byKey(const Key('editableInvitados')), "Julia");
+    await tester.tap(find.byKey(const Key('botonColor')));
+    //await tester.pump();
+    await tester.tap(find.byKey(const Key('botonSave')));
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester
