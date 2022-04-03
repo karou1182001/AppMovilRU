@@ -1,7 +1,10 @@
 import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../widgets/eventcard.dart';
 
@@ -15,50 +18,15 @@ class EventosList extends StatefulWidget {
 class _EventosListState extends State<EventosList> {
   List<Event> entries = <Event>[];
 
+  EventController eventslsit = Get.find();
+
   void initState() {
-    entries.add(Event(
-        name: "Salir de clase",
-        from: DateTime.now(),
-        to: DateTime.now(),
-        description: "Salir de clase y no volver más",
-        persCreadora: "Mateo",
-        invitados: ["Chirstian", "Danna"],
-        color: Colors.blue,
-        imgName: "1"));
-
-    entries.add(Event(
-        name: "Discución intelectual",
-        from: DateTime.now(),
-        to: DateTime.now(),
-        description: "Nos creemos intelectuales y discutimos",
-        persCreadora: "Mateo",
-        invitados: ["Chirstian", "Danna"],
-        color: Colors.green,
-        imgName: "0"));
-
-    entries.add(Event(
-        name: "Sufrimiento",
-        from: DateTime.now(),
-        to: DateTime.now(),
-        description: "Sí",
-        persCreadora: "Mateo",
-        invitados: ["Chirstian", "Danna"],
-        color: Colors.yellow,
-        imgName: "1"));
-
-    entries.add(Event(
-        name: "Intercambio de rocas",
-        from: DateTime.now(),
-        to: DateTime.now(),
-        description: "Reunion anual de entusiastas de rocas",
-        persCreadora: "Mateo",
-        invitados: ["Chirstian", "Danna"],
-        color: Colors.red,
-        imgName: "0"));
+    entries = eventslsit.events;
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
+      //AppBar
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
@@ -83,6 +51,7 @@ class _EventosListState extends State<EventosList> {
               child: ListView.builder(
             itemCount: entries.length,
             itemBuilder: (BuildContext ctx, int index) {
+              //EventCard
               return Eventcard(
                   event: entries[index],
                   onEventClick: () {
