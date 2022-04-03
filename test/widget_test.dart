@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:app_ru/main.dart';
-import 'package:http/testing.dart';
 
 void main()  {
 
@@ -90,7 +89,7 @@ void main()  {
 
   //Test evento particular
 
-  testWidgets('Evento particualr', (WidgetTester tester) async {
+  testWidgets('Evento particular', (WidgetTester tester) async {
     // Se crea una variable de tipo evento para poder cumplir con los parametros de selectedevent
     var event = Event(
         name: "Salir de clase",
