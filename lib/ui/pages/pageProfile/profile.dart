@@ -1,6 +1,7 @@
 import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/ui/pages/pageProfile/editProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
@@ -15,7 +16,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    bool isSwitched = true;
     UserController userController = Get.find();
 
     return Scaffold(
@@ -39,13 +39,12 @@ class _ProfileState extends State<Profile> {
                     backgroundImage: AssetImage('assets/profile_example.jpg'))),
             const SizedBox(height: 10),
             //Nombre del usuario
-            Obx(
-              () => Text(userController.name, style: generalText(Colors.black, 20))
-            ),
+            Obx(() => Text(userController.name,
+                style: generalText(Colors.black, 20))),
             const SizedBox(height: 15),
             //Descripción
-            Text('Me gustan las películas de suspenso y los libros',
-                style: generalText(Colors.grey, 15)),
+            Obx(() => Text(userController.description,
+                style: generalText(Colors.grey, 15))),
             const SizedBox(height: 30),
             //Celular
             Container(
@@ -57,8 +56,10 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('Celular: 3005467812',
-                        style: generalText(Colors.black, 15)),
+                    Obx(
+                      () => Text(userController.number.toString(),
+                          style: generalText(Colors.black, 15)),
+                    )
                   ],
                 )),
             const SizedBox(
@@ -75,12 +76,10 @@ class _ProfileState extends State<Profile> {
                       width: 10,
                     ),
                     Text('RU?', style: generalText(Colors.black, 15)),
-                    Switch(
+                    Obx(() => Switch(
                         activeColor: selectColor,
-                        value: isSwitched,
-                        onChanged: (value) => setState(() {
-                              isSwitched = value;
-                            }))
+                        value: userController.ru,
+                        onChanged: (value) => userController.changeRU()))
                   ],
                 )),
             const SizedBox(
@@ -119,6 +118,7 @@ class _ProfileState extends State<Profile> {
                             (states) => Colors.black)),
                     onPressed: () {
                       print('Navegar hacia la pantalla de editar perfil');
+                      Get.to(() => EditProfile());
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
