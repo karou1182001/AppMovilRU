@@ -114,7 +114,6 @@ void main() {
     await tester.tap(find.byKey(const Key('logout')));
     await tester.pump();
     await tester.tap(find.byKey(const Key('edit')));
-    await tester.pump();
   });
 
   /*testWidgets('Counter increments smoke test', (WidgetTester tester
