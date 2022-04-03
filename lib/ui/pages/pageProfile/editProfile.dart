@@ -2,7 +2,10 @@
 
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/ui/pages/pageProfile/profile.dart';
+import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class EditProfile extends StatelessWidget {
@@ -72,8 +75,9 @@ class EditProfile extends StatelessWidget {
               ElevatedButton(
                   onPressed: () {
                     print(nameController.text);
-                    userController.changeUserName(nameController.text);
+                    userController.changeUserName('Hola');
                     print(userController.name);
+                    Get.to(() => NavBar());
                   },
                   child: Text(
                     'Editar Datos',

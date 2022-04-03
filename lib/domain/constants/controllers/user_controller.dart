@@ -1,11 +1,11 @@
 import 'package:app_ru/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-class UserController {
+class UserController extends GetxController {
   //Usuario
   Rx<User> user = User(
-          name: 'David Ocampo',
           number: 123456789,
           password: 'ocampo123',
           email: 'davidocampo@uninorte.edu.co',
@@ -15,9 +15,12 @@ class UserController {
   //Indicador de si está en la U o no
   final RxBool _ru = false.obs;
 
+  final RxString nombre = 'David'.obs; 
+
   //Getters
+  User get getUser => user.value;
   get email => user.value.getEmail;
-  get name => user.value.getName;
+  get name => nombre.value;
   get password => user.value.getPassword;
   get number => user.value.getNumber;
   get ru => _ru.value;
@@ -29,6 +32,6 @@ class UserController {
   }
 
   void changeUserName(String name) {
-    user.value.changeName(name);
+    nombre.value = name; 
   }
 }
