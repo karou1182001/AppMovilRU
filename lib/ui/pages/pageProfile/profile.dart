@@ -45,8 +45,11 @@ class _ProfileState extends State<Profile> {
                 Text(userController.name, style: generalText(Colors.black, 20)),
                 const SizedBox(height: 15),
                 //Descripción
-                Text(userController.description,
-                    style: generalText(Colors.grey, 15)),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Text(userController.description,
+                      style: generalText(Colors.grey, 15)),
+                ),
                 const SizedBox(height: 30),
                 //Celular
                 Container(

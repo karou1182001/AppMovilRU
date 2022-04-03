@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'domain/constants/controllers/event_controller.dart';
 import 'domain/constants/controllers/friend_controller.dart';
 void main() {
-  Get.put(EventController());
   Get.put(UserController());
+  Get.put(EventController());
   Get.put(FriendController());
   runApp(const MyApp());
 }
