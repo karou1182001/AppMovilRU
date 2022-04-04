@@ -6,10 +6,10 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 class UserController extends GetxController {
   //Usuario
   Rx<User> user = User(
-          name: 'David Ocampo',
+          name: 'John Doe',
           number: 123456789,
-          password: 'ocampo123',
-          email: 'davidocampo@uninorte.edu.co',
+          password: 'johndoe123',
+          email: 'johndoe@uninorte.edu.co',
           description: 'Me gustan las clases de Salazar')
       .obs;
 
