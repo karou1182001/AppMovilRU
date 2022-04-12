@@ -30,7 +30,7 @@ class _FriendsListState extends State<FriendsList> {
     entries = friendsList.friends;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.0),
+        preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
           backgroundColor: white,
           title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
