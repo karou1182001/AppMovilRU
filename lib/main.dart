@@ -11,7 +11,7 @@ void main() {
   Get.put(EventController());
   Get.put(FriendController());
   WidgetsFlutterBinding.ensureInitialized();
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> _init = Firebase.initializeApp();
   runApp(const MyApp());
 }
 
