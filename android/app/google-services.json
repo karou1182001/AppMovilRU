@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "629335196050",
+    "project_id": "ru-app-5800e",
+    "storage_bucket": "ru-app-5800e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629335196050:android:8ca0c47d528d7ee340c14b",
+        "android_client_info": {
+          "package_name": "com.example.app_ru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629335196050-qfb1pe9eha4bubd9kut8qim9nocq1tq2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4nJHaoL0iB1KE2ERXQ8fN2ypzVWER54w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629335196050-qfb1pe9eha4bubd9kut8qim9nocq1tq2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
