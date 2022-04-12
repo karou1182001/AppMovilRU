@@ -7,16 +7,13 @@ import 'domain/constants/controllers/event_controller.dart';
 import 'domain/constants/controllers/friend_controller.dart';
 
 void main() {
-  Get.put(UserController());
-  Get.put(EventController());
-  Get.put(FriendController());
   WidgetsFlutterBinding.ensureInitialized();
-  final Future<FirebaseApp> _init = Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final Future<FirebaseApp> _init = Firebase.initializeApp();
 
   // This widget is the root of your application.
   @override
@@ -27,7 +24,34 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: const SafeArea(child: NavBar()),
+      home: SafeArea(
+          child: FutureBuilder(
+              future: _init,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Container(child: Text('Error'));
+                }
+
+                if (snapshot.connectionState == ConnectionState.done) {
+                  Get.put(UserController());
+                  Get.put(EventController());
+                  Get.put(FriendController());
+                  print('Estamos conectados');
+                  return NavBar();
+                }
+                return Loading();
+              })),
+    );
+  }
+}
+
+class Loading extends StatelessWidget {
+  const Loading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(child: Text("Loading")),
     );
   }
 }
