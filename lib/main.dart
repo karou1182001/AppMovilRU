@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
                   print('Estamos conectados');
                   return NavBar();
                 }
+                //Poner bonito esto
                 return Loading();
               })),
     );

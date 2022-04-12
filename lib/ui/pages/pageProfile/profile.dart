@@ -4,6 +4,7 @@ import 'package:app_ru/domain/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageProfile/editProfile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
@@ -124,8 +125,11 @@ class _ProfileState extends State<Profile> {
                                 (states) => Colors.black)),
                         onPressed: () {
                           print('Navegar hacia la pantalla de editar perfil');
-                          Get.testMode = true; 
+                          Get.testMode = true;
                           Get.to(() => EditProfile());
+                          //Esto es una prueba de firestore
+                          var user = FirebaseFirestore.instance.collection('usuario');
+                          user.add({'nombre': 'Joshua'});
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
