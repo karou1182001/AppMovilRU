@@ -38,8 +38,10 @@ dependencies:
   #paquete para http request
   http: any
   #Paque de Firebase
-  firebase_core: 
-  firebase_auth: 2.0.0 
+  firebase_core: ^1.0.2
+  google_sign_in: ^5.0.3
+  firebase_auth: ^1.1.4 
+  font_awesome_flutter: ^9.0.0
   cloud_firestore: 
 
   # The following adds the Cupertino Icons font to your application.
