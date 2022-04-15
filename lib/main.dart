@@ -3,6 +3,7 @@ import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'domain/constants/config/configuration.dart';
 import 'domain/constants/controllers/event_controller.dart';
 import 'domain/constants/controllers/friend_controller.dart';
 
@@ -13,7 +14,17 @@ void main() {
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final Future<FirebaseApp> _init = Firebase.initializeApp();
+  final Future<FirebaseApp> _init = Firebase.initializeApp(
+    options: const FirebaseOptions(
+        apiKey: Configuration.apiKey,
+        authDomain: Configuration.authDomain,
+        databaseURL: Configuration.databaseURL,
+        projectId: Configuration.projectId,
+        storageBucket: Configuration.storageBucket,
+        messagingSenderId: Configuration.messagingSenderId,
+        appId: Configuration.appId,
+        measurementId: Configuration.measurementId),
+  );
 
   // This widget is the root of your application.
   @override
