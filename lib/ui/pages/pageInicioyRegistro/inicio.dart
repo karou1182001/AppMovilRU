@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/registro.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicioGoogle.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MenuInicio());
@@ -87,12 +88,15 @@ class MenuInicio extends StatelessWidget {
                     )),
                 Text("O", style: generalText(Colors.grey, 15)),
                 GestureDetector(
-                    onTap: () => Get.to(() => const MenuRegistroGoogle()),
+                    onTap: () => Get.to(() => GoogleSignInProvider()),
                     child: MaterialButton(
                         height: 40,
                         minWidth: 270,
-                        onPressed: () =>
-                            Get.to(() => const MenuRegistroGoogle()),
+                        onPressed: () {
+                          Get.to(() => GoogleSignInProvider());
+                          final provider = Provider.of<GoogleSignInProvider>(context, listen:false);
+                          provider.googleLogin();
+                        },
                         color: Colors.white,
                         child: const Text("Inicia Sesión con Google",
                             style: TextStyle(

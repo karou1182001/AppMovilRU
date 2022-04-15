@@ -7,8 +7,9 @@ import 'domain/constants/config/configuration.dart';
 import 'domain/constants/controllers/event_controller.dart';
 import 'domain/constants/controllers/friend_controller.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
