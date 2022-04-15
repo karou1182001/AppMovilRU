@@ -3,12 +3,14 @@ import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'domain/constants/controllers/event_controller.dart';
 import 'domain/constants/controllers/friend_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
+  _requestPermission();
 }
 
 class MyApp extends StatelessWidget {
@@ -44,6 +46,7 @@ class MyApp extends StatelessWidget {
               })),
     );
   }
+
 }
 
 class Loading extends StatelessWidget {
@@ -56,3 +59,14 @@ class Loading extends StatelessWidget {
     );
   }
 }
+
+_requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+  }

@@ -1,9 +1,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.app_ru">
+
+    <!-- added these permissions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
    <application
         android:label="RU"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- added api key -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCVIyBcw4VQFJKR17kX1CGk-gUh0XfWpHM"/>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
