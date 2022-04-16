@@ -11,6 +11,7 @@ class Friend {
   final String number;
   final bool online;
   final AssetImage scheduleUrl;
+  final String userid;
   const Friend({
     required this.name,
     required this.email,
@@ -18,6 +19,7 @@ class Friend {
     required this.descripcion,
     required this.number,
     required this.online,
-    required this.scheduleUrl
+    required this.scheduleUrl,
+    required this.userid,
   });
 }

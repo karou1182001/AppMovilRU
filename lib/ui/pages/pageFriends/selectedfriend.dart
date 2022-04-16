@@ -1,4 +1,5 @@
 import 'package:app_ru/models/friend.dart';
+import 'package:app_ru/ui/pages/pageFriends/selectedFriendMap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
@@ -114,6 +115,37 @@ class SelectedFriend extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
+            Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 220),
+                    child: ElevatedButton(
+                        key: const Key('Track Friend'),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.black)),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  SelectedFriendMap(selectedfriend.userid)));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.directions, color: Colors.white),
+                            const SizedBox(width: 10),
+                            Text(
+                              'Track',
+                              style: generalText(Colors.white, 15),
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
           ],
         ),
       ),
