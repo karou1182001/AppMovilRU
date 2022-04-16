@@ -18,6 +18,10 @@ class MenuRegistro extends StatelessWidget {
   MenuRegistro({Key? key}) : super(key: key);
   bool value = false;
 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _numberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +47,7 @@ class MenuRegistro extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              TextFormField(),
+              TextFormField(controller: _emailController),
               const SizedBox(
                 height: 15,
               ),
@@ -52,7 +56,7 @@ class MenuRegistro extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              TextFormField(),
+              TextFormField(controller: _passwordController),
               const SizedBox(
                 height: 15,
               ),
@@ -61,7 +65,7 @@ class MenuRegistro extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              TextFormField(),
+              TextFormField(controller: _numberController),
               const SizedBox(
                 height: 15,
               ),
