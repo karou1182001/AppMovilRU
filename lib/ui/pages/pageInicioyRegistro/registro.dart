@@ -1,4 +1,5 @@
 import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/condiciones.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
@@ -21,6 +22,7 @@ class MenuRegistro extends StatelessWidget {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _numberController = TextEditingController();
+  AuthenticationController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -111,22 +113,26 @@ class MenuRegistro extends StatelessWidget {
                       height: 40,
                       minWidth: 270,
                       onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Registro Exitoso'),
-                                content: const Text(
-                                    '¡Muchas gracias por registrarte!'),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Get.to(MenuInicio());
-                                      },
-                                      child: const Text('OK'))
-                                ],
-                              );
-                            });
+                        try {
+                          authController.register(
+                              _emailController.text, _passwordController.text);
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Registro Exitoso'),
+                                  content: const Text(
+                                      '¡Muchas gracias por registrarte!'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Get.to(MenuInicio());
+                                        },
+                                        child: const Text('OK'))
+                                  ],
+                                );
+                              });
+                        } catch (e) {}
                       },
                       color: const Color.fromARGB(255, 1, 53, 96),
                       child: const Text(

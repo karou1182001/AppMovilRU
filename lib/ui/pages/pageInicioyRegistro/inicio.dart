@@ -17,8 +17,8 @@ void main() {
 
 class MenuInicio extends StatelessWidget {
   MenuInicio({Key? key}) : super(key: key);
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   UserController userController = Get.find();
 
   @override
@@ -57,8 +57,7 @@ class MenuInicio extends StatelessWidget {
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
-                    Obx(() =>
-                        TextFormField(initialValue: userController.email)),
+                    TextFormField(controller: _emailController),
                     const SizedBox(
                       height: 15,
                     ),
@@ -67,9 +66,8 @@ class MenuInicio extends StatelessWidget {
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
-                    Obx(() => TextFormField(
-                        initialValue: userController.password,
-                        obscureText: true)),
+                    TextFormField(
+                        controller: _passwordController, obscureText: true),
                     const SizedBox(
                       height: 15,
                     ),
