@@ -74,7 +74,7 @@ class MenuRegistro extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              TextFormField(controller: _passwordController),
+              TextFormField(controller: _passwordController, obscureText: true),
               const SizedBox(
                 height: 15,
               ),
