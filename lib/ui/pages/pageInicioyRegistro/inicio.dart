@@ -1,4 +1,5 @@
 import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageProfile/profile.dart';
@@ -17,7 +18,7 @@ class MenuInicio extends StatelessWidget {
   MenuInicio({Key? key}) : super(key: key);
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  UserController userController = Get.find();
+  AuthenticationController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -73,17 +74,22 @@ class MenuInicio extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                    child: MaterialButton(
+                MaterialButton(
                   height: 40,
                   minWidth: 270,
-                  onPressed: () => Get.to(() => const NavBar()),
+                  onPressed: () async {
+                    try {
+                      await authController.login(
+                          _emailController.text, _passwordController.text);
+                      Get.to(() => const NavBar());
+                    } catch (e) {}
+                  },
                   color: const Color.fromARGB(255, 1, 53, 96),
                   child: const Text(
                     "Ingresar",
                     style: TextStyle(color: Colors.white),
                   ),
-                )),
+                ),
                 Text("O", style: generalText(Colors.grey, 15)),
                 GestureDetector(
                     onTap: () => Get.to(() => GoogleSignInProvider()),
