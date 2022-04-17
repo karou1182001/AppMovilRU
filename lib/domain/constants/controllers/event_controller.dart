@@ -6,43 +6,46 @@ import 'package:get/get.dart';
 import 'FirestoreEven.dart';
 
 class EventController extends GetxController {
-  final _events = RxList<Event>();
+  RxList<Event> eventList = RxList<Event>([]);
   DateTime _selectedDate = DateTime.now();
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   //Getters
-  get events => _events;
+  get events => eventList;
   DateTime get selectedDate => _selectedDate;
-  RxList get eventsOfSelectedDate => _events;
+  RxList get eventsOfSelectedDate => eventList;
 
-  EventController() {
-    // _events.add(Event(
-    //     name: "Salir de clase",
-    //     from: DateTime.now(),
-    //     to: DateTime.now(),
-    //     description: "Salir de clase y no volver más",
-    //     persCreadora: "Mateo",
-    //     invitados: ["Chirstian", "Danna"],
-    //     color: Colors.blue,
-    //     imgName: "1"));
-    // _events.add(Event(
-    //     name: "Discución intelectual",
-    //     from: DateTime.now(),
-    //     to: DateTime.now(),
-    //     description: "Nos creemos intelectuales y discutimos",
-    //     persCreadora: "Mateo",
-    //     invitados: ["Chirstian", "Danna"],
-    //     color: Colors.green,
-    //     imgName: "0"));
-  }
+  // EventController() {
+  // _events.add(Event(
+  //     name: "Salir de clase",
+  //     from: DateTime.now(),
+  //     to: DateTime.now(),
+  //     description: "Salir de clase y no volver más",
+  //     persCreadora: "Mateo",
+  //     invitados: ["Chirstian", "Danna"],
+  //     color: Colors.blue,
+  //     imgName: "1"));
+  // _events.add(Event(
+  //     name: "Discución intelectual",
+  //     from: DateTime.now(),
+  //     to: DateTime.now(),
+  //     description: "Nos creemos intelectuales y discutimos",
+  //     persCreadora: "Mateo",
+  //     invitados: ["Chirstian", "Danna"],
+  //     color: Colors.green,
+  //     imgName: "0"));
+  // }
 
-  void onReady() {
-    events.bindStream(FirestoreDb.eventStream());
+  @override
+  void onInit() {
+    super.onInit();
+    eventList.bindStream(getEvents());
+    print("on ready");
   }
 
   //Setters
   void addEvent(Event event) {
     FirestoreDb.addEvent(event);
-    _events.add(event);
+    eventList.add(event);
   }
 
   void setDate(DateTime date) {
@@ -53,11 +56,21 @@ class EventController extends GetxController {
 
   void deleteEvent(Event event) {
     FirestoreDb.deleteEvent(event.eventId);
-    _events.remove(event);
+    eventList.remove(event);
   }
 
   void editEvent(Event newEvent, Event oldEvent) {
-    final index = _events.indexOf(oldEvent);
-    _events[index] = newEvent;
+    final index = eventList.indexOf(oldEvent);
+    eventList[index] = newEvent;
   }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  Stream<List<Event>> getEvents() => firebaseFirestore
+      .collection('events')
+      .snapshots()
+      .map((query) => query.docs.map((item) => Event.fromMap(item)).toList());
 }

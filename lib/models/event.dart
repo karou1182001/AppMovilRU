@@ -24,7 +24,7 @@ class Event {
     required this.imgName,
   });
 
-  Event.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
+  Event.fromMap(DocumentSnapshot documentSnapshot) {
     eventId = documentSnapshot.id;
     name = documentSnapshot['name'];
     from = documentSnapshot['from'];

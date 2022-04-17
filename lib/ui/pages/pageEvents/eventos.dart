@@ -24,6 +24,7 @@ class _EventosListState extends State<EventosList> {
     Get.put(EventController());
     EventController eventslsit = Get.find();
     entries = eventslsit.events;
+    print(entries.length);
     return Scaffold(
       //AppBar
       appBar: PreferredSize(
