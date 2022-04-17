@@ -127,9 +127,6 @@ class _ProfileState extends State<Profile> {
                           print('Navegar hacia la pantalla de editar perfil');
                           Get.testMode = true;
                           Get.to(() => EditProfile());
-                          //Esto es una prueba de firestore
-                          var user = FirebaseFirestore.instance.collection('usuario');
-                          user.add({'nombre': 'Joshua'});
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,

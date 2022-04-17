@@ -1,4 +1,5 @@
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
+import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
                   Get.put(EventController());
                   Get.put(FriendController());
                   print('Estamos conectados');
-                  return NavBar();
+                  return MenuInicio();
                 }
                 //Poner bonito esto
                 return Loading();

@@ -19,6 +19,7 @@ class FriendController extends GetxController {
       number: "3183745902",
       online: true,
       scheduleUrl: AssetImage('assets/horario.png'),
+      userid:"r9U2dwXdF7GOZs2A4Wy8",
     ));
 
     _friends.add(const Friend(
@@ -29,6 +30,7 @@ class FriendController extends GetxController {
       number: "3183762807",
       online: true,
       scheduleUrl: AssetImage('assets/horario.png'),
+      userid:"OAjYXKupFtXAycPBC4RC",
     ));
   }
   //Setters
