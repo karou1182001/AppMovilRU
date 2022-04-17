@@ -1,5 +1,6 @@
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -88,7 +89,7 @@ class AuthenticationController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(
           email: theEmail, password: thePassword);
-      print(auth.currentUser!.email! + 'hola');
+      print(auth.currentUser!.email);
       return Future.value(true);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -96,7 +97,7 @@ class AuthenticationController extends GetxController {
         return Future.error("User not found");
       } else if (e.code == 'wrong-password') {
         print('NOK 2');
-        return Future.error("Wrong password");
+        return Future.error('Wrong Password');
       }
     }
     print('NOK');

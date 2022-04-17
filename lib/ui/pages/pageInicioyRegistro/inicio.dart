@@ -82,9 +82,10 @@ class MenuInicio extends StatelessWidget {
                   minWidth: 270,
                   onPressed: () {
                     try {
-                      authController.login(
-                          _emailController.text, _passwordController.text);
-                      Get.to(() => const NavBar());
+                      authController
+                          .login(
+                              _emailController.text, _passwordController.text)
+                          .then((value) => Get.to(() => const NavBar()));
                     } catch (e) {}
                   },
                   color: const Color.fromARGB(255, 1, 53, 96),
