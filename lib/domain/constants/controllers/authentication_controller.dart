@@ -1,3 +1,4 @@
+import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -31,10 +32,10 @@ class AuthenticationController extends GetxController {
   _setInitialScreen(User? user) {
     if (user == null) {
       // if the user is not found then the user is navigated to the Register Screen
-      Get.offAll(() => MenuRegistro());
+      Get.offAll(() => MenuInicio());
     } else {
       // if the user exists and logged in the the user is navigated to the Home Screen
-      Get.offAll(() => MenuInicio());
+      Get.offAll(() => NavBar());
     }
   }
 
@@ -42,10 +43,10 @@ class AuthenticationController extends GetxController {
     print(googleSignInAccount);
     if (googleSignInAccount == null) {
       // if the user is not found then the user is navigated to the Register Screen
-      Get.offAll(() => MenuRegistro());
+      Get.offAll(() => MenuInicio());
     } else {
       // if the user exists and logged in the the user is navigated to the Home Screen
-      Get.offAll(() => MenuInicio());
+      Get.offAll(() => NavBar());
     }
   }
 
@@ -87,7 +88,7 @@ class AuthenticationController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(
           email: theEmail, password: thePassword);
-      print(auth.currentUser!.email);
+      print(auth.currentUser!.email! + 'hola');
       return Future.value(true);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
