@@ -1,4 +1,6 @@
+import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -89,7 +91,7 @@ class AuthenticationController extends GetxController {
     try {
       await auth.signInWithEmailAndPassword(
           email: theEmail, password: thePassword);
-      print(auth.currentUser!.email);
+      //Leemos la info del usuario actual
       return Future.value(true);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

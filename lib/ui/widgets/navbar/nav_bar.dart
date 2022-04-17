@@ -4,6 +4,9 @@ import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/widgets/navbar/custom_paint.dart';
 import 'package:app_ru/ui/widgets/navbar/model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../domain/constants/controllers/user_controller.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -13,6 +16,13 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Get.put(UserController());
+  }
+
   @override
   //Colocamos que inicie en el menú 2, para que por defecto salga el calendario
   int selectBtn = 2;

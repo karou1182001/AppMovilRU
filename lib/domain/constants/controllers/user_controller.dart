@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,20 +9,22 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 
+import '../constants/firabase_constants.dart';
+
 class UserController extends GetxController {
+  AuthenticationController authenticationController = Get.find();
   //Usuario
-  Rx<User> user = User(
-          name: 'John Doe',
-          number: 123456789,
-          password: 'johndoe123',
-          email: 'johndoe@uninorte.edu.co',
-          description: 'Me gustan las clases de Salazar')
-      .obs;
+  late Rx<User> user =
+      User(name: '', number: 123, email: '', description: '').obs;
+
+  UserController() {
+    createUser();
+  }
 
   //Indicador de si está en la U o no
   final RxBool _ru = false.obs;
 
-  // variables de localizacion 
+  // variables de localizacion
   final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
 
@@ -29,7 +32,6 @@ class UserController extends GetxController {
   User get getUser => user.value;
   get email => user.value.getEmail;
   get name => user.value.getName;
-  get password => user.value.getPassword;
   get number => user.value.getNumber;
   get ru => _ru.value;
   get description => user.value.getDescription;
@@ -45,11 +47,6 @@ class UserController extends GetxController {
     user.value.changeName(userName);
   }
 
-  //Función para cambiar la contraseña
-  void changeUserPassword(String userPassword) {
-    user.value.changePassword(userPassword);
-  }
-
   //Función para cambiar el número
   void changeUserNumber(int userNumber) {
     user.value.changeNumber(userNumber);
@@ -60,20 +57,37 @@ class UserController extends GetxController {
     user.value.changeDescription(userDescription);
   }
 
+  void createUser() async {
+    var query = userFirebase.where('email',
+        isEqualTo: authenticationController.auth.currentUser!.email);
+    QuerySnapshot usuario = await query.get();
+    String nombre = usuario.docs[0]['name'];
+    int numero = int.parse(usuario.docs[0]['number']);
+    String descripcion = usuario.docs[0]['description'];
+    user = User(
+            name: nombre,
+            number: numero,
+            email: authenticationController.auth.currentUser!.email!,
+            description: descripcion)
+        .obs;
+  }
+
   void stablishLocation(bool value) {
-    if(value == true){
+    if (value == true) {
       getLocation();
       listenLocation();
-    }else{
+    } else {
       stopListeningLocation();
     }
-    
   }
 
   void getLocation() async {
     try {
       final loc.LocationData _locationResult = await location.getLocation();
-      await FirebaseFirestore.instance.collection('usuario').doc('AeKKTBW9zN2z2c9nDUAj').set({
+      await FirebaseFirestore.instance
+          .collection('usuario')
+          .doc('AeKKTBW9zN2z2c9nDUAj')
+          .set({
         'latitude': _locationResult.latitude,
         'longitude': _locationResult.longitude,
       }, SetOptions(merge: true));
@@ -88,7 +102,10 @@ class UserController extends GetxController {
       _locationSubscription?.cancel();
       _locationSubscription = null;
     }).listen((loc.LocationData currentlocation) async {
-      await FirebaseFirestore.instance.collection('usuario').doc('AeKKTBW9zN2z2c9nDUAj').set({
+      await FirebaseFirestore.instance
+          .collection('usuario')
+          .doc('AeKKTBW9zN2z2c9nDUAj')
+          .set({
         'latitude': currentlocation.latitude,
         'longitude': currentlocation.longitude,
       }, SetOptions(merge: true));
@@ -99,5 +116,4 @@ class UserController extends GetxController {
     _locationSubscription?.cancel();
     _locationSubscription = null;
   }
-    
 }

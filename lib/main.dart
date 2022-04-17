@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
                 }
 
                 if (snapshot.connectionState == ConnectionState.done) {
-                  Get.put(UserController());
                   Get.put(EventController());
                   Get.put(FriendController());
                   Get.put(AuthenticationController());

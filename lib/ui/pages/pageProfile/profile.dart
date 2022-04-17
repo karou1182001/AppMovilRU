@@ -72,6 +72,23 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 15,
                 ),
+                //Email
+                Container(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.email),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(userController.email.toString(),
+                            style: generalText(Colors.black, 15)),
+                      ],
+                    )),
+                const SizedBox(
+                  height: 15,
+                ),
                 //Parte del switch de RU?, que indica si el usuario se encuentra en la U o no.
                 Container(
                     padding: const EdgeInsets.only(left: 10),

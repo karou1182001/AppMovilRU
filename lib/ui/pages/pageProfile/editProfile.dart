@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
@@ -14,6 +15,7 @@ class EditProfile extends StatelessWidget {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController numberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  AuthenticationController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +88,7 @@ class EditProfile extends StatelessWidget {
                   decoration:
                       InputDecoration(hintText: userController.description))),
               ElevatedButton(
-                key: Key('editar'),
+                  key: Key('editar'),
                   onPressed: () {
                     if (nameController.text != '') {
                       userController.changeUserName(nameController.text);
@@ -96,8 +98,8 @@ class EditProfile extends StatelessWidget {
                           .changeUserNumber(int.parse(numberController.text));
                     }
                     if (passwordController.text != '') {
-                      userController
-                          .changeUserPassword(passwordController.text);
+                      authController.auth.currentUser!
+                          .updatePassword(passwordController.text);
                     }
                     if (descriptionController.text != '') {
                       userController
