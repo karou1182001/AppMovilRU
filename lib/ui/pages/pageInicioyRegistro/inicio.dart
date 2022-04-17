@@ -15,8 +15,8 @@ void main() {
 
 class MenuInicio extends StatelessWidget {
   MenuInicio({Key? key}) : super(key: key);
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   UserController userController = Get.find();
 
   @override
@@ -54,8 +54,7 @@ class MenuInicio extends StatelessWidget {
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
-                    Obx(() =>
-                        TextFormField(initialValue: userController.email)),
+                    TextFormField(controller: _emailController),
                     const SizedBox(
                       height: 15,
                     ),
@@ -64,9 +63,8 @@ class MenuInicio extends StatelessWidget {
                             color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
-                    Obx(() => TextFormField(
-                        initialValue: userController.password,
-                        obscureText: true)),
+                    TextFormField(
+                        controller: _passwordController, obscureText: true),
                     const SizedBox(
                       height: 15,
                     ),
@@ -77,15 +75,15 @@ class MenuInicio extends StatelessWidget {
               children: [
                 GestureDetector(
                     child: MaterialButton(
-                      height: 40,
-                      minWidth: 270,
-                      onPressed: () => Get.to(() => const NavBar()),
-                      color: const Color.fromARGB(255, 1, 53, 96),
-                      child: const Text(
-                        "Ingresar",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )),
+                  height: 40,
+                  minWidth: 270,
+                  onPressed: () => Get.to(() => const NavBar()),
+                  color: const Color.fromARGB(255, 1, 53, 96),
+                  child: const Text(
+                    "Ingresar",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )),
                 Text("O", style: generalText(Colors.grey, 15)),
                 GestureDetector(
                     onTap: () => Get.to(() => GoogleSignInProvider()),
@@ -94,7 +92,9 @@ class MenuInicio extends StatelessWidget {
                         minWidth: 270,
                         onPressed: () {
                           Get.to(() => GoogleSignInProvider());
-                          final provider = Provider.of<GoogleSignInProvider>(context, listen:false);
+                          final provider = Provider.of<GoogleSignInProvider>(
+                              context,
+                              listen: false);
                           provider.googleLogin();
                         },
                         color: Colors.white,
