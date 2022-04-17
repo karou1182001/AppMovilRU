@@ -114,7 +114,7 @@ class EventViewingPage extends StatelessWidget {
           ElevatedButton(
             onPressed: () {},
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(event.color)),
+                backgroundColor: MaterialStateProperty.all(Color(event.color))),
             child: const Text(""),
           ),
         ],

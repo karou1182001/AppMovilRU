@@ -63,7 +63,7 @@ void main() {
         number: "3183745902",
         online: true,
         scheduleUrl: AssetImage('assets/horario.png'),
-        userid:"OAjYXKupFtXAycPBC4RC");
+        userid: "OAjYXKupFtXAycPBC4RC");
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(body: SelectedFriend(selectedfriend: friend))));
     //Se testean los valores de selected friend
@@ -96,7 +96,7 @@ void main() {
         description: "Salir de clase y no volver más",
         persCreadora: "Mateo",
         invitados: ["Chirstian", "Danna"],
-        color: Colors.blue,
+        color: Colors.blue.value,
         imgName: "1");
     await tester.pumpWidget(
         MaterialApp(home: Scaffold(body: SelectedEvent(selectedevent: event))));
