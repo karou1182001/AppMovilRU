@@ -107,18 +107,33 @@ class MenuRegistro extends StatelessWidget {
                         ),
                       ],
                     ),
-                    GestureDetector(
-                        onTap: () => Get.to(() => const Profile()),
-                        child: MaterialButton(
-                          height: 40,
-                          minWidth: 270,
-                          onPressed: () => Get.to(() => const Profile()),
-                          color: const Color.fromARGB(255, 1, 53, 96),
-                          child: const Text(
-                            "Regístrate",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )),
+                    MaterialButton(
+                      height: 40,
+                      minWidth: 270,
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Registro Exitoso'),
+                                content: const Text(
+                                    '¡Muchas gracias por registrarte!'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Get.to(MenuInicio());
+                                      },
+                                      child: const Text('OK'))
+                                ],
+                              );
+                            });
+                      },
+                      color: const Color.fromARGB(255, 1, 53, 96),
+                      child: const Text(
+                        "Regístrate",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                     const SizedBox(
                       height: 7,
                     ),
