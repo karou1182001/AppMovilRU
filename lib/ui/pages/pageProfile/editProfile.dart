@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
-import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

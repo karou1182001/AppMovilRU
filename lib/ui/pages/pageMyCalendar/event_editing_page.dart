@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/constants/color.dart';
+import '../../../domain/constants/constants/color.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;

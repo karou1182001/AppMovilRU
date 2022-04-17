@@ -1,7 +1,7 @@
-import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
-import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -80,9 +80,9 @@ class MenuInicio extends StatelessWidget {
                 MaterialButton(
                   height: 40,
                   minWidth: 270,
-                  onPressed: () async {
+                  onPressed: () {
                     try {
-                      await authController.login(
+                      authController.login(
                           _emailController.text, _passwordController.text);
                       Get.to(() => const NavBar());
                     } catch (e) {}

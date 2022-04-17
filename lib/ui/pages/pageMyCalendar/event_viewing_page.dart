@@ -7,7 +7,7 @@ import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/constants/color.dart';
+import '../../../domain/constants/constants/color.dart';
 
 class EventViewingPage extends StatelessWidget {
   final Event event;

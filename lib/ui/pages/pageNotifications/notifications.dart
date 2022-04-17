@@ -1,4 +1,4 @@
-import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:flutter/material.dart';
 
 class Notifications extends StatefulWidget {

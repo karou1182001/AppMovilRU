@@ -1,4 +1,4 @@
-import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';

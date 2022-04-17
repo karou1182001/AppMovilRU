@@ -4,7 +4,7 @@
 //https://www.syncfusion.com/kb/12116/how-to-add-google-calendar-events-to-the-flutter-event-calendar-sfcalendar
 //https://youtu.be/LoDtxRkGDTw
 ///-----------------------Librerías--------------------------------------
-import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_data_source.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
