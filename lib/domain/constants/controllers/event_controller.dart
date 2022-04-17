@@ -32,6 +32,10 @@ class EventController extends GetxController {
         imgName: "0"));
   }
 
+  // void onReady() {
+  //   events.bindStream(FirestoreDb.eventsStream());
+  // }
+
   //Setters
   void addEvent(Event event) {
     _events.add(event);
