@@ -1,15 +1,19 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Event {
-  final String name;
-  final DateTime from;
-  final DateTime to;
-  final String description;
-  final String persCreadora;
-  final List invitados;
-  final Color color;
-  final String imgName;
-  const Event({
+  String? eventId;
+  late String name;
+  late DateTime from;
+  late DateTime to;
+  late String description;
+  late String persCreadora;
+  late List invitados;
+  late Color color;
+  late String imgName;
+
+  Event({
     required this.name,
     required this.from,
     required this.to,
@@ -19,4 +23,16 @@ class Event {
     required this.color,
     required this.imgName,
   });
+
+  Event.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
+    eventId = documentSnapshot.id;
+    name = documentSnapshot['name'];
+    from = documentSnapshot['from'];
+    to = documentSnapshot['to'];
+    description = documentSnapshot['description'];
+    persCreadora = documentSnapshot['persCreadora'];
+    invitados = documentSnapshot['invitados'];
+    color = documentSnapshot['color'];
+    imgName = documentSnapshot['imgName'];
+  }
 }
