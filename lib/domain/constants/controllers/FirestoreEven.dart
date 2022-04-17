@@ -17,21 +17,21 @@ class FirestoreDb {
     });
   }
 
-  static Stream<List<Event>> eventStream() {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    FirebaseAuth auth = FirebaseAuth.instance;
-    return firebaseFirestore
-        .collection('events')
-        .snapshots()
-        .map((QuerySnapshot query) {
-      List<Event> events = [];
-      for (var event in query.docs) {
-        final _events = Event.fromDocumentSnapshot(documentSnapshot: event);
-        events.add(_events);
-      }
-      return events;
-    });
-  }
+  // static Stream<List<Event>> eventStream() {
+  //   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  //   FirebaseAuth auth = FirebaseAuth.instance;
+  //   return firebaseFirestore
+  //       .collection('events')
+  //       .snapshots()
+  //       .map((QuerySnapshot query) {
+  //     List<Event> events = [];
+  //     for (var event in query.docs) {
+  //       final _events = Event.fromMap(documentSnapshot: event);
+  //       events.add(_events);
+  //     }
+  //     return events;
+  //   });
+  // }
 
   //updateevento
 
