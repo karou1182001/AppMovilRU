@@ -9,6 +9,8 @@ import 'package:app_ru/ui/pages/pageInicioyRegistro/registro.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicioGoogle.dart';
 import 'package:provider/provider.dart';
 
+import '../../../domain/constants/controllers/authentication_controller.dart';
+
 void main() {
   runApp(MenuInicio());
 }
@@ -21,6 +23,7 @@ class MenuInicio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationController authController = AuthenticationController.instance;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -77,15 +80,15 @@ class MenuInicio extends StatelessWidget {
               children: [
                 GestureDetector(
                     child: MaterialButton(
-                      height: 40,
-                      minWidth: 270,
-                      onPressed: () => Get.to(() => const NavBar()),
-                      color: const Color.fromARGB(255, 1, 53, 96),
-                      child: const Text(
-                        "Ingresar",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )),
+                  height: 40,
+                  minWidth: 270,
+                  onPressed: () => Get.to(() => const NavBar()),
+                  color: const Color.fromARGB(255, 1, 53, 96),
+                  child: const Text(
+                    "Ingresar",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )),
                 Text("O", style: generalText(Colors.grey, 15)),
                 GestureDetector(
                     onTap: () => Get.to(() => GoogleSignInProvider()),
@@ -93,9 +96,10 @@ class MenuInicio extends StatelessWidget {
                         height: 40,
                         minWidth: 270,
                         onPressed: () {
-                          Get.to(() => GoogleSignInProvider());
-                          final provider = Provider.of<GoogleSignInProvider>(context, listen:false);
-                          provider.googleLogin();
+                          authController.signInWithGoogle();
+                          // Get.to(() => GoogleSignInProvider());
+                          // final provider = Provider.of<GoogleSignInProvider>(context, listen:false);
+                          // provider.googleLogin();
                         },
                         color: Colors.white,
                         child: const Text("Inicia Sesión con Google",

@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'domain/constants/controllers/authentication_controller.dart';
 import 'domain/constants/controllers/event_controller.dart';
 import 'domain/constants/controllers/friend_controller.dart';
 
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
                   Get.put(UserController());
                   Get.put(EventController());
                   Get.put(FriendController());
+                  Get.put(AuthenticationController());
                   print('Estamos conectados');
                   return MenuInicio();
                 }
@@ -47,7 +49,6 @@ class MyApp extends StatelessWidget {
               })),
     );
   }
-
 }
 
 class Loading extends StatelessWidget {
@@ -62,12 +63,12 @@ class Loading extends StatelessWidget {
 }
 
 _requestPermission() async {
-    var status = await Permission.location.request();
-    if (status.isGranted) {
-      print('done');
-    } else if (status.isDenied) {
-      _requestPermission();
-    } else if (status.isPermanentlyDenied) {
-      openAppSettings();
-    }
+  var status = await Permission.location.request();
+  if (status.isGranted) {
+    print('done');
+  } else if (status.isDenied) {
+    _requestPermission();
+  } else if (status.isPermanentlyDenied) {
+    openAppSettings();
   }
+}
