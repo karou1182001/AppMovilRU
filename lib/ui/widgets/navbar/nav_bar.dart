@@ -1,6 +1,6 @@
 //Repositorio guía de Navbar: https://github.com/sudeshnb/animation_nav_bar
-import 'package:app_ru/domain/constants/color.dart';
-import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/domain/constants/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/widgets/navbar/custom_paint.dart';
 import 'package:app_ru/ui/widgets/navbar/model.dart';
 import 'package:flutter/material.dart';

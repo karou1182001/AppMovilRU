@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
-import '../../../domain/constants/color.dart';
+import '../../../domain/constants/constants/color.dart';
 
 class TaskWidget extends StatefulWidget {
   const TaskWidget({Key? key}) : super(key: key);

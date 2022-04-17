@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print
 
-import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/color.dart';
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
-import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageProfile/editProfile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     Get.put(UserController());
     UserController userController = Get.find();
+    AuthenticationController authController = Get.find();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -163,6 +165,7 @@ class _ProfileState extends State<Profile> {
                         onPressed: () {
                           print(
                               'Navegar hacia la pantalla de inicio de sesión');
+                          authController.signOut();
                           Get.to(() => MenuInicio());
                         },
                         child: Row(

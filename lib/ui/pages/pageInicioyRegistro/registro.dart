@@ -1,6 +1,7 @@
-import 'package:app_ru/domain/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/color.dart';
+import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
-import 'package:app_ru/domain/constants/text_style.dart';
+import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/condiciones.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
 import 'package:app_ru/ui/pages/pageProfile/profile.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+
+import '../../../domain/constants/controllers/authentication_controller.dart';
 
 void main() {
   runApp(MenuRegistro());
@@ -19,6 +22,7 @@ class MenuRegistro extends StatelessWidget {
   MenuRegistro({Key? key}) : super(key: key);
   bool value = false;
 
+  TextEditingController _nombreController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _numberController = TextEditingController();
@@ -44,6 +48,17 @@ class MenuRegistro extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
+              //Nombre del Usuario
+              const Text("Nombre",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold)),
+              TextFormField(controller: _nombreController),
+              const SizedBox(
+                height: 15,
+              ),
+              //Email del Usuario
               const Text("Email",
                   style: TextStyle(
                       color: Colors.black,
@@ -53,15 +68,17 @@ class MenuRegistro extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
+              //Contraseña del Usuario (tiene que ser de mínimo 6 caracteres)
               const Text("Contraseña",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              TextFormField(controller: _passwordController),
+              TextFormField(controller: _passwordController, obscureText: true),
               const SizedBox(
                 height: 15,
               ),
+              //Número del usuario
               const Text("Número de teléfono",
                   style: TextStyle(
                       color: Colors.black,
@@ -113,26 +130,42 @@ class MenuRegistro extends StatelessWidget {
                       height: 40,
                       minWidth: 270,
                       onPressed: () {
-                        try {
-                          authController.register(
-                              _emailController.text, _passwordController.text);
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text('Registro Exitoso'),
-                                  content: const Text(
-                                      '¡Muchas gracias por registrarte!'),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () {
-                                          Get.to(MenuInicio());
-                                        },
-                                        child: const Text('OK'))
-                                  ],
-                                );
-                              });
-                        } catch (e) {}
+                        //Condiciones
+                        if (_nombreController.text != '' &&
+                            _emailController.text != '' &&
+                            _numberController != 0 &&
+                            _passwordController.text.length >= 6) {
+                          try {
+                            //Realizamos el registro en Firebase
+                            authController.register(_emailController.text,
+                                _passwordController.text);
+                            //Registramos los datos en Firestore
+                            userFirebase.add({
+                              'name': _nombreController.text,
+                              'email': _emailController.text,
+                              'number': _numberController.text,
+                              'description': '¡Dinos quién eres!'
+                            });
+                            //Enviamos un mensaje exitoso
+                            showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Registro Exitoso'),
+                                    content: const Text(
+                                        '¡Muchas gracias por registrarte!'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Get.to(MenuInicio());
+                                          },
+                                          child: const Text('OK'))
+                                    ],
+                                  );
+                                });
+                          } catch (e) {}
+                        }
                       },
                       color: const Color.fromARGB(255, 1, 53, 96),
                       child: const Text(
@@ -141,7 +174,7 @@ class MenuRegistro extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 7,
+                      height: 15,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
