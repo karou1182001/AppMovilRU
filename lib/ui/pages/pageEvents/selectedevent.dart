@@ -81,9 +81,9 @@ class SelectedEvent extends StatelessWidget {
                                                 begin: Alignment.bottomCenter,
                                                 end: Alignment.topCenter,
                                                 colors: [
-                                                  selectedevent.color
+                                                  Color(selectedevent.color)
                                                       .withOpacity(0.4),
-                                                  selectedevent.color
+                                                  Color(selectedevent.color)
                                                       .withOpacity(1)
                                                 ])))),
                                 Positioned(
@@ -94,7 +94,8 @@ class SelectedEvent extends StatelessWidget {
                                         children: [
                                           ClipOval(
                                             child: Container(
-                                                color: selectedevent.color,
+                                                color:
+                                                    Color(selectedevent.color),
                                                 padding:
                                                     const EdgeInsets.all(10),
                                                 child: const Icon(

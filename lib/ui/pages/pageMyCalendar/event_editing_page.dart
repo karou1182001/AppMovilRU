@@ -343,7 +343,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
         //Se le pasa el usuario
         persCreadora: "Usuario actual",
         invitados: ["Julia"],
-        color: colorEvento,
+        color: colorEvento.value,
         imgName: "1",
       );
 

@@ -10,7 +10,7 @@ class Event {
   late String description;
   late String persCreadora;
   late List invitados;
-  late Color color;
+  late int color;
   late String imgName;
 
   Event({

@@ -1,43 +1,47 @@
 import 'package:app_ru/models/event.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'FirestoreEven.dart';
 
 class EventController extends GetxController {
   final _events = RxList<Event>();
   DateTime _selectedDate = DateTime.now();
-
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   //Getters
   get events => _events;
   DateTime get selectedDate => _selectedDate;
   RxList get eventsOfSelectedDate => _events;
 
   EventController() {
-    _events.add(Event(
-        name: "Salir de clase",
-        from: DateTime.now(),
-        to: DateTime.now(),
-        description: "Salir de clase y no volver más",
-        persCreadora: "Mateo",
-        invitados: ["Chirstian", "Danna"],
-        color: Colors.blue,
-        imgName: "1"));
-    _events.add(Event(
-        name: "Discución intelectual",
-        from: DateTime.now(),
-        to: DateTime.now(),
-        description: "Nos creemos intelectuales y discutimos",
-        persCreadora: "Mateo",
-        invitados: ["Chirstian", "Danna"],
-        color: Colors.green,
-        imgName: "0"));
+    // _events.add(Event(
+    //     name: "Salir de clase",
+    //     from: DateTime.now(),
+    //     to: DateTime.now(),
+    //     description: "Salir de clase y no volver más",
+    //     persCreadora: "Mateo",
+    //     invitados: ["Chirstian", "Danna"],
+    //     color: Colors.blue,
+    //     imgName: "1"));
+    // _events.add(Event(
+    //     name: "Discución intelectual",
+    //     from: DateTime.now(),
+    //     to: DateTime.now(),
+    //     description: "Nos creemos intelectuales y discutimos",
+    //     persCreadora: "Mateo",
+    //     invitados: ["Chirstian", "Danna"],
+    //     color: Colors.green,
+    //     imgName: "0"));
   }
 
-  // void onReady() {
-  //   events.bindStream(FirestoreDb.eventsStream());
-  // }
+  void onReady() {
+    events.bindStream(FirestoreDb.eventStream());
+  }
 
   //Setters
   void addEvent(Event event) {
+    FirestoreDb.addEvent(event);
     _events.add(event);
   }
 
@@ -48,6 +52,7 @@ class EventController extends GetxController {
   //Otros
 
   void deleteEvent(Event event) {
+    FirestoreDb.deleteEvent(event.eventId);
     _events.remove(event);
   }
 

@@ -40,7 +40,7 @@ class Eventcard extends StatelessWidget {
                               begin: Alignment.bottomCenter,
                               end: Alignment.topCenter,
                               colors: [
-                                event.color.withOpacity(0.7),
+                                Color(event.color).withOpacity(0.7),
                                 Colors.transparent
                               ])))),
               Positioned(
@@ -51,7 +51,7 @@ class Eventcard extends StatelessWidget {
                       children: [
                         ClipOval(
                           child: Container(
-                              color: event.color,
+                              color: Color(event.color),
                               padding: const EdgeInsets.all(10),
                               child: const Icon(
                                 Icons.add_outlined,
