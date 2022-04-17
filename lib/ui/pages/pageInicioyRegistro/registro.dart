@@ -144,11 +144,12 @@ class MenuRegistro extends StatelessWidget {
                               'name': _nombreController.text,
                               'email': _emailController.text,
                               'number': _numberController.text,
-                              'description': ''
+                              'description': '¡Dinos quién eres!'
                             });
                             //Enviamos un mensaje exitoso
                             showDialog(
                                 context: context,
+                                barrierDismissible: false,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
                                     title: const Text('Registro Exitoso'),
