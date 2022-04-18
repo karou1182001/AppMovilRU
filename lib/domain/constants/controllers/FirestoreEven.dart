@@ -8,6 +8,7 @@ class FirestoreDb {
     await eventsFirebase.add({
       'name': event.name,
       'from': event.from,
+      'to': event.to,
       'description': event.description,
       'persCreadora': event.persCreadora,
       'invitados': event.invitados,
