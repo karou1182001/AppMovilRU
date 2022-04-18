@@ -102,6 +102,7 @@ class MenuInicio extends StatelessWidget {
                         minWidth: 270,
                         onPressed: () {
                           authController.signInWithGoogle();
+                    
                           // Get.to(() => GoogleSignInProvider());
                           // final provider = Provider.of<GoogleSignInProvider>(context, listen:false);
                           // provider.googleLogin();
