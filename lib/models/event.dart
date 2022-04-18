@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Event {
   String? eventId;
   late String name;
-  late DateTime from;
-  late DateTime to;
+  late String from;
+  late String to;
   late String description;
   late String persCreadora;
   late List invitados;
@@ -24,7 +24,7 @@ class Event {
     required this.imgName,
   });
 
-  Event.fromMap(DocumentSnapshot documentSnapshot) {
+  Event.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
     eventId = documentSnapshot.id;
     name = documentSnapshot['name'];
     from = documentSnapshot['from'];

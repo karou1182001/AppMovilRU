@@ -6,6 +6,7 @@ import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/constants/constants/color.dart';
 
@@ -38,8 +39,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
     } else {
       final event = widget.event;
       titleController.text = event!.name;
-      fromDate = event.from;
-      toDate = event.to;
+      fromDate = DateTime.parse(event.from);
+      toDate = DateTime.parse(event.to);
     }
   }
 
@@ -337,8 +338,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
       //Creamos un nuevo evento
       final event = Event(
         name: titleController.text,
-        from: fromDate,
-        to: toDate,
+        from: DateFormat("yyyy-MM-dd hh:mm:ss").format(fromDate),
+        to: DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
         description: descController.text,
         //Se le pasa el usuario
         persCreadora: "Usuario actual",

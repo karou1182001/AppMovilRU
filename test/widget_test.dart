@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:app_ru/main.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   //Test para crear un nuevo evento en el calendario
@@ -91,8 +92,8 @@ void main() {
     // Se crea una variable de tipo evento para poder cumplir con los parametros de selectedevent
     var event = Event(
         name: "Salir de clase",
-        from: DateTime.now(),
-        to: DateTime.now(),
+        from: DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now()),
+        to: DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now()),
         description: "Salir de clase y no volver más",
         persCreadora: "Mateo",
         invitados: ["Chirstian", "Danna"],

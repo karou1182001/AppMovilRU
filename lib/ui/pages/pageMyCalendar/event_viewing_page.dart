@@ -83,9 +83,9 @@ class EventViewingPage extends StatelessWidget {
               fontSize: 18, fontWeight: FontWeight.bold, color: selectColor),
         ),
         const SizedBox(height: 32),
-        buildDate("From:", event.from),
+        buildDate("From:", DateTime.parse(event.from)),
         const SizedBox(height: 32),
-        buildDate("To:     ", event.to)
+        buildDate("To:     ", DateTime.parse(event.to))
       ],
     );
   }
