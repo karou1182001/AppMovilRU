@@ -80,10 +80,16 @@ class AuthenticationController extends GetxController {
     }
   }
 
-  void register(String email, password) async {
+  void register(String email, password, name, int number) async {
     try {
-      await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      await auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) => userFirebase.add({
+                'name': name,
+                'email': email,
+                'number': number,
+                'description': '¡Dinos quién eres!'
+              }));
     } catch (firebaseAuthException) {}
   }
 

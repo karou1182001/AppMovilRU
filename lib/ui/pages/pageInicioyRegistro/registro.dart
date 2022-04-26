@@ -139,15 +139,11 @@ class MenuRegistro extends StatelessWidget {
                             _passwordController.text.length >= 6) {
                           try {
                             //Realizamos el registro en Firebase
-                            authController.register(_emailController.text,
-                                _passwordController.text);
-                            //Registramos los datos en Firestore
-                            userFirebase.add({
-                              'name': _nombreController.text,
-                              'email': _emailController.text,
-                              'number': _numberController.text,
-                              'description': '¡Dinos quién eres!'
-                            });
+                            authController.register(
+                                _emailController.text,
+                                _passwordController.text,
+                                _nombreController,
+                                int.parse(_numberController.text));
                             //Enviamos un mensaje exitoso
                             showDialog(
                                 context: context,

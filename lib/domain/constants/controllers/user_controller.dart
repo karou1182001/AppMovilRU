@@ -72,6 +72,7 @@ class UserController extends GetxController {
         .obs;
   }
 
+//Parte de geolocalización
   void stablishLocation(bool value) {
     if (value == true) {
       getLocation();
