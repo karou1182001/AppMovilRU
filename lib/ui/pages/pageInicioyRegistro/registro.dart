@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
