@@ -11,7 +11,7 @@ class FriendController extends GetxController {
   RxList get friendsList => _friends;
 
   FriendController() {
-    _friends.add(const Friend(
+    _friends.add( Friend(
       name: "Alejandro Vertel",
       email: "vertel@uninorte.edu.co",
       imgUrl: AssetImage('assets/perfilvertel.jpg'),
@@ -22,7 +22,7 @@ class FriendController extends GetxController {
       userid:"r9U2dwXdF7GOZs2A4Wy8",
     ));
 
-    _friends.add(const Friend(
+    _friends.add( Friend(
       name: "David Ocampo",
       email: "davidocampo@uninorte.edu.co",
       imgUrl: AssetImage('assets/perfilocampo.jpg'),

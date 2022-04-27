@@ -5,6 +5,7 @@ import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
 
 import '../../widgets/friendcard.dart';
 
@@ -61,13 +62,23 @@ class _FriendsListState extends State<FriendsList> {
                         MaterialPageRoute(
                             builder: (context) => SelectedFriend(
                                   selectedfriend: entries[index],
-                                )));
+                                )
+                              )
+                            );
                   },
-                  
-                  );
+                );
             },
           ))
+          
         ]),
+      ),
+      floatingActionButton: FloatingActionButton(
+        key: const Key('floatingbutton'),
+        onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) =>  UserList())),
+        backgroundColor: selectColor,
+        tooltip: 'Busca Usuarios',
+        child: const Icon(Icons.add),
       ),
     );
   }

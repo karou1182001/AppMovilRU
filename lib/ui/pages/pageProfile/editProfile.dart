@@ -95,7 +95,7 @@ class EditProfile extends StatelessWidget {
                     }
                     if (numberController.text != '') {
                       userController
-                          .changeUserNumber(int.parse(numberController.text));
+                          .changeUserNumber((numberController.text));
                     }
                     if (passwordController.text != '') {
                       authController.auth.currentUser!

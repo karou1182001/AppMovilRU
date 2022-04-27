@@ -56,7 +56,7 @@ void main() {
 
   testWidgets('Amigo Especifico', (WidgetTester tester) async {
     // Se crea una variable de tipo friend para poder cumplir con los parametros de selectedfriend
-    var friend = const Friend(
+    var friend =  Friend(
         name: "Alejandro Vertel",
         email: "vertel@uninorte.edu.co",
         imgUrl: AssetImage('assets/perfilvertel.jpg'),

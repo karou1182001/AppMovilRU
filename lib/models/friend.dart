@@ -12,7 +12,7 @@ class Friend {
   final bool online;
   final AssetImage scheduleUrl;
   final String userid;
-  const Friend({
+   Friend({
     required this.name,
     required this.email,
     required this.imgUrl,
