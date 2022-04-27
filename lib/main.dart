@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                 if (snapshot.hasError) {
                   return Container(child: Text('Error'));
                 }
-
+                //Si la conexión fue exitosa
                 if (snapshot.connectionState == ConnectionState.done) {
                   Get.put(EventController());
                   Get.put(FriendController());
