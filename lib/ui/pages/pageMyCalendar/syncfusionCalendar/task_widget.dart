@@ -1,13 +1,13 @@
 //Esta clase es para mostrar los eventos de un día particular como una timeline
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/event_data_source.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/event_viewing_page.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/event_data_source.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/event_viewing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
-import '../../../domain/constants/constants/color.dart';
+import '../../../../domain/constants/constants/color.dart';
 
 class TaskWidget extends StatefulWidget {
   const TaskWidget({Key? key}) : super(key: key);
@@ -57,7 +57,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       width: details.bounds.width,
       height: details.bounds.height,
       decoration: BoxDecoration(
-          color: event.color.withOpacity(0.5),
+          color: Color(event.color).withOpacity(0.5),
           borderRadius: BorderRadius.circular(12)),
       child: Center(
         child: Text(

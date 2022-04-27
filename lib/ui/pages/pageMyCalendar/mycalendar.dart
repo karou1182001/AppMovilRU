@@ -6,9 +6,9 @@
 ///-----------------------Librerías--------------------------------------
 import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/event_data_source.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/task_widget.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/event_data_source.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/event_editing_page.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/task_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //Para poder usar el widget calendar

@@ -6,7 +6,7 @@ import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageEvents/eventos.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/mycalendar.dart';
 import 'package:app_ru/ui/pages/pageProfile/editProfile.dart';
 import 'package:app_ru/ui/pages/pageProfile/profile.dart';

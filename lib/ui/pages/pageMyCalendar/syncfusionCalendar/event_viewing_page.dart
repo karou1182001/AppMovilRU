@@ -1,13 +1,13 @@
 //En esta clase podemos ver un evento que ya ha sido editado
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/models/event.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/event_editing_page.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/utils.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/constants/constants/color.dart';
+import '../../../../domain/constants/constants/color.dart';
 
 class EventViewingPage extends StatelessWidget {
   final Event event;

@@ -1,14 +1,14 @@
 //En esta clase podemos crear un evento nuevo y editar sus datos
 import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/models/event.dart';
-import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
+import 'package:app_ru/ui/pages/pageMyCalendar/syncfusionCalendar/utils.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../domain/constants/constants/color.dart';
+import '../../../../domain/constants/constants/color.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
