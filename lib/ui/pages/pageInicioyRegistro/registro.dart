@@ -145,7 +145,10 @@ class MenuRegistro extends StatelessWidget {
                               'name': _nombreController.text,
                               'email': _emailController.text,
                               'number': _numberController.text,
-                              'description': '¡Dinos quién eres!'
+                              'description': '¡Dinos quién eres!',
+                              'id': '',
+                              'latitude': '',
+                              'longitude': ''
                             });
                             //Enviamos un mensaje exitoso
                             showDialog(
