@@ -7,6 +7,7 @@ import 'package:app_ru/ui/pages/pageInicioyRegistro/condiciones.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
 import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/terminos.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
@@ -130,7 +131,7 @@ class MenuRegistro extends StatelessWidget {
                     MaterialButton(
                       height: 40,
                       minWidth: 270,
-                      onPressed: () {
+                      onPressed: () async {
                         //Condiciones
                         if (_nombreController.text != '' &&
                             _emailController.text != '' &&
@@ -141,15 +142,18 @@ class MenuRegistro extends StatelessWidget {
                             authController.register(_emailController.text,
                                 _passwordController.text);
                             //Registramos los datos en Firestore
-                            userFirebase.add({
-                              'name': _nombreController.text,
+                            await FirebaseFirestore.instance
+                              .collection('usuario')
+                              .doc(_emailController.text)
+                              .set({
+                            'name': _nombreController.text,
                               'email': _emailController.text,
                               'number': _numberController.text,
                               'description': '¡Dinos quién eres!',
-                              'id': '',
+                              'id': _emailController.text,
                               'latitude': '',
                               'longitude': ''
-                            });
+                          }, SetOptions(merge: true));
                             //Enviamos un mensaje exitoso
                             showDialog(
                                 context: context,
