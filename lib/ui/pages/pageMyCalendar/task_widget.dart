@@ -1,5 +1,4 @@
 //Esta clase es para mostrar los eventos de un día particular como una timeline
-import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_data_source.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_viewing_page.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
 import '../../../domain/constants/constants/color.dart';
+import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 
 class TaskWidget extends StatefulWidget {
   const TaskWidget({Key? key}) : super(key: key);
@@ -19,8 +19,8 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
-    EventController eventCont = Get.find();
-    final selectedEvents = eventCont.eventsOfSelectedDate;
+    FirebaseEventController feventCont = Get.find();
+    final selectedEvents = feventCont.events;
     if (selectedEvents.isEmpty) {
       return const Center(
         child: Text(
@@ -34,9 +34,9 @@ class _TaskWidgetState extends State<TaskWidget> {
       data: SfCalendarThemeData(),
       child: SfCalendar(
         view: CalendarView.timelineDay,
-        dataSource: EventDataSource(eventCont.events),
+        dataSource: EventDataSource(feventCont.events),
         //Para que como día inicial, se muestre el día que oprimió la persona
-        initialDisplayDate: eventCont.selectedDate,
+        initialDisplayDate: feventCont.selectedDate,
         appointmentBuilder: appointmentBuilder,
         onTap: (details) {
           if (details.appointments == null) return;
@@ -57,7 +57,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       width: details.bounds.width,
       height: details.bounds.height,
       decoration: BoxDecoration(
-          color: event.color.withOpacity(0.5),
+          color: Color(event.color).withOpacity(0.5),
           borderRadius: BorderRadius.circular(12)),
       child: Center(
         child: Text(

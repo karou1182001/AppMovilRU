@@ -1,5 +1,6 @@
 //En esta clase podemos crear un evento nuevo y editar sus datos
-import 'package:app_ru/domain/constants/controllers/event_controller.dart';
+import 'dart:io';
+
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
@@ -7,8 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../domain/constants/constants/color.dart';
+import '../../../domain/constants/controllers/firebaseevent_controller.dart';
+import '../../../domain/constants/controllers/user_controller.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
@@ -28,14 +32,17 @@ class _EventEditingPageState extends State<EventEditingPage> {
   late DateTime fromDate;
   late DateTime toDate;
   Color colorEvento = selectColor;
+  late var _selectedPicture = File("");
+  FirebaseEventController feventCont = Get.find();
 
   @override
   void initState() {
     super.initState();
     if (widget.event == null) {
       //Horas por defecto
-      fromDate = DateTime.now();
-      toDate = DateTime.now().add(const Duration(hours: 2));
+      fromDate = feventCont.selectedDate;
+      //DateTime.now();
+      toDate = feventCont.selectedDate.add(const Duration(hours: 2));
     } else {
       final event = widget.event;
       titleController.text = event!.name;
@@ -78,6 +85,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
               const SizedBox(
                 height: 20,
               ),
+              imagePicker(),
+              imagen(),
               parrafoDescripcion(),
               const SizedBox(
                 height: 20,
@@ -203,6 +212,53 @@ class _EventEditingPageState extends State<EventEditingPage> {
           )
         ],
       );
+
+  Widget imagePicker() => Row(
+        children: [
+          const Text(
+            "IMAGEN EVENTO",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(width: 20),
+          ElevatedButton(
+            onPressed: () async {
+              var image =
+                  (await ImagePicker().pickImage(source: ImageSource.gallery));
+
+              setState(() {
+                _selectedPicture = File(image!.path);
+              });
+            },
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.grey)),
+            child: const Icon(Icons.camera_alt),
+          )
+        ],
+      );
+
+  imagen() {
+    //Video base para guardar imagen https://youtu.be/h5z6qwyjwi8
+    if (_selectedPicture.toString() != "File: ''") {
+      return Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            height: 150,
+            child: Image.file(_selectedPicture),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      );
+    } else {
+      return const SizedBox(
+        height: 20,
+      );
+    }
+  }
 
   //Pone los calendarios del From
   Widget buildFrom() => buildHeader(
@@ -336,7 +392,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
       //Creamos un nuevo evento
-      final event = Event(
+      /*final event = Event(
         name: titleController.text,
         from: DateFormat("yyyy-MM-dd hh:mm:ss").format(fromDate),
         to: DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
@@ -346,17 +402,38 @@ class _EventEditingPageState extends State<EventEditingPage> {
         invitados: ["Julia"],
         color: colorEvento.value,
         imgName: "1",
-      );
+      );*/
 
       final isEditing = widget.event != null;
       //LLmando al controlador, añadimos el evento a la lista de controladores
-      Get.put(EventController());
-      EventController eventCont = Get.find();
+      Get.put(FirebaseEventController());
+      FirebaseEventController feventCont = Get.find();
+      UserController userController = Get.find();
 
       if (isEditing) {
-        eventCont.editEvent(event, widget.event!);
+        //eventCont.editEvent(event, widget.event!);
+        feventCont.updateEvent(
+            titleController.text,
+            DateFormat("yyyy-MM-dd hh:mm:ss").format(fromDate),
+            DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
+            descController.text,
+            userController.email,
+            ["Julia"],
+            colorEvento.value,
+            "1",
+            widget.event!);
       } else {
-        eventCont.addEvent(event);
+        //eventCont.addEvent(event);
+        feventCont.addEvent(
+          titleController.text,
+          DateFormat("yyyy-MM-dd hh:mm:ss").format(fromDate),
+          DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
+          descController.text,
+          userController.email,
+          ["Julia"],
+          colorEvento.value,
+          "1",
+        );
       }
 
       //Volvemos a la página anterior

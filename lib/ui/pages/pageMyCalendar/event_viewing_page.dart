@@ -1,5 +1,5 @@
 //En esta clase podemos ver un evento que ya ha sido editado
-import 'package:app_ru/domain/constants/controllers/event_controller.dart';
+import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/constants/constants/color.dart';
+import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 
 class EventViewingPage extends StatelessWidget {
   final Event event;
@@ -146,28 +147,40 @@ class EventViewingPage extends StatelessWidget {
   }
 
   List<Widget> buildViewingActions(BuildContext context, Event event) {
-    return <Widget>[
-      IconButton(
-        icon: const Icon(Icons.edit),
-        onPressed: () => Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => EventEditingPage(event: event),
+    UserController userController = Get.find();
+    if (userController.email == event.persCreadora) {
+      return <Widget>[
+        IconButton(
+          icon: const Icon(Icons.edit),
+          onPressed: () => Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => EventEditingPage(event: event),
+            ),
           ),
         ),
-      ),
-      IconButton(
-        icon: const Icon(Icons.delete),
-        onPressed: () {
-          Get.put(EventController());
-          EventController eventCont = Get.find();
+        IconButton(
+          icon: const Icon(Icons.delete),
+          onPressed: () {
+            //Get.put(EventController());
+            //EventController eventCont = Get.find();
+            Get.put(FirebaseEventController());
+            FirebaseEventController feventCont = Get.find();
 
-          eventCont.deleteEvent(event);
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const NavBar()),
-              (route) => false);
-        },
-      ),
-    ];
+            feventCont.deleteEvent(event);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const NavBar()),
+                (route) => false);
+          },
+        ),
+      ];
+    } else {
+      return <Widget>[
+        IconButton(
+          icon: const Icon(Icons.playlist_remove_sharp),
+          onPressed: () {},
+        )
+      ];
+    }
   }
 }

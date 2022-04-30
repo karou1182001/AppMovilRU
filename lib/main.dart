@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'domain/constants/controllers/authentication_controller.dart';
-import 'domain/constants/controllers/event_controller.dart';
+import 'domain/constants/controllers/firebaseevent_controller.dart';
 import 'domain/constants/controllers/friend_controller.dart';
 
 Future<void> main() async {
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 }
                 //Si la conexión fue exitosa
                 if (snapshot.connectionState == ConnectionState.done) {
-                  Get.put(EventController());
+                  Get.put(FirebaseEventController());
                   Get.put(FriendController());
                   Get.put(AuthenticationController());
                   print('Estamos conectados');

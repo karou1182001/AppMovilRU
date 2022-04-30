@@ -1,11 +1,11 @@
 import 'package:app_ru/domain/constants/constants/color.dart';
-import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 import '../../widgets/eventcard.dart';
 
 class EventosList extends StatefulWidget {
@@ -21,9 +21,9 @@ class _EventosListState extends State<EventosList> {
   void initState() {}
 
   Widget build(BuildContext context) {
-    Get.put(EventController());
-    EventController eventslsit = Get.find();
-    entries = eventslsit.events;
+    Get.put(FirebaseEventController());
+    FirebaseEventController feventCont = Get.find();
+    entries = feventCont.events;
     print(entries.length);
     return Scaffold(
       //AppBar

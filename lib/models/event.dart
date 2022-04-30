@@ -1,9 +1,10 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
-  String? eventId;
+  DocumentReference eventId;
   late String name;
   late String from;
   late String to;
@@ -13,7 +14,8 @@ class Event {
   late int color;
   late String imgName;
 
-  Event({
+  /*Event({
+    required this.eventId,
     required this.name,
     required this.from,
     required this.to,
@@ -22,17 +24,27 @@ class Event {
     required this.invitados,
     required this.color,
     required this.imgName,
-  });
+  });*/
 
-  Event.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
-    eventId = documentSnapshot.id;
-    name = documentSnapshot['name'];
-    from = documentSnapshot['from'];
-    to = documentSnapshot['to'];
-    description = documentSnapshot['description'];
-    persCreadora = documentSnapshot['persCreadora'];
-    invitados = documentSnapshot['invitados'];
-    color = documentSnapshot['color'];
-    imgName = documentSnapshot['imgName'];
-  }
+  Event.fromMap(Map<String, dynamic> map, {required this.eventId})
+      : assert(map['name'] != null),
+        assert(map['from'] != null),
+        assert(map['to'] != null),
+        assert(map['description'] != null),
+        assert(map['persCreadora'] != null),
+        assert(map['invitados'] != null),
+        assert(map['color'] != null),
+        assert(map['imgName'] != null),
+        name = map['name'],
+        from = map['from'],
+        to = map['to'],
+        description = map['description'],
+        persCreadora = map['persCreadora'],
+        invitados = map['invitados'],
+        color = map['color'],
+        imgName = map['imgName'];
+
+  Event.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data() as Map<String, dynamic>,
+            eventId: snapshot.reference);
 }

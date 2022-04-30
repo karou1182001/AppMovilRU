@@ -5,7 +5,6 @@
 //https://youtu.be/LoDtxRkGDTw
 ///-----------------------Librerías--------------------------------------
 import 'package:app_ru/domain/constants/constants/color.dart';
-import 'package:app_ru/domain/constants/controllers/event_controller.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_data_source.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/task_widget.dart';
@@ -14,15 +13,43 @@ import 'package:get/get.dart';
 //Para poder usar el widget calendar
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class MyCalendar extends StatelessWidget {
-  const MyCalendar({Key? key}) : super(key: key);
+import '../../../domain/constants/controllers/firebaseevent_controller.dart';
+
+class MyCalendar extends StatefulWidget {
+  @override
+  State<MyCalendar> createState() => _MyCalendarState();
+}
+
+class _MyCalendarState extends State<MyCalendar> {
+  //final FirebaseEventController feventCont = Get.find();
+
+  @override
+  void initState() {
+    //print("Entra");
+    FirebaseEventController feventCont = Get.find();
+    //feventCont.onInit();
+    feventCont.subscribeUpdates();
+    //print("Aquí");
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    //FirebaseEventController feventCont = Get.find();
+    //feventCont.unsubscribeUpdates();
+    //print("A cerrar");
+    super.dispose();
+  }
 
   //-----------------------DISEÑO DE INTERFAZ-------------------------------
   @override
   Widget build(BuildContext context) {
-    Get.put(EventController());
-    EventController eventCont = Get.find();
-    final events = eventCont.events;
+    //Get.put(FirebaseEventController());
+    FirebaseEventController feventCont = Get.find();
+    final events = feventCont.events;
+    print(events);
+    print("imprime");
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -36,11 +63,14 @@ class MyCalendar extends StatelessWidget {
       ),
       body: SfCalendar(
           view: CalendarView.month, //Vista de mes por defecto
-          initialSelectedDate: DateTime.now(),
+          initialSelectedDate: feventCont.selectedDate,
           //Pone los eventos en el calendario
           dataSource: EventDataSource(events),
+          onTap: (details) {
+            feventCont.setDate(details.date!);
+          },
           onLongPress: (details) {
-            eventCont.setDate(details.date!);
+            feventCont.setDate(details.date!);
             //Esto es para que se nos muestren todos los eventos que hay ese día
             showModalBottomSheet(
                 context: context, builder: (context) => const TaskWidget());

@@ -23,7 +23,8 @@ class SelectedEvent extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
+                //child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
+                child: Image.asset('assets/' + "1" + '.jpg',
                     fit: BoxFit.cover, height: 200)),
             Expanded(
               child: Stack(

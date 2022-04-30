@@ -35,7 +35,7 @@ List<Model> navBtn = [
       id: 2,
       icon: CupertinoIcons.calendar,
       name: 'Calendario',
-      widget: const MyCalendar()),
+      widget: MyCalendar()),
   Model(
       id: 3,
       icon: Icons.notifications,
