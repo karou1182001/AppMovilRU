@@ -99,7 +99,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
               ),
               imagePicker(),
               imagen(),
-              personas(),
+              invitados(),
               parrafoDescripcion(),
             ],
           ),
@@ -138,7 +138,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
       );
 
   //Invitados
-  Widget personas() => Column(
+  Widget invitados() => Column(
         children: [
           ListView.builder(
             shrinkWrap: true,
@@ -255,19 +255,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
         ],
       );
 
-  Widget invitados() => TextFormField(
-        key: Key('editableInvitados'),
-        controller: invitadosController,
-        minLines: 2,
-        maxLines: 8,
-        keyboardType: TextInputType.multiline,
-        decoration: const InputDecoration(
-            hintText: 'Invitados',
-            hintStyle: TextStyle(color: Colors.grey),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            )),
-      );
   //Pone los calendarios
   Widget buildDateTimePickers() => Column(
         children: [
