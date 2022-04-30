@@ -106,9 +106,9 @@ class SelectedEvent extends StatelessWidget {
                                                 )),
                                           ),
                                           const SizedBox(width: 10),
-                                          Text(
+                                          const Text(
                                             "Inscribirse",
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20),
                                           )

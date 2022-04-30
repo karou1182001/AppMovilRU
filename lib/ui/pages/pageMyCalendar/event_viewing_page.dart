@@ -67,6 +67,14 @@ class EventViewingPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
+          buildHeader(
+            header: "Confirmados",
+            child: Text(
+              event.confirmados.join("\n"),
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          const SizedBox(height: 24),
           showColor()
         ],
       ),

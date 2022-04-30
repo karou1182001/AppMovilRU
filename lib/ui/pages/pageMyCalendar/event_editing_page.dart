@@ -544,6 +544,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
           descController.text,
           userController.email,
           personasInvitadas,
+          [userController.email],
           colorEvento.value,
           "1",
         );
