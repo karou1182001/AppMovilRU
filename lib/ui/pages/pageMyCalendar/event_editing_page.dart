@@ -34,6 +34,11 @@ class _EventEditingPageState extends State<EventEditingPage> {
   Color colorEvento = selectColor;
   late var _selectedPicture = File("");
   FirebaseEventController feventCont = Get.find();
+  List<dynamic> personasInvitadas = [];
+  String currentEmail = "";
+  late TextEditingController textControllerAttendee;
+  late FocusNode textFocusNodeAttendee;
+  bool isEditingEmail = false;
 
   @override
   void initState() {
@@ -44,11 +49,18 @@ class _EventEditingPageState extends State<EventEditingPage> {
       //DateTime.now();
       toDate = feventCont.selectedDate.add(const Duration(hours: 2));
     } else {
+      //Por si el evento ya fue creado y solo lo queremos editas, tomamos los valores
+      //del evento
       final event = widget.event;
       titleController.text = event!.name;
       fromDate = DateTime.parse(event.from);
       toDate = DateTime.parse(event.to);
+      descController.text = event.description;
+      colorEvento = Color(event.color);
+      personasInvitadas = event.invitados;
     }
+    textControllerAttendee = TextEditingController();
+    textFocusNodeAttendee = FocusNode();
   }
 
   @override
@@ -87,11 +99,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
               ),
               imagePicker(),
               imagen(),
+              personas(),
               parrafoDescripcion(),
-              const SizedBox(
-                height: 20,
-              ),
-              invitados()
             ],
           ),
         ),
@@ -129,6 +138,123 @@ class _EventEditingPageState extends State<EventEditingPage> {
       );
 
   //Invitados
+  Widget personas() => Column(
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            physics: PageScrollPhysics(),
+            itemCount: personasInvitadas.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      personasInvitadas[index],
+                      style: const TextStyle(
+                        color: selectColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        setState(() {
+                          personasInvitadas.removeAt(index);
+                        });
+                      },
+                      color: Colors.red,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          SizedBox(height: 10),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: TextField(
+                  enabled: true,
+                  cursorColor: selectColor,
+                  focusNode: textFocusNodeAttendee,
+                  controller: textControllerAttendee,
+                  textCapitalization: TextCapitalization.none,
+                  textInputAction: TextInputAction.done,
+                  onChanged: (value) {
+                    setState(() {
+                      currentEmail = value;
+                    });
+                  },
+                  onSubmitted: (value) {
+                    textFocusNodeAttendee.unfocus();
+                  },
+                  decoration: InputDecoration(
+                    disabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(color: Colors.grey, width: 1),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(color: selectColor, width: 1),
+                    ),
+                    errorBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                    ),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    contentPadding: const EdgeInsets.only(
+                      left: 16,
+                      bottom: 16,
+                      top: 16,
+                      right: 16,
+                    ),
+                    hintText: 'Ingresa email de invitado',
+                    errorText:
+                        isEditingEmail ? _validateEmail(currentEmail) : null,
+                    errorStyle: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.redAccent,
+                    ),
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(
+                  Icons.check_circle,
+                  color: selectColor,
+                  size: 35,
+                ),
+                onPressed: () {
+                  setState(() {
+                    isEditingEmail = true;
+                  });
+                  if (_validateEmail(currentEmail) == "email validado") {
+                    setState(() {
+                      textFocusNodeAttendee.unfocus();
+                      //calendar.EventAttendee eventAttendee = calendar.EventAttendee();
+                      //eventAttendee.email = currentEmail;
+
+                      personasInvitadas.add(currentEmail);
+
+                      textControllerAttendee.text = '';
+                      currentEmail = "";
+                      isEditingEmail = false;
+                    });
+                  }
+                },
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+        ],
+      );
+
   Widget invitados() => TextFormField(
         key: Key('editableInvitados'),
         controller: invitadosController,
@@ -418,7 +544,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
             DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
             descController.text,
             userController.email,
-            ["Julia"],
+            personasInvitadas,
             colorEvento.value,
             "1",
             widget.event!);
@@ -430,7 +556,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
           DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
           descController.text,
           userController.email,
-          ["Julia"],
+          personasInvitadas,
           colorEvento.value,
           "1",
         );
@@ -443,5 +569,29 @@ class _EventEditingPageState extends State<EventEditingPage> {
           MaterialPageRoute(builder: (context) => const NavBar()),
           (route) => false);
     }
+  }
+
+  //------------------------MÉTODOS-----------------------------------
+  String _validateEmail(String value) {
+    if (value != null) {
+      value = value.trim();
+
+      if (value.isEmpty) {
+        return 'Can\'t add an empty email';
+      } else {
+        final regex = RegExp(
+            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+        final matches = regex.allMatches(value);
+        for (Match match in matches) {
+          if (match.start == 0 && match.end == value.length) {
+            return "email validado";
+          }
+        }
+      }
+    } else {
+      return 'Can\'t add an empty email';
+    }
+
+    return 'Invalid email';
   }
 }

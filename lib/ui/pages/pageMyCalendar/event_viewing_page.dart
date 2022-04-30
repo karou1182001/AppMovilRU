@@ -62,7 +62,7 @@ class EventViewingPage extends StatelessWidget {
           buildHeader(
             header: "Invitados",
             child: Text(
-              event.invitados.join(","),
+              event.invitados.join("\n"),
               style: const TextStyle(fontSize: 18),
             ),
           ),
