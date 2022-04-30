@@ -16,17 +16,19 @@ class FirebaseEventController extends GetxController {
   final Stream<QuerySnapshot> _eventsStream = eventsFirebase.snapshots();
   late StreamSubscription<Object?> streamSubscription;
   final _eventList = <Event>[].obs;
-  //_evenList= eventStream();
+  final _eventListofUser = <Event>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    _eventList.bindStream(eventStream());
+    //Inicia actualizando los eventos del usuario
+    findeventsOfUser();
     print("on init");
   }
 
   //Getters
-  get events => _eventList;
+  get allEvents => _eventList;
+  get eventsOfUser => _eventListofUser;
   DateTime get selectedDate => _selectedDate;
 
   void setDate(DateTime date) {
@@ -34,11 +36,13 @@ class FirebaseEventController extends GetxController {
   }
 
   subscribeUpdates() async {
+    //Actualiza todos los eventos
     streamSubscription = _eventsStream.listen((event) {
       _eventList.clear();
       event.docs.forEach((element) {
         _eventList.add(Event.fromSnapshot(element));
       });
+      findeventsOfUser();
       print("Got ${_eventList.length}");
     });
   }
@@ -94,14 +98,16 @@ class FirebaseEventController extends GetxController {
     });
   }
 
-  void findevents() async {
+  void findeventsOfUser() async {
     UserController userController = Get.find();
-    var query =
-        eventsFirebase.where('persCreadora', isEqualTo: "Usuario actual");
+    //Consulta a realizar
+    //Busca todos los eventos a los que el usuario ha confirmado asistir
+    var query = eventsFirebase.where('confirmados',
+        arrayContains: userController.email);
     QuerySnapshot evento = await query.get();
-    _eventList.clear();
+    _eventListofUser.clear();
     evento.docs.forEach((element) {
-      _eventList.add(Event.fromSnapshot(element));
+      _eventListofUser.add(Event.fromSnapshot(element));
       print(Event.fromSnapshot(element).name);
     });
   }

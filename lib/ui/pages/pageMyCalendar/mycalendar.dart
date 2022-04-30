@@ -27,7 +27,7 @@ class _MyCalendarState extends State<MyCalendar> {
   void initState() {
     //print("Entra");
     FirebaseEventController feventCont = Get.find();
-    //feventCont.onInit();
+    feventCont.onInit();
     feventCont.subscribeUpdates();
     //print("Aquí");
 
@@ -47,7 +47,7 @@ class _MyCalendarState extends State<MyCalendar> {
   Widget build(BuildContext context) {
     //Get.put(FirebaseEventController());
     FirebaseEventController feventCont = Get.find();
-    final events = feventCont.events;
+    final events = feventCont.eventsOfUser;
     print(events);
     print("imprime");
     return Scaffold(

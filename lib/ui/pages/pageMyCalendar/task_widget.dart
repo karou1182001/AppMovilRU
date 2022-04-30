@@ -20,7 +20,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   @override
   Widget build(BuildContext context) {
     FirebaseEventController feventCont = Get.find();
-    final selectedEvents = feventCont.events;
+    final selectedEvents = feventCont.eventsOfUser;
     if (selectedEvents.isEmpty) {
       return const Center(
         child: Text(
@@ -34,7 +34,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       data: SfCalendarThemeData(),
       child: SfCalendar(
         view: CalendarView.timelineDay,
-        dataSource: EventDataSource(feventCont.events),
+        dataSource: EventDataSource(feventCont.eventsOfUser),
         //Para que como día inicial, se muestre el día que oprimió la persona
         initialDisplayDate: feventCont.selectedDate,
         appointmentBuilder: appointmentBuilder,

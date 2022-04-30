@@ -23,7 +23,7 @@ class _EventosListState extends State<EventosList> {
   Widget build(BuildContext context) {
     Get.put(FirebaseEventController());
     FirebaseEventController feventCont = Get.find();
-    entries = feventCont.events;
+    entries = feventCont.allEvents;
     print(entries.length);
     return Scaffold(
       //AppBar
