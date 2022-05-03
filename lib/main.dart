@@ -41,6 +41,8 @@ class MyApp extends StatelessWidget {
                   Get.put(FirebaseEventController());
                   Get.put(FriendController());
                   Get.put(AuthenticationController());
+                  Get.put(UserController());
+                  
                   print('Estamos conectados');
                   return MenuInicio();
                 }
