@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:app_ru/models/friend.dart';
-import 'package:app_ru/models/user.dart';
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:app_ru/models/event.dart';
@@ -56,18 +55,15 @@ void main() {
 
   testWidgets('Amigo Especifico', (WidgetTester tester) async {
     // Se crea una variable de tipo friend para poder cumplir con los parametros de selectedfriend
-    var friend = User(
+    var friend = Friend(
         name: "Alejandro Vertel",
         email: "vertel@uninorte.edu.co",
-        //imgUrl: AssetImage('assets/perfilvertel.jpg'),
-        description: "Me encantan las tortujas y bailar",
+        imgUrl: AssetImage('assets/perfilvertel.jpg'),
+        descripcion: "Me encantan las tortujas y bailar",
         number: "3183745902",
-        //ru: true,
-        //scheduleUrl: AssetImage('assets/horario.png'),
-        id: "OAjYXKupFtXAycPBC4RC",
-        friends: [],
-        latitude: '',
-        longitude: '');
+        online: true,
+        scheduleUrl: AssetImage('assets/horario.png'),
+        userid: "OAjYXKupFtXAycPBC4RC");
     await tester.pumpWidget(MaterialApp(
         home: Scaffold(body: SelectedFriend(selectedfriend: friend))));
     //Se testean los valores de selected friend

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'user_controller.dart';
-import '';
 
 class FirebaseEventController extends GetxController {
   DateTime _selectedDate = DateTime.now();
@@ -100,8 +99,7 @@ class FirebaseEventController extends GetxController {
   }
 
   void findeventsOfUser() async {
-    
-    final UserController userController = Get.find();
+    UserController userController = Get.find();
     //Consulta a realizar
     //Busca todos los eventos a los que el usuario ha confirmado asistir
     var query = eventsFirebase.where('confirmados',

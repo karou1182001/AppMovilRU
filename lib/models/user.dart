@@ -10,7 +10,6 @@ class User {
  late  String latitude;
  late  String longitude;
  late  String id;
- late List<String> friends;
 
   User(
       {required this.name,
@@ -20,14 +19,12 @@ class User {
       required this.latitude,
       required this.longitude,
       required this.id,
-      required this.friends,
       });
 
   get getName => name;
   get getNumber => number;
   get getEmail => email;
   get getDescription => description;
-  get getFriends => friends;
 
   void changeName(String userName) {
     name = userName;
@@ -49,6 +46,5 @@ class User {
     latitude = documentSnapshot['latitude'];
     longitude = documentSnapshot['longitude'];
     id = documentSnapshot['id'];
-    friends = documentSnapshot['friends'];
   }
 }

@@ -141,21 +141,18 @@ class MenuRegistro extends StatelessWidget {
                             //Realizamos el registro en Firebase
                             authController.register(_emailController.text,
                                 _passwordController.text);
-                            //creamos un array vacio
-                            List<String> friends = [];
                             //Registramos los datos en Firestore
                             await FirebaseFirestore.instance
                               .collection('usuario')
                               .doc(_emailController.text)
                               .set({
-                              'name': _nombreController.text,
+                            'name': _nombreController.text,
                               'email': _emailController.text,
                               'number': _numberController.text,
                               'description': '¡Dinos quién eres!',
                               'id': _emailController.text,
                               'latitude': '',
-                              'longitude': '',
-                              'friends':friends,
+                              'longitude': ''
                           }, SetOptions(merge: true));
                             //Enviamos un mensaje exitoso
                             showDialog(

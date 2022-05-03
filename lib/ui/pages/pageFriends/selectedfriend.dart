@@ -1,5 +1,4 @@
 import 'package:app_ru/models/friend.dart';
-import 'package:app_ru/models/user.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedFriendMap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import 'package:app_ru/domain/constants/constants/text_style.dart';
 import '../../../domain/constants/constants/color.dart';
 
 class SelectedFriend extends StatelessWidget {
-  User selectedfriend;
+  Friend selectedfriend;
 
   SelectedFriend({required this.selectedfriend});
 
@@ -39,7 +38,7 @@ class SelectedFriend extends StatelessWidget {
                 height: 115,
                 width: 115,
                 child: CircleAvatar(
-                  //backgroundImage: selectedfriend.imgUrl,
+                  backgroundImage: selectedfriend.imgUrl,
                   radius: 60,
                 )),
             const SizedBox(height: 10),
@@ -47,7 +46,7 @@ class SelectedFriend extends StatelessWidget {
             Text(selectedfriend.name, style: generalText(Colors.black, 18)),
             const SizedBox(height: 15),
             //Descripción
-            Text(selectedfriend.description, style: generalText(Colors.grey, 15)),
+            Text(selectedfriend.descripcion, style: generalText(Colors.grey, 15)),
             const SizedBox(height: 30),
             //Celular
             Container(
@@ -111,7 +110,7 @@ class SelectedFriend extends StatelessWidget {
             const SizedBox(height: 10),
             Container(
                 height: MediaQuery.of(context).size.height * 0.2,
-                //child: Image(image: selectedfriend.scheduleUrl)
+                child: Image(image: selectedfriend.scheduleUrl)
                 ),
             const SizedBox(
               height: 15,
@@ -132,7 +131,7 @@ class SelectedFriend extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
-                                  SelectedFriendMap(selectedfriend.id)));
+                                  SelectedFriendMap(selectedfriend.userid)));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
