@@ -13,6 +13,7 @@ class FirestoreDb {
       'latitude': user.latitude,
       'longitude': user.longitude,
       'id':user.id,
+      'friends': user.friends,
     });
   }
 

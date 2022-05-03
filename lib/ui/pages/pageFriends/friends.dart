@@ -1,6 +1,8 @@
 import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/friend_controller.dart';
+import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/models/friend.dart';
+import 'package:app_ru/models/user.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +19,7 @@ class FriendsList extends StatefulWidget {
 }
 
 class _FriendsListState extends State<FriendsList> {
-  List<Friend> entries = <Friend>[];
+  List<User> entries = <User>[];
 
   //FriendController friendsList = Get.find();
 
@@ -27,8 +29,8 @@ class _FriendsListState extends State<FriendsList> {
 
   Widget build(BuildContext context) {
     Get.put(FriendController());
-    FriendController friendsList = Get.find();
-    entries = friendsList.friends;
+    UserController friendsList = Get.find();
+    entries = friendsList.users;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),

@@ -1,8 +1,9 @@
 import 'package:app_ru/models/friend.dart';
+import 'package:app_ru/models/user.dart';
 import 'package:flutter/material.dart';
 
 class Friendcard extends StatelessWidget {
-  Friend friend;
+  User friend;
 
   Function onEventClick;
 

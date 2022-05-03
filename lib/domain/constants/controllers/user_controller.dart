@@ -12,18 +12,23 @@ import 'package:permission_handler/permission_handler.dart';
 import '../constants/firabase_constants.dart';
 
 class UserController extends GetxController {
-  AuthenticationController authenticationController = Get.find();
+  
+  final authenticationController = Get.find<AuthenticationController>();
+   
    RxList<User> usersList = RxList<User>([]);
   get users => usersList;
+  RxList<User> friendsList = RxList<User>([]);
+  get friendsL => friendsList;
 
 
   //Usuario
   late Rx<User> user =
-      User(name: '', number: '123', email: '', description: '',latitude: '',longitude: '',id: '').obs;
+      User(name: '', number: '123', email: '', description: '',latitude: '',longitude: '',id: '', friends: []).obs;
 
   UserController() {
     createUser();
     findusers();
+    findfriends();
     print("correo actual "+authenticationController.auth.currentUser!.email!);
   }
 
@@ -41,6 +46,7 @@ class UserController extends GetxController {
   get number => user.value.getNumber;
   get ru => _ru.value;
   get description => user.value.getDescription;
+  get friends => user.value.getFriends;
 
   //Función que cambia el estado del switch en perfil
   void changeRU() {
@@ -73,6 +79,7 @@ class UserController extends GetxController {
     String latitude = usuario.docs[0]['latitude'];
     String longitude = usuario.docs[0]['longitude'];
     String id = usuario.docs[0]['id'];
+    List<String> friends = usuario.docs[0]['friends'];
     user = User(
             name: nombre,
             number: numero,
@@ -80,8 +87,23 @@ class UserController extends GetxController {
             description: descripcion,
             latitude: latitude,
             longitude: longitude,
-            id: id)
+            id: id,
+            friends: friends)
         .obs;
+  }
+
+  //camios en lista de amigos
+  void changeFriends(String friends) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('usuario')
+          .doc(user.value.id)
+          .set({
+        'friends': friends,
+      }, SetOptions(merge: true));
+    } catch (e) {
+      print(e);
+    }
   }
 
 //Parte de geolocalización
@@ -140,6 +162,19 @@ class UserController extends GetxController {
       users.add(_users);
     }
     usersList = users.obs;
+  }
+
+  void findfriends()  {
+    
+    List<User> friendss = [];
+    for (String id in friends){
+      for(User user in usersList){
+        if(id==user.id){
+          friendss.add(user);
+        }
+      }
+    }
+    friendsList = friendss.obs;
   }
 
 
