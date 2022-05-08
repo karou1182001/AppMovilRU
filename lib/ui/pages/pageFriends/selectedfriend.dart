@@ -84,7 +84,7 @@ class SelectedFriend extends StatelessWidget {
                         height: 20,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: Colors.red,
+                          color: Colors.green,
                           border: Border.all(
                             width: 1
                           )
