@@ -13,7 +13,6 @@ class AuthenticationController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   late Rx<GoogleSignInAccount?> googleSignInAccount;
   GoogleSignIn googleSign = GoogleSignIn();
-  static AuthenticationController instance = Get.find();
   late Rx<User?> firebaseUser;
 
   @override
@@ -80,7 +79,7 @@ class AuthenticationController extends GetxController {
     }
   }
 
-  void register(String email, password) async {
+  Future<void> register(String email, password) async {
     try {
       await auth.createUserWithEmailAndPassword(
           email: email, password: password);

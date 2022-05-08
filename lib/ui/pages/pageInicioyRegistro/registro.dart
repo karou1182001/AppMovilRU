@@ -1,4 +1,3 @@
-
 import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
@@ -139,21 +138,21 @@ class MenuRegistro extends StatelessWidget {
                             _passwordController.text.length >= 6) {
                           try {
                             //Realizamos el registro en Firebase
-                            authController.register(_emailController.text,
+                            await authController.register(_emailController.text,
                                 _passwordController.text);
                             //Registramos los datos en Firestore
                             await FirebaseFirestore.instance
-                              .collection('usuario')
-                              .doc(_emailController.text)
-                              .set({
-                            'name': _nombreController.text,
+                                .collection('usuario')
+                                .doc(_emailController.text)
+                                .set({
+                              'name': _nombreController.text,
                               'email': _emailController.text,
                               'number': _numberController.text,
                               'description': '¡Dinos quién eres!',
                               'id': _emailController.text,
                               'latitude': '',
                               'longitude': ''
-                          }, SetOptions(merge: true));
+                            }, SetOptions(merge: true));
                             //Enviamos un mensaje exitoso
                             showDialog(
                                 context: context,
