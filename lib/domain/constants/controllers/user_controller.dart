@@ -12,11 +12,18 @@ import 'package:permission_handler/permission_handler.dart';
 import '../constants/firabase_constants.dart';
 
 class UserController extends GetxController {
+<<<<<<< Updated upstream
   AuthenticationController authController = Get.find();
   RxList<User> usersList = RxList<User>([]);
   get users => usersList;
   RxList<User> friendsList = RxList<User>([]);
   get friendsl => friendsList;
+=======
+  AuthenticationController authenticationController =
+      Get.put(AuthenticationController());
+  RxList<User> usersList = RxList<User>([]);
+  get users => usersList;
+>>>>>>> Stashed changes
 
   //Usuario
   late Rx<User> user = User(
@@ -26,15 +33,23 @@ class UserController extends GetxController {
           description: '',
           latitude: '',
           longitude: '',
+<<<<<<< Updated upstream
           id: '',
           friends: [])
+=======
+          id: '')
+>>>>>>> Stashed changes
       .obs;
 
   UserController() {
     createUser();
     findusers();
+<<<<<<< Updated upstream
     findfriends();
     print("correo actual " + authController.auth.currentUser!.email!);
+=======
+    print("correo actual " + authenticationController.auth.currentUser!.email!);
+>>>>>>> Stashed changes
   }
 
   //Indicador de si está en la U o no
@@ -150,7 +165,11 @@ class UserController extends GetxController {
 
   void findusers() async {
     var query = userFirebase.where('email',
+<<<<<<< Updated upstream
         isNotEqualTo: authController.auth.currentUser!.email!);
+=======
+        isNotEqualTo: authenticationController.auth.currentUser!.email!);
+>>>>>>> Stashed changes
     QuerySnapshot usuario = await query.get();
     List<User> users = [];
     for (var user in usuario.docs) {
@@ -159,6 +178,7 @@ class UserController extends GetxController {
     }
     usersList = users.obs;
   }
+<<<<<<< Updated upstream
 
   void findfriends() async {
     var query =
@@ -192,4 +212,6 @@ class UserController extends GetxController {
     friendsList = friendss.obs;
     
   }
+=======
+>>>>>>> Stashed changes
 }
