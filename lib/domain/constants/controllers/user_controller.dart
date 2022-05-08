@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'dart:io';
+import 'package:app_ru/domain/constants/constants/storage_repo.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,15 +21,14 @@ class UserController extends GetxController {
 
   //Usuario
   late Rx<User> user = User(
-          name: '',
-          number: '123',
-          email: '',
-          description: '',
-          latitude: '',
-          longitude: '',
-          id: '',
-          friends: [])
-      .obs;
+      name: '',
+      number: '123',
+      email: '',
+      description: '',
+      latitude: '',
+      longitude: '',
+      id: '',
+      friends: []).obs;
 
   UserController() {
     createUser();
@@ -77,6 +77,11 @@ class UserController extends GetxController {
     final doc = userFirebase.doc(authController.auth.currentUser!.email);
     await doc.update({'description': userDescription});
     user.value.changeDescription(userDescription);
+  }
+
+  void changeProfilePicture(String filePath) {
+    StorageRepo storage = Get.find();
+    storage.uploadFile(filePath);
   }
 
   void createUser() async {
@@ -161,24 +166,24 @@ class UserController extends GetxController {
   }
 
   void findfriends() async {
-    var query =
-        userFirebase.where('email', isEqualTo: authController.auth.currentUser!.email!);
+    var query = userFirebase.where('email',
+        isEqualTo: authController.auth.currentUser!.email!);
     QuerySnapshot usuario = await query.get();
-    List<dynamic> friendsMail =usuario.docs[0]['friends'];
+    List<dynamic> friendsMail = usuario.docs[0]['friends'];
     List<User> friendss = [];
-    for(var friend in friendsMail){
-      var query = userFirebase.where('id',
-        isEqualTo: friend);
-    QuerySnapshot usuario = await query.get();
-    String nombre = usuario.docs[0]['name'];
-    String numero = usuario.docs[0]['number'];
-    String email = usuario.docs[0]['email'];
-    String descripcion = usuario.docs[0]['description'];
-    String latitude = usuario.docs[0]['latitude'];
-    String longitude = usuario.docs[0]['longitude'];
-    String id = usuario.docs[0]['id'];
-    List<dynamic> friends =usuario.docs[0]['friends'];
-    User friendd = User(
+    for (var friend in friendsMail) {
+      var query = userFirebase.where('id', isEqualTo: friend);
+      QuerySnapshot usuario = await query.get();
+      if (usuario.docs.isNotEmpty) {
+        String nombre = usuario.docs[0]['name'];
+        String numero = usuario.docs[0]['number'];
+        String email = usuario.docs[0]['email'];
+        String descripcion = usuario.docs[0]['description'];
+        String latitude = usuario.docs[0]['latitude'];
+        String longitude = usuario.docs[0]['longitude'];
+        String id = usuario.docs[0]['id'];
+        List<dynamic> friends = usuario.docs[0]['friends'];
+        User friendd = User(
             name: nombre,
             number: numero,
             email: email,
@@ -186,10 +191,12 @@ class UserController extends GetxController {
             latitude: latitude,
             longitude: longitude,
             id: id,
-            friends:friends);
-    friendss.add(friendd);
+            friends: friends);
+        friendss.add(friendd);
+        friendsList = friendss.obs;
+      } else {
+        print('No hay amigos');
+      }
     }
-    friendsList = friendss.obs;
-    
   }
 }

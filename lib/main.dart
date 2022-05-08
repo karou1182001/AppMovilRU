@@ -1,3 +1,4 @@
+import 'package:app_ru/domain/constants/constants/storage_repo.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
                   Get.put(AuthenticationController());
                   Get.put(UserController());
                   Get.put(FirebaseEventController());
+                  Get.put(StorageRepo());
                   print('Estamos conectados');
                   return MenuInicio();
                 }

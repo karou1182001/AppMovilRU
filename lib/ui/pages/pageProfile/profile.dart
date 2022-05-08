@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:io';
+
 import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
@@ -10,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -24,6 +27,18 @@ class _ProfileState extends State<Profile> {
     Get.put(UserController());
     UserController userController = Get.find();
     AuthenticationController authController = Get.find();
+    String imagen = '';
+
+    Future getImage() async {
+      //Pickeamos la imagen
+      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      //Añadir imagen a Firebase
+      userController.changeProfilePicture(image!.path);
+      //Actualizamos al usuario
+      setState(() {
+        imagen = image.path;
+      });
+    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -39,12 +54,32 @@ class _ProfileState extends State<Profile> {
               children: [
                 const SizedBox(height: 20),
                 //Imagen de perfil
-                const SizedBox(
-                    height: 115,
-                    width: 115,
-                    child: CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/profile_example.jpg'))),
+                Stack(children: [
+                  Container(
+                      height: 115,
+                      width: 115,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 3), shape: BoxShape.circle),
+                      child: CircleAvatar(backgroundImage: AssetImage(imagen))),
+                  Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          getImage();
+                        },
+                        child: Container(
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.amber,
+                              border:
+                                  Border.all(width: 3, color: Colors.black)),
+                          child: const Icon(Icons.edit, color: Colors.black),
+                        ),
+                      ))
+                ]),
                 const SizedBox(height: 10),
                 //Nombre del usuario
                 Text(userController.name, style: generalText(Colors.black, 20)),
