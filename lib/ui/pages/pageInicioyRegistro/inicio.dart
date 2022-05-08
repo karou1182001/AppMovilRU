@@ -24,7 +24,7 @@ class MenuInicio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthenticationController authController = AuthenticationController.instance;
+    AuthenticationController authController = Get.find();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
