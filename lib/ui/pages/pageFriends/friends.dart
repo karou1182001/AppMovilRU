@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
 
-import '../../widgets/friendcard.dart';
+import '../../widgets/usercard.dart';
 
 class FriendsList extends StatefulWidget {
   const FriendsList({Key? key}) : super(key: key);
@@ -19,10 +19,10 @@ class FriendsList extends StatefulWidget {
 class _FriendsListState extends State<FriendsList> {
   List<User> entries = <User>[];
 
-  //FriendController friendsList = Get.find();
+ 
 
   void initState() {
-    //entries = friendsList.friends;
+    
   }
 
   Widget build(BuildContext context) {
@@ -54,8 +54,8 @@ class _FriendsListState extends State<FriendsList> {
               child: ListView.builder(
             itemCount: entries.length,
             itemBuilder: (BuildContext ctx, int index) {
-              return Friendcard(
-                  friend: entries[index],
+              return Usercard(
+                  user: entries[index],
                   onEventClick: () {
                     Navigator.push(
                         context,

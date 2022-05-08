@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
 import '../../../domain/constants/controllers/user_controller.dart';
-import '../../widgets/friendcard.dart';
 import '../../widgets/usercard.dart';
 import 'package:get/get.dart';
 class UserList extends StatefulWidget {
