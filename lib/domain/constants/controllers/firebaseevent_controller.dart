@@ -17,6 +17,7 @@ class FirebaseEventController extends GetxController {
   late StreamSubscription<Object?> streamSubscription;
   final _eventList = <Event>[].obs;
   final _eventListofUser = <Event>[].obs;
+  final _eventsearch = <Event>[].obs;
 
   @override
   void onInit() {
@@ -99,6 +100,7 @@ class FirebaseEventController extends GetxController {
   }
 
   void findeventsOfUser() async {
+    Get.put(UserController());
     UserController userController = Get.find();
     //Consulta a realizar
     //Busca todos los eventos a los que el usuario ha confirmado asistir
@@ -112,6 +114,15 @@ class FirebaseEventController extends GetxController {
     });
   }
 
+  void getSearch(String text) async {
+    var query = eventsFirebase.where('name', arrayContains: text);
+    QuerySnapshot eventos = await query.get();
+    _eventsearch.clear();
+    eventos.docs.forEach((element) {
+      _eventsearch.add(Event.fromSnapshot(element));
+      print("eventos iguales: " + Event.fromSnapshot(element).name);
+    });
+  }
   /*void findevents() async {
     var query =
         eventsFirebase.where('persCreadora', isEqualTo: "Usuario actual");

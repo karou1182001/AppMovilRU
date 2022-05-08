@@ -11,6 +11,7 @@ class SelectedEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //APPBAR
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(70.0),
@@ -19,111 +20,117 @@ class SelectedEvent extends StatelessWidget {
             title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
           ),
         ),
-        body: Column(
-          children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                //child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
-                child: Image.asset('assets/' + "1" + '.jpg',
-                    fit: BoxFit.cover, height: 200)),
-            Expanded(
-              child: Stack(
+        resizeToAvoidBottomInset: false,
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(20),
+              child: Column(
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height,
-                    padding:
-                        const EdgeInsets.only(top: 40, right: 14, left: 14),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(selectedevent.name,
-                                key: const Key('Nombre evento'),
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 25)),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        Text(
-                          selectedevent.description,
-                          key: const Key('Descripcion evento'),
+                  // IMAGEN DEL EVENTO
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      //child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
+                      child: Image.asset('assets/' + "1" + '.jpg',
+                          fit: BoxFit.cover, height: 200)),
+                  //NOMBRE DEL EVENTO
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(selectedevent.name,
+                          key: const Key('Nombre evento'),
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 15),
-                        ),
-                        //Suscibre buttom
-                        Container(
-                            margin: EdgeInsets.all(20),
-                            height: 50,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Container(
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(10),
-                                                    bottomRight:
-                                                        Radius.circular(10)),
-                                            gradient: LinearGradient(
-                                                begin: Alignment.bottomCenter,
-                                                end: Alignment.topCenter,
-                                                colors: [
-                                                  Color(selectedevent.color)
-                                                      .withOpacity(0.4),
-                                                  Color(selectedevent.color)
-                                                      .withOpacity(1)
-                                                ])))),
-                                Positioned(
-                                    bottom: 0,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Row(
-                                        children: [
-                                          ClipOval(
-                                            child: Container(
-                                                color:
-                                                    Color(selectedevent.color),
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                child: const Icon(
-                                                  Icons.add_outlined,
-                                                  size: 15,
-                                                  color: Colors.white,
-                                                )),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          const Text(
-                                            "Inscribirse",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          )
-                                        ],
-                                      ),
-                                    ))
-                              ],
-                            ))
-                      ],
-                    ),
+                              color: Colors.black, fontSize: 30)),
+                    ],
                   ),
+                  //NOMBRE DEL CREADOR DEL EVENTO
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Creado por: " + selectedevent.persCreadora,
+                          key: const Key('Dueño del evento'),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 13))
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  //DESCRIPCION DEL EVENTO
+                  Text(
+                    selectedevent.description,
+                    key: const Key('Descripcion evento'),
+                    style: const TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  const SizedBox(height: 15),
+                  //INICIO DEL EVENTO
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Comienza el: " + selectedevent.from,
+                          key: const Key('Inicio evento'),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 16))
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  // FINAL DEL EVENTO
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Finaliza el : " + selectedevent.to,
+                          key: const Key('Final evento'),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 16))
+                    ],
+                  ),
+                  //Suscibre buttom
+                  Container(
+                      margin: EdgeInsets.all(20),
+                      height: 50,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10)),
+                                      color: Color(selectedevent.color)))),
+                          Positioned(
+                              bottom: 0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: [
+                                    ClipOval(
+                                      child: Container(
+                                          color: Color(selectedevent.color),
+                                          padding: const EdgeInsets.all(10),
+                                          child: const Icon(
+                                            Icons.add_outlined,
+                                            size: 15,
+                                            color: Colors.white,
+                                          )),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      "Inscribirse",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    )
+                                  ],
+                                ),
+                              ))
+                        ],
+                      )),
                 ],
               ),
             ),
-          ],
+          ),
         ));
   }
 }
