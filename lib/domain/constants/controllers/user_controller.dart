@@ -15,6 +15,8 @@ class UserController extends GetxController {
   AuthenticationController authController = Get.find();
   RxList<User> usersList = RxList<User>([]);
   get users => usersList;
+  RxList<User> friendsList = RxList<User>([]);
+  get friendsl => friendsList;
 
   //Usuario
   late Rx<User> user = User(
@@ -24,12 +26,14 @@ class UserController extends GetxController {
           description: '',
           latitude: '',
           longitude: '',
-          id: '')
+          id: '',
+          friends: [])
       .obs;
 
   UserController() {
     createUser();
     findusers();
+    findfriends();
     print("correo actual " + authController.auth.currentUser!.email!);
   }
 
@@ -85,6 +89,7 @@ class UserController extends GetxController {
     String latitude = usuario.docs[0]['latitude'];
     String longitude = usuario.docs[0]['longitude'];
     String id = usuario.docs[0]['id'];
+    List<dynamic> friends = usuario.docs[0]['friends'];
     user = User(
             name: nombre,
             number: numero,
@@ -92,7 +97,8 @@ class UserController extends GetxController {
             description: descripcion,
             latitude: latitude,
             longitude: longitude,
-            id: id)
+            id: id,
+            friends: friends)
         .obs;
   }
 
@@ -152,5 +158,38 @@ class UserController extends GetxController {
       users.add(_users);
     }
     usersList = users.obs;
+  }
+
+  void findfriends() async {
+    var query =
+        userFirebase.where('email', isEqualTo: authController.auth.currentUser!.email!);
+    QuerySnapshot usuario = await query.get();
+    List<dynamic> friendsMail =usuario.docs[0]['friends'];
+    List<User> friendss = [];
+    for(var friend in friendsMail){
+      var query = userFirebase.where('id',
+        isEqualTo: friend);
+    QuerySnapshot usuario = await query.get();
+    String nombre = usuario.docs[0]['name'];
+    String numero = usuario.docs[0]['number'];
+    String email = usuario.docs[0]['email'];
+    String descripcion = usuario.docs[0]['description'];
+    String latitude = usuario.docs[0]['latitude'];
+    String longitude = usuario.docs[0]['longitude'];
+    String id = usuario.docs[0]['id'];
+    List<dynamic> friends =usuario.docs[0]['friends'];
+    User friendd = User(
+            name: nombre,
+            number: numero,
+            email: email,
+            description: descripcion,
+            latitude: latitude,
+            longitude: longitude,
+            id: id,
+            friends:friends);
+    friendss.add(friendd);
+    }
+    friendsList = friendss.obs;
+    
   }
 }
