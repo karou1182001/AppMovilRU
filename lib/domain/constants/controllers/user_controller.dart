@@ -12,19 +12,25 @@ import 'package:permission_handler/permission_handler.dart';
 import '../constants/firabase_constants.dart';
 
 class UserController extends GetxController {
-  AuthenticationController authenticationController = Get.find();
-   RxList<User> usersList = RxList<User>([]);
+  AuthenticationController authController = Get.find();
+  RxList<User> usersList = RxList<User>([]);
   get users => usersList;
 
-
   //Usuario
-  late Rx<User> user =
-      User(name: '', number: '123', email: '', description: '',latitude: '',longitude: '',id: '').obs;
+  late Rx<User> user = User(
+          name: '',
+          number: '123',
+          email: '',
+          description: '',
+          latitude: '',
+          longitude: '',
+          id: '')
+      .obs;
 
   UserController() {
     createUser();
     findusers();
-    print("correo actual "+authenticationController.auth.currentUser!.email!);
+    print("correo actual " + authController.auth.currentUser!.email!);
   }
 
   //Indicador de si está en la U o no
@@ -49,23 +55,29 @@ class UserController extends GetxController {
   }
 
   //Función para que cambie el nombre
-  void changeUserName(String userName) {
+  Future<void> changeUserName(String userName) async {
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'name': userName});
     user.value.changeName(userName);
   }
 
   //Función para cambiar el número
-  void changeUserNumber(String userNumber) {
+  Future<void> changeUserNumber(String userNumber) async {
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'number': userNumber});
     user.value.changeNumber(userNumber);
   }
 
   //Función para cambiar la descripción
-  void changeUserDescription(String userDescription) {
+  Future<void> changeUserDescription(String userDescription) async {
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'description': userDescription});
     user.value.changeDescription(userDescription);
   }
 
   void createUser() async {
     var query = userFirebase.where('email',
-        isEqualTo: authenticationController.auth.currentUser!.email);
+        isEqualTo: authController.auth.currentUser!.email);
     QuerySnapshot usuario = await query.get();
     String nombre = usuario.docs[0]['name'];
     String numero = usuario.docs[0]['number'];
@@ -76,7 +88,7 @@ class UserController extends GetxController {
     user = User(
             name: nombre,
             number: numero,
-            email: authenticationController.auth.currentUser!.email!,
+            email: authController.auth.currentUser!.email!,
             description: descripcion,
             latitude: latitude,
             longitude: longitude,
@@ -131,8 +143,8 @@ class UserController extends GetxController {
   }
 
   void findusers() async {
-    var query =
-        userFirebase.where('email', isNotEqualTo: authenticationController.auth.currentUser!.email!);
+    var query = userFirebase.where('email',
+        isNotEqualTo: authController.auth.currentUser!.email!);
     QuerySnapshot usuario = await query.get();
     List<User> users = [];
     for (var user in usuario.docs) {
@@ -141,7 +153,4 @@ class UserController extends GetxController {
     }
     usersList = users.obs;
   }
-
-
-
 }
