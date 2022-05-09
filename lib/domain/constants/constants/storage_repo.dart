@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 class StorageRepo {
   AuthenticationController authController = Get.find();
   final storage = FirebaseStorage.instance;
+
+  //Imagenes del perfil de usuario
   Future<void> uploadFile(String filePath) async {
     String? userEmail = authController.auth.currentUser!.email;
     File file = File(filePath);
@@ -18,7 +20,26 @@ class StorageRepo {
   Future<String> retrieveFile() async {
     String? userEmail = authController.auth.currentUser!.email;
     try {
-      final ref = storage.ref().child('user/$userEmail/profilePic');
+      final ref = storage.ref().child('event/$userEmail/eventPic');
+      var url = await ref.getDownloadURL();
+      print('Esta es la ' + url);
+      return url;
+    } catch (e) {
+      return '';
+    }
+  }
+
+  //Imagen de cada evento
+  Future<void> uploadFileEvent(String filePath, String eventId) async {
+    File file = File(filePath);
+    try {
+      await storage.ref().child('event/$eventId/eventPic').putFile(file);
+    } catch (e) {}
+  }
+
+  Future<String> retrieveFileEvent(String eventId) async {
+    try {
+      final ref = storage.ref().child('event/$eventId/eventPic');
       var url = await ref.getDownloadURL();
       print('Esta es la ' + url);
       return url;

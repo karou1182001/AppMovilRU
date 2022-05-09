@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constants/storage_repo.dart';
 import 'user_controller.dart';
 
 class FirebaseEventController extends GetxController {
@@ -18,6 +19,7 @@ class FirebaseEventController extends GetxController {
   final _eventList = <Event>[].obs;
   final _eventListofUser = <Event>[].obs;
   final _eventsearch = <Event>[].obs;
+  RxString url = ''.obs;
 
   @override
   void onInit() {
@@ -52,6 +54,7 @@ class FirebaseEventController extends GetxController {
     streamSubscription.cancel();
   }
 
+  //Añadir eventos a Firebase
   void addEvent(name, from, to, description, persCreadora, invitados, publico,
       confirmados, color, imgName) {
     eventf
@@ -71,10 +74,12 @@ class FirebaseEventController extends GetxController {
         .catchError((onError) => print("No se pudo añadir"));
   }
 
+  //Eliminar eventos de Firebase
   void deleteEvent(Event event) {
     event.eventId.delete();
   }
 
+  //Actualizar eventos de firebase
   updateEvent(name, from, to, description, persCreadora, invitados, publico,
       color, imgName, Event event) {
     event.eventId.update({
@@ -87,6 +92,17 @@ class FirebaseEventController extends GetxController {
       'color': color,
       'imgName': imgName
     });
+  }
+
+  //Métodos para imagen
+  void changeEventPicture(String filePath, String eventId) {
+    StorageRepo storage = StorageRepo();
+    storage.uploadFileEvent(filePath, eventId);
+  }
+
+  Future<void> getProfileUrl(String eventId) async {
+    StorageRepo storage = StorageRepo();
+    url.value = await storage.retrieveFileEvent(eventId);
   }
 
   static Stream<List<Event>> eventStream() {
@@ -125,15 +141,4 @@ class FirebaseEventController extends GetxController {
       print("eventos iguales: " + Event.fromSnapshot(element).name);
     });
   }
-  /*void findevents() async {
-    var query =
-        eventsFirebase.where('persCreadora', isEqualTo: "Usuario actual");
-    QuerySnapshot evento = await query.get();
-    List<Event> events = [];
-    for (var event in evento.docs) {
-      final _events = Event.fromDocumentSnapshot(documentSnapshot: event);
-      events.add(_events);
-    }
-    eventList = events.obs;
-  }*/
 }

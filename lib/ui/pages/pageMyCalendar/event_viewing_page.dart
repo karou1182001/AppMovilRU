@@ -93,6 +93,8 @@ class EventViewingPage extends StatelessWidget {
           style: TextStyle(
               fontSize: 18, fontWeight: FontWeight.bold, color: selectColor),
         ),
+        const SizedBox(height: 10),
+        imagen(),
         const SizedBox(height: 32),
         buildDate("From:", DateTime.parse(event.from)),
         const SizedBox(height: 32),
@@ -207,5 +209,20 @@ class EventViewingPage extends StatelessWidget {
     } else {
       return const Text("Privado", style: TextStyle(fontSize: 18));
     }
+  }
+
+  Widget imagen() {
+    FirebaseEventController feventCont = Get.find();
+    feventCont.getProfileUrl(event.name);
+    return Container(
+        height: 115,
+        width: 115,
+        decoration:
+            BoxDecoration(border: Border.all(width: 3), shape: BoxShape.circle),
+        child: (feventCont.url.value != '')
+            ? CircleAvatar(backgroundImage: NetworkImage(feventCont.url.value))
+            : const CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg')));
   }
 }

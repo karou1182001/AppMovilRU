@@ -42,6 +42,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   late TextEditingController textControllerAttendee;
   late FocusNode textFocusNodeAttendee;
   bool isEditingEmail = false;
+  String eventId = "";
 
   @override
   void initState() {
@@ -55,7 +56,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
       //Por si el evento ya fue creado y solo lo queremos editas, tomamos los valores
       //del evento
       final event = widget.event;
-      titleController.text = event!.name;
+      eventId = event!.name;
+      titleController.text = event.name;
       fromDate = DateTime.parse(event.from);
       toDate = DateTime.parse(event.to);
       descController.text = event.description;
@@ -374,6 +376,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
               var image =
                   (await ImagePicker().pickImage(source: ImageSource.gallery));
 
+              //Añadir imagen a Firebase
+              feventCont.changeEventPicture(image!.path, eventId);
               setState(() {
                 _selectedPicture = File(image!.path);
               });
