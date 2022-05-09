@@ -36,7 +36,6 @@ class UserController extends GetxController {
     findusers();
     findfriends();
     getProfileUrl();
-    Get.put(StorageRepo());
   }
 
   //Indicador de si está en la U o no
@@ -83,12 +82,12 @@ class UserController extends GetxController {
   }
 
   void changeProfilePicture(String filePath) {
-    StorageRepo storage = Get.find();
+    StorageRepo storage = StorageRepo();
     storage.uploadFile(filePath);
   }
 
   Future<void> getProfileUrl() async {
-    StorageRepo storage = Get.find();
+    StorageRepo storage = StorageRepo();
     url.value = await storage.retrieveFile(); 
   }
 

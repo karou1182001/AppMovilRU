@@ -10,7 +10,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'domain/constants/controllers/authentication_controller.dart';
 import 'domain/constants/controllers/firebaseevent_controller.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
                 //Si la conexión fue exitosa
                 if (snapshot.connectionState == ConnectionState.done) {
                   Get.put(AuthenticationController());
-                  Get.put(FirebaseEventController());
                   print('Estamos conectados');
                   return MenuInicio();
                 }

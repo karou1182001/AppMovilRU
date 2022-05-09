@@ -16,10 +16,6 @@ class AuthenticationController extends GetxController {
   GoogleSignIn googleSign = GoogleSignIn();
   late Rx<User?> firebaseUser;
 
-  AuthenticationController() {
-    Get.put(UserController());
-  }
-
   @override
   void onReady() {
     super.onReady();

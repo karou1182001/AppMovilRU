@@ -6,6 +6,7 @@ import 'package:app_ru/ui/widgets/navbar/model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 import '../../../domain/constants/controllers/user_controller.dart';
 
 class NavBar extends StatefulWidget {
@@ -20,6 +21,7 @@ class _NavBarState extends State<NavBar> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Get.put(FirebaseEventController());
     Get.put(UserController());
   }
 
