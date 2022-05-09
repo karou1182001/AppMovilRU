@@ -21,16 +21,15 @@ class MyCalendar extends StatefulWidget {
 }
 
 class _MyCalendarState extends State<MyCalendar> {
-  //final FirebaseEventController feventCont = Get.find();
+  final FirebaseEventController feventCont = Get.find();
+  RxList<dynamic> events = [].obs;
 
   @override
   void initState() {
-    //print("Entra");
     FirebaseEventController feventCont = Get.find();
     feventCont.onInit();
     feventCont.subscribeUpdates();
-    //print("Aquí");
-
+    loadData();
     super.initState();
   }
 
@@ -42,14 +41,22 @@ class _MyCalendarState extends State<MyCalendar> {
     super.dispose();
   }
 
+  loadData() async {
+    final eventos = await feventCont.eventsOfUser;
+
+    setState(() {
+      events = eventos;
+    });
+  }
+
   //-----------------------DISEÑO DE INTERFAZ-------------------------------
   @override
   Widget build(BuildContext context) {
     //Get.put(FirebaseEventController());
-    FirebaseEventController feventCont = Get.find();
-    final events = feventCont.eventsOfUser;
-    print(events);
-    print("imprime");
+    //FirebaseEventController feventCont = Get.find();
+    //final events = feventCont.eventsOfUser;
+    //print(events);
+    print("imprimeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -100,8 +107,10 @@ class _MyCalendarState extends State<MyCalendar> {
       //Botón flotante que nos permite crear un nuevo evento
       floatingActionButton: FloatingActionButton(
         key: Key('floatingbutton'),
-        onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const EventEditingPage())),
+        onPressed: () => Navigator.of(context)
+            .push(MaterialPageRoute(
+                builder: (context) => const EventEditingPage()))
+            .whenComplete(() => loadData()),
         backgroundColor: selectColor,
         tooltip: 'Crea un nuevo evento',
         child: const Icon(Icons.add),
