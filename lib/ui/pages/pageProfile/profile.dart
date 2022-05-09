@@ -27,18 +27,12 @@ class _ProfileState extends State<Profile> {
     Get.put(UserController());
     UserController userController = Get.find();
     AuthenticationController authController = Get.find();
-    String url = '';
     
     Future getImage() async {
       //Pickeamos la imagen
       var image = await ImagePicker().pickImage(source: ImageSource.gallery);
       //Añadir imagen a Firebase
       userController.changeProfilePicture(image!.path);
-      //Actualizamos al usuario
-      setState(() async {
-        url = userController.url.value;
-        print(url);
-      });
     }
 
     return Scaffold(
