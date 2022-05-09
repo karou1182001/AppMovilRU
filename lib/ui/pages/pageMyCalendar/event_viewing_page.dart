@@ -186,7 +186,20 @@ class EventViewingPage extends StatelessWidget {
       return <Widget>[
         IconButton(
           icon: const Icon(Icons.playlist_remove_sharp),
-          onPressed: () {},
+          onPressed: () {
+            //Eliminamos al usuario de los invitados y y confirmados del evento
+            event.invitados.remove(userController.email);
+            event.confirmados.remove(userController.email);
+            //Actualizamos la base de datos
+            event.eventId.update({
+              'invitados': event.invitados,
+              'confirmados': event.confirmados
+            });
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const NavBar()),
+                (route) => false);
+          },
         )
       ];
     }
