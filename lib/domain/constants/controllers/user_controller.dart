@@ -84,6 +84,12 @@ class UserController extends GetxController {
     storage.uploadFile(filePath);
   }
 
+  Future<String> getProfileUrl() async {
+    StorageRepo storage = Get.find();
+    String url = await storage.retrieveFile();
+    return url; 
+  }
+
   void createUser() async {
     var query = userFirebase.where('email',
         isEqualTo: authController.auth.currentUser!.email);
