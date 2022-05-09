@@ -28,12 +28,7 @@ class _ProfileState extends State<Profile> {
     UserController userController = Get.find();
     AuthenticationController authController = Get.find();
     String url = '';
-
-    initState() async {
-      url = await userController.getProfileUrl();
-      print(url);
-    }
-
+    
     Future getImage() async {
       //Pickeamos la imagen
       var image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -41,7 +36,7 @@ class _ProfileState extends State<Profile> {
       userController.changeProfilePicture(image!.path);
       //Actualizamos al usuario
       setState(() async {
-        url = await userController.getProfileUrl();
+        url = userController.url.value;
         print(url);
       });
     }
@@ -66,8 +61,8 @@ class _ProfileState extends State<Profile> {
                       width: 115,
                       decoration: BoxDecoration(
                           border: Border.all(width: 3), shape: BoxShape.circle),
-                      child: (url != '')
-                          ? CircleAvatar(backgroundImage: NetworkImage(url))
+                      child: (userController.url.value != '')
+                          ? CircleAvatar(backgroundImage: NetworkImage(userController.url.value))
                           : const CircleAvatar(
                               backgroundImage: NetworkImage(
                                   'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg'))),

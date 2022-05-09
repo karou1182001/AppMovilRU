@@ -20,6 +20,7 @@ class StorageRepo {
     try {
       final ref = storage.ref().child('user/$userEmail/profilePic');
       var url = await ref.getDownloadURL();
+      print('Esta es la ' + url);
       return url;
     } catch (e) {
       return '';

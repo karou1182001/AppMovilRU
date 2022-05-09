@@ -18,6 +18,7 @@ class UserController extends GetxController {
   get users => usersList;
   RxList<User> friendsList = RxList<User>([]);
   get friendsl => friendsList;
+  RxString url = ''.obs;  
 
   //Usuario
   late Rx<User> user = User(
@@ -34,6 +35,7 @@ class UserController extends GetxController {
     createUser();
     findusers();
     findfriends();
+    getProfileUrl();
     print("correo actual " + authController.auth.currentUser!.email!);
   }
 
@@ -85,10 +87,9 @@ class UserController extends GetxController {
     storage.uploadFile(filePath);
   }
 
-  Future<String> getProfileUrl() async {
+  Future<void> getProfileUrl() async {
     StorageRepo storage = Get.find();
-    String url = await storage.retrieveFile();
-    return url; 
+    url.value = await storage.retrieveFile(); 
   }
 
   void createUser() async {
