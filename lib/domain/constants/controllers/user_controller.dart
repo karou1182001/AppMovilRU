@@ -51,6 +51,7 @@ class UserController extends GetxController {
   get number => user.value.getNumber;
   get ru => _ru.value;
   get description => user.value.getDescription;
+  get friends => user.value.getFriends;
 
   //Función que cambia el estado del switch en perfil
   void changeRU() {
@@ -172,12 +173,9 @@ class UserController extends GetxController {
   }
 
   void findfriends() async {
-    var query = userFirebase.where('email',
-        isEqualTo: authController.auth.currentUser!.email!);
-    QuerySnapshot usuario = await query.get();
-    List<dynamic> friendsMail = usuario.docs[0]['friends'];
+    
     List<User> friendss = [];
-    for (var friend in friendsMail) {
+    for (String friend in friends) {
       var query = userFirebase.where('id', isEqualTo: friend);
       QuerySnapshot usuario = await query.get();
       if (usuario.docs.isNotEmpty) {
