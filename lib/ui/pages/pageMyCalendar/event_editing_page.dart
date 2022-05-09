@@ -14,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../domain/constants/constants/color.dart';
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 import '../../../domain/constants/controllers/user_controller.dart';
+import 'mycalendar.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
@@ -521,6 +522,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
       final isEditing = widget.event != null;
       //LLmando al controlador, añadimos el evento a la lista de controladores
       Get.put(FirebaseEventController());
+      Get.put(UserController());
       FirebaseEventController feventCont = Get.find();
       UserController userController = Get.find();
 
@@ -552,7 +554,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
       }
 
       //Volvemos a la página anterior
-
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const NavBar()),
