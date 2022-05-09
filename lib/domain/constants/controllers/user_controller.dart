@@ -36,7 +36,7 @@ class UserController extends GetxController {
     findusers();
     findfriends();
     getProfileUrl();
-    print("correo actual " + authController.auth.currentUser!.email!);
+    Get.put(StorageRepo());
   }
 
   //Indicador de si está en la U o no

@@ -40,9 +40,7 @@ class MyApp extends StatelessWidget {
                 //Si la conexión fue exitosa
                 if (snapshot.connectionState == ConnectionState.done) {
                   Get.put(AuthenticationController());
-                  Get.put(UserController());
                   Get.put(FirebaseEventController());
-                  Get.put(StorageRepo());
                   print('Estamos conectados');
                   return MenuInicio();
                 }

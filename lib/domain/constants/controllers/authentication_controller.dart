@@ -1,4 +1,5 @@
 import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
+import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,10 @@ class AuthenticationController extends GetxController {
   late Rx<GoogleSignInAccount?> googleSignInAccount;
   GoogleSignIn googleSign = GoogleSignIn();
   late Rx<User?> firebaseUser;
+
+  AuthenticationController() {
+    Get.put(UserController());
+  }
 
   @override
   void onReady() {
