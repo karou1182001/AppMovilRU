@@ -75,6 +75,8 @@ class EventViewingPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
+          buildHeader(header: "Tipo de evento", child: widgetPublico()),
+          const SizedBox(height: 24),
           showColor()
         ],
       ),
@@ -128,12 +130,6 @@ class EventViewingPage extends StatelessWidget {
           ),
         ],
       );
-  /*ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(event.color)),
-        child: const Icon(Icons.color_lens),
-      );*/
 
   Widget buildDate(String title, DateTime date) {
     return Row(
@@ -202,6 +198,14 @@ class EventViewingPage extends StatelessWidget {
           },
         )
       ];
+    }
+  }
+
+  Widget widgetPublico() {
+    if (event.publico == true) {
+      return const Text("Público", style: TextStyle(fontSize: 18));
+    } else {
+      return const Text("Privado", style: TextStyle(fontSize: 18));
     }
   }
 }

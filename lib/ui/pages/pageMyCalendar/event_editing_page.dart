@@ -34,6 +34,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   late DateTime fromDate;
   late DateTime toDate;
   Color colorEvento = selectColor;
+  bool publico = true;
   late var _selectedPicture = File("");
   FirebaseEventController feventCont = Get.find();
   List<dynamic> personasInvitadas = [];
@@ -60,6 +61,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
       descController.text = event.description;
       colorEvento = Color(event.color);
       personasInvitadas = event.invitados;
+      publico = event.publico;
     }
     textControllerAttendee = TextEditingController();
     textFocusNodeAttendee = FocusNode();
@@ -102,6 +104,10 @@ class _EventEditingPageState extends State<EventEditingPage> {
               imagePicker(),
               imagen(),
               invitados(),
+              switchPublico(),
+              const SizedBox(
+                height: 20,
+              ),
               parrafoDescripcion(),
             ],
           ),
@@ -257,6 +263,34 @@ class _EventEditingPageState extends State<EventEditingPage> {
         ],
       );
 
+  //Público o no público
+  Widget switchPublico() => Container(
+      padding: const EdgeInsets.only(left: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const Icon(Icons.person_pin_circle_outlined),
+          const SizedBox(
+            width: 10,
+          ),
+          const Text(
+            'Público',
+            style: TextStyle(
+              color: selectColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          ),
+          Switch(
+              activeColor: Colors.green,
+              value: publico,
+              onChanged: (value) => {
+                    setState(() {
+                      publico = value;
+                    })
+                  }),
+        ],
+      ));
   //Pone los calendarios
   Widget buildDateTimePickers() => Column(
         children: [
@@ -506,19 +540,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
     //Validamos que todo esté bien ingresado
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
-      //Creamos un nuevo evento
-      /*final event = Event(
-        name: titleController.text,
-        from: DateFormat("yyyy-MM-dd hh:mm:ss").format(fromDate),
-        to: DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
-        description: descController.text,
-        //Se le pasa el usuario
-        persCreadora: "Usuario actual",
-        invitados: ["Julia"],
-        color: colorEvento.value,
-        imgName: "1",
-      );*/
-
       final isEditing = widget.event != null;
       //LLmando al controlador, añadimos el evento a la lista de controladores
       Get.put(FirebaseEventController());
@@ -535,6 +556,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
             descController.text,
             userController.email,
             personasInvitadas,
+            publico,
             colorEvento.value,
             "1",
             widget.event!);
@@ -547,6 +569,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
           descController.text,
           userController.email,
           personasInvitadas,
+          publico,
           [userController.email],
           colorEvento.value,
           "1",

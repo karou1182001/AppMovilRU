@@ -52,7 +52,7 @@ class FirebaseEventController extends GetxController {
     streamSubscription.cancel();
   }
 
-  void addEvent(name, from, to, description, persCreadora, invitados,
+  void addEvent(name, from, to, description, persCreadora, invitados, publico,
       confirmados, color, imgName) {
     eventf
         .add({
@@ -63,6 +63,7 @@ class FirebaseEventController extends GetxController {
           'persCreadora': persCreadora,
           'invitados': invitados,
           'confirmados': confirmados,
+          'publico': publico,
           'color': color,
           'imgName': imgName
         })
@@ -74,14 +75,15 @@ class FirebaseEventController extends GetxController {
     event.eventId.delete();
   }
 
-  updateEvent(name, from, to, description, persCreadora, invitados, color,
-      imgName, Event event) {
+  updateEvent(name, from, to, description, persCreadora, invitados, publico,
+      color, imgName, Event event) {
     event.eventId.update({
       'name': name,
       'from': from,
       'to': to,
       'description': description,
       'invitados': invitados,
+      'publico': publico,
       'color': color,
       'imgName': imgName
     });

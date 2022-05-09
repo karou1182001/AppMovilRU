@@ -12,6 +12,7 @@ class Event {
   late String persCreadora;
   late List invitados;
   late List confirmados;
+  late bool publico;
   late int color;
   late String imgName;
 
@@ -35,6 +36,7 @@ class Event {
         assert(map['persCreadora'] != null),
         assert(map['invitados'] != null),
         assert(map['confirmados'] != null),
+        assert(map['publico'] != null),
         assert(map['color'] != null),
         assert(map['imgName'] != null),
         name = map['name'],
@@ -44,6 +46,7 @@ class Event {
         persCreadora = map['persCreadora'],
         invitados = map['invitados'],
         confirmados = map['confirmados'],
+        publico = map['publico'],
         color = map['color'],
         imgName = map['imgName'];
 
