@@ -29,7 +29,7 @@ class FirebaseUserController extends GetxController {
     super.onInit();
     
     //Inicia actualizando los eventos del usuario
-   
+    subscribeUpdates();
     print("on init");
   }
 

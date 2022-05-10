@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:app_ru/domain/constants/constants/storage_repo.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
@@ -26,8 +27,8 @@ class UserController extends GetxController {
       number: '123',
       email: '',
       description: '',
-      latitude: '',
-      longitude: '',
+      latitude: 0,
+      longitude: 0,
       id: '',
       friends: []).obs;
 
@@ -99,8 +100,8 @@ class UserController extends GetxController {
     String nombre = usuario.docs[0]['name'];
     String numero = usuario.docs[0]['number'];
     String descripcion = usuario.docs[0]['description'];
-    String latitude = usuario.docs[0]['latitude'];
-    String longitude = usuario.docs[0]['longitude'];
+    double latitude = usuario.docs[0]['latitude'];
+    double longitude = usuario.docs[0]['longitude'];
     String id = usuario.docs[0]['id'];
     List<dynamic> friends = usuario.docs[0]['friends'];
     user = User(
@@ -187,8 +188,8 @@ class UserController extends GetxController {
         String numero = usuario.docs[0]['number'];
         String email = usuario.docs[0]['email'];
         String descripcion = usuario.docs[0]['description'];
-        String latitude = usuario.docs[0]['latitude'];
-        String longitude = usuario.docs[0]['longitude'];
+        double latitude = usuario.docs[0]['latitude'];
+        double longitude = usuario.docs[0]['longitude'];
         String id = usuario.docs[0]['id'];
         List<dynamic> friends = usuario.docs[0]['friends'];
         User friendd = User(
