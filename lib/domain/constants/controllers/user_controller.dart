@@ -133,8 +133,8 @@ class UserController extends GetxController {
           .collection('usuario')
           .doc(user.value.id)
           .set({
-        'latitude': _locationResult.latitude.toString(),
-        'longitude': _locationResult.longitude.toString(),
+        'latitude': _locationResult.latitude,
+        'longitude': _locationResult.longitude,
       }, SetOptions(merge: true));
     } catch (e) {
       print(e);
@@ -151,8 +151,8 @@ class UserController extends GetxController {
           .collection('usuario')
           .doc(user.value.id)
           .set({
-        'latitude': currentlocation.latitude.toString(),
-        'longitude': currentlocation.longitude.toString(),
+        'latitude': currentlocation.latitude,
+        'longitude': currentlocation.longitude,
       }, SetOptions(merge: true));
     });
   }
