@@ -35,9 +35,10 @@ class UserController extends GetxController {
   void onInit() {
     super.onInit();
     createUser();
+    getProfileUrl();
     findusers();
     findfriends();
-    getProfileUrl();
+    
   }
 
   //Indicador de si está en la U o no
