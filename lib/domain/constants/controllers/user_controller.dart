@@ -84,9 +84,10 @@ class UserController extends GetxController {
     user.value.changeDescription(userDescription);
   }
 
-  void changeProfilePicture(String filePath) {
+  void changeProfilePicture(String filePath) async {
     StorageRepo storage = StorageRepo();
-    storage.uploadFile(filePath);
+    await storage.uploadFile(filePath);
+    url.value = await storage.retrieveFile(); 
   }
 
   Future<void> getProfileUrl() async {
