@@ -1,5 +1,6 @@
 
 import 'package:app_ru/models/user.dart';
+import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedFriendMap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:app_ru/domain/constants/constants/text_style.dart';
 import '../../../domain/constants/constants/color.dart';
 
 class SelectedFriend extends StatelessWidget {
-  User selectedfriend;
+  Users selectedfriend;
 
   SelectedFriend({required this.selectedfriend});
 
@@ -132,7 +133,7 @@ class SelectedFriend extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
-                                  SelectedFriendMap(selectedfriend.id)));
+                                  SelectedFriendMap(selectedfriend.email)));
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,

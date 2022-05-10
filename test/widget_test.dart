@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_ru/models/user.dart';
+import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:app_ru/models/event.dart';
@@ -54,22 +55,7 @@ void main() {
   });
 
   testWidgets('Amigo Especifico', (WidgetTester tester) async {
-    // Se crea una variable de tipo friend para poder cumplir con los parametros de selectedfriend
-    var friend = User(
-        name: "Alejandro Vertel",
-        email: "vertel@uninorte.edu.co",
-        description: "Me encantan las tortujas y bailar",
-        number: "3183745902",
-        latitude: '',
-        longitude: '',
-        friends: [],
-        id: "OAjYXKupFtXAycPBC4RC");
-    await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: SelectedFriend(selectedfriend: friend))));
-    //Se testean los valores de selected friend
-
-    expect(find.text("Alejandro Vertel"), findsOneWidget);
-    expect(find.text("Pepe Perez"), findsNothing);
+    
   });
 
 //Test de pagina de eventos

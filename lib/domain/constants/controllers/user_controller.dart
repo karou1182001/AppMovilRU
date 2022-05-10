@@ -31,7 +31,8 @@ class UserController extends GetxController {
       id: '',
       friends: []).obs;
 
-  UserController() {
+  void onInit() {
+    super.onInit();
     createUser();
     findusers();
     findfriends();
@@ -52,6 +53,7 @@ class UserController extends GetxController {
   get number => user.value.getNumber;
   get ru => _ru.value;
   get description => user.value.getDescription;
+  get friends => user.value.getFriends;
 
   //Función que cambia el estado del switch en perfil
   void changeRU() {
