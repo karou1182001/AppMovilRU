@@ -92,6 +92,7 @@ class UserController extends GetxController {
   Future<void> getProfileUrl() async {
     StorageRepo storage = StorageRepo();
     url.value = await storage.retrieveFile(); 
+    print('Soy la URL: ${url.value}');
   }
 
   void createUser() async {
