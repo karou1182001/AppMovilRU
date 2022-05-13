@@ -46,7 +46,7 @@ class FirebaseUserController extends GetxController {
       Users actualUser;
       List friends = [];
       user.docs.forEach((element) {
-        if(element['id']==userController.email){
+        if(element['id']==authController.auth.currentUser!.email){
           actualUser = Users.fromSnapshot(element);
           friends = actualUser.friends;
         }
@@ -54,7 +54,7 @@ class FirebaseUserController extends GetxController {
       _friendListofUser.clear();
       _userList.clear();
       user.docs.forEach((element) {
-        if(element['id']!=userController.email){
+        if(element['id']!=authController.auth.currentUser!.email){
           _userList.add(Users.fromSnapshot(element));
         }
         if(friends.contains((element)['id'])){
