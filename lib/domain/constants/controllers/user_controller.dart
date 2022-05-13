@@ -35,9 +35,10 @@ class UserController extends GetxController {
   void onInit() {
     super.onInit();
     createUser();
+    getProfileUrl();
     findusers();
     findfriends();
-    getProfileUrl();
+    
   }
 
   //Indicador de si está en la U o no
@@ -83,14 +84,16 @@ class UserController extends GetxController {
     user.value.changeDescription(userDescription);
   }
 
-  void changeProfilePicture(String filePath) {
+  void changeProfilePicture(String filePath) async {
     StorageRepo storage = StorageRepo();
-    storage.uploadFile(filePath);
+    await storage.uploadFile(filePath);
+    url.value = await storage.retrieveFile(); 
   }
 
   Future<void> getProfileUrl() async {
     StorageRepo storage = StorageRepo();
     url.value = await storage.retrieveFile(); 
+    print('Soy la URL: ${url.value}');
   }
 
   void createUser() async {
