@@ -103,8 +103,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
               const SizedBox(
                 height: 20,
               ),
-              imagePicker(),
-              imagen(),
+              //imagePicker(),
+              //imagen(),
               invitados(),
               switchPublico(),
               const SizedBox(
