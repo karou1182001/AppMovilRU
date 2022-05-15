@@ -20,7 +20,7 @@ class StorageRepo {
   Future<String> retrieveFile() async {
     String? userEmail = authController.auth.currentUser!.email;
     try {
-      final ref = storage.ref().child('event/$userEmail/eventPic');
+      final ref = storage.ref().child('user/$userEmail/profilePic');
       var url = await ref.getDownloadURL();
       print('Esta es la ' + url);
       return url;

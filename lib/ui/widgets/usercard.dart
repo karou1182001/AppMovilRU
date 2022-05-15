@@ -1,9 +1,10 @@
 
 import 'package:app_ru/models/user.dart';
+import 'package:app_ru/models/users.dart';
 import 'package:flutter/material.dart';
 
 class Usercard extends StatelessWidget {
-  User user;
+  Users user;
 
   Function onEventClick;
 

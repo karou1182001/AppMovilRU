@@ -1,7 +1,9 @@
 import 'package:app_ru/models/user.dart';
+import 'package:app_ru/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
+import '../../../domain/constants/controllers/firebaseuser_controller.dart';
 import '../../../domain/constants/controllers/user_controller.dart';
 import '../../widgets/usercard.dart';
 import 'package:get/get.dart';
@@ -11,14 +13,24 @@ class UserList extends StatefulWidget {
 }
 
 class _UserListState extends State<UserList>{
-List<User> entries = <User>[];
+List<Users> entries = <Users>[];
+FirebaseUserController fuserCont = Get.find();
+  void initState(){
+    FirebaseUserController fuserCont = Get.find();
+    fuserCont.onInit();
+    fuserCont.subscribeUpdates();
+    loadData();
+    super.initState();
+  }
+  loadData() async {
+    final users = await fuserCont.allUsers;
 
-
+    setState(() {
+      entries = users;
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    Get.put(UserController());
-    UserController usersList = Get.find();
-    entries = usersList.users;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),

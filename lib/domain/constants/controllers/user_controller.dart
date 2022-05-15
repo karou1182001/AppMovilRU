@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:app_ru/domain/constants/constants/storage_repo.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
@@ -26,16 +27,18 @@ class UserController extends GetxController {
       number: '123',
       email: '',
       description: '',
-      latitude: '',
-      longitude: '',
+      latitude: 0,
+      longitude: 0,
       id: '',
       friends: []).obs;
 
-  UserController() {
+  void onInit() {
+    super.onInit();
     createUser();
+    getProfileUrl();
     findusers();
     findfriends();
-    getProfileUrl();
+    
   }
 
   //Indicador de si está en la U o no
@@ -52,6 +55,7 @@ class UserController extends GetxController {
   get number => user.value.getNumber;
   get ru => _ru.value;
   get description => user.value.getDescription;
+  get friends => user.value.getFriends;
 
   //Función que cambia el estado del switch en perfil
   void changeRU() {
@@ -80,14 +84,16 @@ class UserController extends GetxController {
     user.value.changeDescription(userDescription);
   }
 
-  void changeProfilePicture(String filePath) {
+  void changeProfilePicture(String filePath) async {
     StorageRepo storage = StorageRepo();
-    storage.uploadFile(filePath);
+    await storage.uploadFile(filePath);
+    url.value = await storage.retrieveFile(); 
   }
 
   Future<void> getProfileUrl() async {
     StorageRepo storage = StorageRepo();
     url.value = await storage.retrieveFile(); 
+    print('Soy la URL: ${url.value}');
   }
 
   void createUser() async {
@@ -97,8 +103,8 @@ class UserController extends GetxController {
     String nombre = usuario.docs[0]['name'];
     String numero = usuario.docs[0]['number'];
     String descripcion = usuario.docs[0]['description'];
-    String latitude = usuario.docs[0]['latitude'];
-    String longitude = usuario.docs[0]['longitude'];
+    double latitude = usuario.docs[0]['latitude'];
+    double longitude = usuario.docs[0]['longitude'];
     String id = usuario.docs[0]['id'];
     List<dynamic> friends = usuario.docs[0]['friends'];
     user = User(
@@ -130,8 +136,8 @@ class UserController extends GetxController {
           .collection('usuario')
           .doc(user.value.id)
           .set({
-        'latitude': _locationResult.latitude.toString(),
-        'longitude': _locationResult.longitude.toString(),
+        'latitude': _locationResult.latitude,
+        'longitude': _locationResult.longitude,
       }, SetOptions(merge: true));
     } catch (e) {
       print(e);
@@ -148,8 +154,8 @@ class UserController extends GetxController {
           .collection('usuario')
           .doc(user.value.id)
           .set({
-        'latitude': currentlocation.latitude.toString(),
-        'longitude': currentlocation.longitude.toString(),
+        'latitude': currentlocation.latitude,
+        'longitude': currentlocation.longitude,
       }, SetOptions(merge: true));
     });
   }
@@ -185,8 +191,8 @@ class UserController extends GetxController {
         String numero = usuario.docs[0]['number'];
         String email = usuario.docs[0]['email'];
         String descripcion = usuario.docs[0]['description'];
-        String latitude = usuario.docs[0]['latitude'];
-        String longitude = usuario.docs[0]['longitude'];
+        double latitude = usuario.docs[0]['latitude'];
+        double longitude = usuario.docs[0]['longitude'];
         String id = usuario.docs[0]['id'];
         List<dynamic> friends = usuario.docs[0]['friends'];
         User friendd = User(

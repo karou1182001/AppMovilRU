@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
+import '../../../domain/constants/controllers/firebaseuser_controller.dart';
 import '../../../domain/constants/controllers/user_controller.dart';
 
 class NavBar extends StatefulWidget {
@@ -23,7 +24,9 @@ class _NavBarState extends State<NavBar> {
     // TODO: implement initState
     super.initState();
     Get.put(FirebaseEventController());
+    
     Get.put(UserController());
+    Get.put(FirebaseUserController());
   }
 
   //Colocamos que inicie en el menú 2, para que por defecto salga el calendario

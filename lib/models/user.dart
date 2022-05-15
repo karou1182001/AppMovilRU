@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,8 +9,8 @@ class User {
  late  String number;
   late String email;
   late String description;
- late  String latitude;
- late  String longitude;
+ late  double latitude;
+ late  double longitude;
  late  String id;
  late List<dynamic> friends;
 

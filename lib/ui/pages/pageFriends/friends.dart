@@ -1,12 +1,14 @@
 import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/models/user.dart';
+import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
 
+import '../../../domain/constants/controllers/firebaseuser_controller.dart';
 import '../../widgets/usercard.dart';
 
 class FriendsList extends StatefulWidget {
@@ -17,18 +19,25 @@ class FriendsList extends StatefulWidget {
 }
 
 class _FriendsListState extends State<FriendsList> {
-  List<User> entries = <User>[];
-
- 
-
-  void initState() {
+  final FirebaseUserController fuserCont = Get.find();
+  List<Users> entries = <Users>[];
+ void initState(){
+    FirebaseUserController fuserCont = Get.find();
+    fuserCont.onInit();
+    fuserCont.subscribeUpdates();
+    loadData();
+    super.initState();
+  }
+  loadData() async {
+    final users = await fuserCont.friendsOfUser;
     
+    setState(() {
+      entries = users;
+      print('hay un total de '+entries.length.toString());
+    });
   }
 
   Widget build(BuildContext context) {
-    Get.put(UserController());
-    UserController friendsList = Get.find();
-    entries = friendsList.friendsl;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),

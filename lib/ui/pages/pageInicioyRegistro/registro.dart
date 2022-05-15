@@ -151,8 +151,8 @@ class MenuRegistro extends StatelessWidget {
                               'number': _numberController.text,
                               'description': '¡Dinos quién eres!',
                               'id': _emailController.text,
-                              'latitude': '',
-                              'longitude': '',
+                              'latitude': 0.1,
+                              'longitude': 0.1,
                               'friends':friends,
                             }, SetOptions(merge: true));
                             //Enviamos un mensaje exitoso
