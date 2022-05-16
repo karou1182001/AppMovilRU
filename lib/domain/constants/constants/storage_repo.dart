@@ -17,10 +17,29 @@ class StorageRepo {
     } catch (e) {}
   }
 
+  Future<void> uploadFileSchedule(String filePath) async {
+    String? userEmail = authController.auth.currentUser!.email;
+    File file = File(filePath);
+    try {
+      await storage.ref().child('user/$userEmail/schedule').putFile(file);
+    } catch (e) {}
+  }
+
   Future<String> retrieveFile() async {
     String? userEmail = authController.auth.currentUser!.email;
     try {
       final ref = storage.ref().child('user/$userEmail/profilePic');
+      var url = await ref.getDownloadURL();
+      print('Esta es la ' + url);
+      return url;
+    } catch (e) {
+      return '';
+    }
+  }
+  Future<String> retrieveFileSchedule() async {
+    String? userEmail = authController.auth.currentUser!.email;
+    try {
+      final ref = storage.ref().child('user/$userEmail/schedule');
       var url = await ref.getDownloadURL();
       print('Esta es la ' + url);
       return url;

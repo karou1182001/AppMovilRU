@@ -27,12 +27,23 @@ class _ProfileState extends State<Profile> {
     Get.put(UserController());
     UserController userController = Get.find();
     AuthenticationController authController = Get.find();
-    
+
     Future getImage() async {
       //Pickeamos la imagen
       var image = await ImagePicker().pickImage(source: ImageSource.gallery);
       //Añadir imagen a Firebase
-      userController.changeProfilePicture(image!.path);
+      if (image != null) {
+        userController.changeProfilePicture(image.path);
+      }
+    }
+
+    Future getImageHorario() async {
+      //Pickeamos la imagen
+      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      //Añadir imagen a Firebase
+      if (image != null) {
+        userController.changeProfileSchedule(image.path);
+      }
     }
 
     return Scaffold(
@@ -56,7 +67,9 @@ class _ProfileState extends State<Profile> {
                       decoration: BoxDecoration(
                           border: Border.all(width: 3), shape: BoxShape.circle),
                       child: (userController.url.value != '')
-                          ? CircleAvatar(backgroundImage: NetworkImage(userController.url.value))
+                          ? CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(userController.url.value))
                           : const CircleAvatar(
                               backgroundImage: NetworkImage(
                                   'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg'))),
@@ -159,8 +172,46 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(height: 10),
                 SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
-                    child:
-                        const Image(image: AssetImage('assets/horario.png'))),
+                    child: (userController.urlSchedule.value != '')
+                        ? Image(
+                            image: NetworkImage(
+                                userController.urlSchedule.value,
+                                scale: 1))
+                        : const Image(
+                            height: 500,
+                            width: 500,
+                            image: NetworkImage(
+                                'https://i.pinimg.com/originals/36/1c/73/361c7372f6113e6dfb5c28f6f03194ee.png',
+                                scale: 1))),
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 220),
+                    child: ElevatedButton(
+                        key: const Key('changeschedule'),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18))),
+                            backgroundColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.black)),
+                        onPressed: () async {
+                          await getImageHorario();
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.logout, color: Colors.white),
+                            const SizedBox(width: 10),
+                            Text(
+                              'Añadir Horario',
+                              style: generalText(Colors.white, 15),
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
                 const SizedBox(
                   height: 15,
                 ),
