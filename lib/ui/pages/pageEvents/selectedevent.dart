@@ -35,15 +35,11 @@ class SelectedEvent extends StatelessWidget {
                       child: Image.asset('assets/' + "1" + '.jpg',
                           fit: BoxFit.cover, height: 200)),
                   //NOMBRE DEL EVENTO
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(selectedevent.name,
+                      Text(
+                          selectedevent.name,
                           key: const Key('Nombre evento'),
                           style: const TextStyle(
                               color: Colors.black, fontSize: 30)),
-                    ],
-                  ),
                   //NOMBRE DEL CREADOR DEL EVENTO
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

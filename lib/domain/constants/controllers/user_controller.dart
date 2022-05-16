@@ -37,8 +37,12 @@ class UserController extends GetxController {
     super.onInit();
     createUser();
     getProfileUrl();
+<<<<<<< Updated upstream
     findusers();
     findfriends();
+=======
+    
+>>>>>>> Stashed changes
   }
 
   //Indicador de si está en la U o no
