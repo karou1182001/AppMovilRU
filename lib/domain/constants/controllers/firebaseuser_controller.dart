@@ -54,10 +54,12 @@ class FirebaseUserController extends GetxController {
           friends = actualUser.friends;
           friendsRequest = actualUser.friendsRequest;
           friendsRequested = actualUser.friendsRequested;
+          print('hola si encontre mi usuario');
         }
       });
       _friendListofUser.clear();
       _userList.clear();
+      _friendRequestListofUser.clear();
       user.docs.forEach((element) {
         if(element['id']!=authController.auth.currentUser!.email && !friends.contains((element)['id']) && !friendsRequest.contains((element)['id']) && !friendsRequested.contains((element)['id'])){
           _userList.add(Users.fromSnapshot(element));
