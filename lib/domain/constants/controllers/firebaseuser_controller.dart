@@ -104,7 +104,21 @@ class FirebaseUserController extends GetxController {
     userRef.update({
       "friendsRequested": FieldValue.arrayUnion([friendMail]),
     });
-    
+
+  }
+
+  acceptFriend(String friendMail){
+    final friendRef = userf.doc(friendMail);
+    friendRef.update({
+      "friendsRequested": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+      "friends": FieldValue.arrayUnion([authController.auth.currentUser!.email]),
+    });
+    final userRef = userf.doc(authController.auth.currentUser!.email);
+    userRef.update({
+      "friendsRequest": FieldValue.arrayRemove([friendMail]),
+      "friends": FieldValue.arrayRemove([friendMail]),
+    });
+
   }
 
 
