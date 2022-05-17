@@ -44,8 +44,10 @@ class _MyCalendarState extends State<MyCalendar> {
   loadData() async {
     final eventos = await feventCont.eventsOfUser;
 
+
     setState(() {
       events = eventos;
+      print("Me actualicé");
     });
   }
 
@@ -56,7 +58,6 @@ class _MyCalendarState extends State<MyCalendar> {
     //FirebaseEventController feventCont = Get.find();
     //final events = feventCont.eventsOfUser;
     //print(events);
-    print("imprimeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
