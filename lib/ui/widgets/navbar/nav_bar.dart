@@ -3,6 +3,7 @@ import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/widgets/navbar/custom_paint.dart';
 import 'package:app_ru/ui/widgets/navbar/model.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +29,6 @@ class _NavBarState extends State<NavBar> {
     Get.put(FirebaseUserController());
   }
 
-  @override
   //Colocamos que inicie en el menú 2, para que por defecto salga el calendario
   int selectBtn = 2;
   Widget build(BuildContext context) {
@@ -37,11 +37,56 @@ class _NavBarState extends State<NavBar> {
       //Aquí se pone el widget que se seleccione en la NavBar
       body: navBtn[selectBtn].widget,
       //Aquí se pone la NavBar
-      bottomNavigationBar: navigationBar(tam),
+      bottomNavigationBar: Navbar(),
+
+      //navigationBar(tam),
     );
   }
 
+  // _onTap function
+  void _onTap(int index) {
+    setState(() {
+      selectBtn = index;
+    });
+  }
+
   //--------------------WIDGET NAVBAR------------------------------------
+
+  Widget Navbar() {
+    return Container(
+      //Altura de la Navbar respecto a la pantalla
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(35), topLeft: Radius.circular(35)),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(selectBtn == 0 ? 0.0 : 35.0),
+          topRight:
+              Radius.circular(selectBtn == navBtn.length - 1 ? 0.0 : 35.0),
+        ),
+        child: CurvedNavigationBar(
+          index: 2,
+          height: 75.0,
+          items: <Widget>[
+            Icon(navBtn[0].icon, size: 20),
+            Icon(navBtn[1].icon, size: 20),
+            Icon(navBtn[2].icon, size: 20),
+            Icon(navBtn[3].icon, size: 20),
+            Icon(navBtn[4].icon, size: 20),
+          ],
+          color: colorp1,
+          buttonBackgroundColor: colorp1,
+          backgroundColor: Colors.transparent,
+          animationCurve: Curves.easeInOut,
+          animationDuration: Duration(milliseconds: 500),
+          onTap: _onTap,
+          letIndexChange: (index) => true,
+        ),
+      ),
+    );
+  }
+
   //Navbar
   AnimatedContainer navigationBar(double tam) {
     return AnimatedContainer(
@@ -92,7 +137,7 @@ class _NavBarState extends State<NavBar> {
             child: AnimatedContainer(
               height: height,
               width: width,
-              duration: const Duration(milliseconds: 50),
+              duration: const Duration(milliseconds: 0),
               //Si el botón está activado lo pinta
               child: isActive
                   ? CustomPaint(
@@ -108,13 +153,13 @@ class _NavBarState extends State<NavBar> {
                 color: isActive ? white : black,
                 //size: 2,
               )),
-          Align(
+          /*Align(
             alignment: Alignment.bottomCenter,
             child: Text(
               navBtn[i].name,
               style: isActive ? bntText.copyWith(color: white) : bntText,
             ),
-          )
+          )*/
         ],
       ),
     );
