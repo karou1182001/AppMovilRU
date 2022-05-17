@@ -1,5 +1,6 @@
 import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
+import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
@@ -46,27 +47,31 @@ FirebaseUserController fuserCont = Get.find();
                     return Usercard(
                     user: entries[index],
                     onEventClick: () {
-                      openSquare(entries[index]);
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => Column(
+                          children: [
+                            Text(
+                              entries[index].name,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                            ElevatedButton(onPressed: () =>{
+                              fuserCont.addFriend(entries[index].email),
+                            Navigator.pop(context)
+                            }
+                            ,
+                             child: const Text('Add'))
+                          ],
+                        )
+                      );
                     },
                 );
               })
         ),
   );
   }
+  
 
-  Future openSquare(Users entrie) => showDialog(
-    context: context, 
-    builder: (context) => AlertDialog(
-      title: const Text("Pulse para añadir"),
-      content: ElevatedButton(onPressed: fuserCont.addFriend(entrie.email), child: const Text('AÑADIR')),
-      actions: [
-        TextButton(onPressed: close, child: const Text('OK'))
-      ],
-    ),
-  );
-
-  void close(){
-    Navigator.of(context).pop();
-  }
+  
 }
 
