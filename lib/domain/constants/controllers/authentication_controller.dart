@@ -87,7 +87,7 @@ class AuthenticationController extends GetxController {
     } catch (firebaseAuthException) {}
   }
 
-  Future<void> login(theEmail, thePassword) async {
+  Future<bool> login(theEmail, thePassword) async {
     try {
       await auth.signInWithEmailAndPassword(
           email: theEmail, password: thePassword);
@@ -96,13 +96,13 @@ class AuthenticationController extends GetxController {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('NOK 1');
-        return Future.error("User not found");
+        return Future.value(false);
       } else if (e.code == 'wrong-password') {
         print('NOK 2');
-        return Future.error('Wrong Password');
+        return Future.value(false);
       }
     }
-    print('NOK');
+    return Future.value(false);
   }
 
   void signOut() async {
