@@ -10,7 +10,7 @@ class Users {
   late String email;
   late String description;
  late List friends;
-
+late List friendsRequest;
  
 
   Users.fromMap(Map<String, dynamic> map, {required this.userId})
@@ -19,11 +19,13 @@ class Users {
         assert(map['email'] != null),
         assert(map['description'] != null),
         assert(map['friends'] != null),
+        assert(map['friendsRequest'] != null),
         name = map['name'],
         number = map['number'],
         email = map['email'],
         description = map['description'],
-        friends = map['friends'];
+        friends = map['friends'],
+        friendsRequest = map['friendsRequest'];
 
   Users.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data() as Map<String, dynamic>,

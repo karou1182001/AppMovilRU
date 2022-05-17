@@ -23,6 +23,7 @@ class FirebaseUserController extends GetxController {
   UserController userController = Get.find();
   final _userList = <Users>[].obs;
   final _friendListofUser = <Users>[].obs;
+  final _friendRequestListofUser = <Users>[].obs;
   
 
   @override
@@ -35,6 +36,7 @@ class FirebaseUserController extends GetxController {
   //Getters
   get allUsers => _userList;
   get friendsOfUser => _friendListofUser;
+  get friendsRequestOfUser => _friendRequestListofUser;
   
 
   
@@ -44,24 +46,30 @@ class FirebaseUserController extends GetxController {
     streamSubscription = _userStream.listen((user) {
       Users actualUser;
       List friends = [];
+      List friendsRequest = [];
       user.docs.forEach((element) {
         if(element['id']==authController.auth.currentUser!.email){
           actualUser = Users.fromSnapshot(element);
           friends = actualUser.friends;
+          friendsRequest = actualUser.friendsRequest;
         }
       });
       _friendListofUser.clear();
       _userList.clear();
       user.docs.forEach((element) {
-        if(element['id']!=authController.auth.currentUser!.email){
+        if(element['id']!=authController.auth.currentUser!.email && !friends.contains((element)['id']) && !friendsRequest.contains((element)['id'])){
           _userList.add(Users.fromSnapshot(element));
         }
         if(friends.contains((element)['id'])){
           _friendListofUser.add(Users.fromSnapshot(element));
         }
+        if(friendsRequest.contains((element)['id'])){
+          _friendRequestListofUser.add(Users.fromSnapshot(element));
+        }
       });
       print("Got a total of ${_friendListofUser.length} friends");
       print("Got a total of ${_userList.length} users");
+      print("Got a total of ${_friendRequestListofUser.length} friends Request");
     });
   }
 

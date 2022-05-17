@@ -143,6 +143,7 @@ class MenuRegistro extends StatelessWidget {
                             //Registramos los datos en Firestore
                             List<String> friends = [];
                             List<String> friendsRequest = [];
+                            List<String> friendsRequested = [];
                             await FirebaseFirestore.instance
                                 .collection('usuario')
                                 .doc(_emailController.text)
@@ -157,6 +158,7 @@ class MenuRegistro extends StatelessWidget {
                               'longitude': 0.1,
                               'friends':friends,
                               'friendsRequest' :friendsRequest,
+                              'friendsRequested':friendsRequested,
                             }, SetOptions(merge: true));
                             //Enviamos un mensaje exitoso
                             showDialog(
