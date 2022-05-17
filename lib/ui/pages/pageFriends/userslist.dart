@@ -46,12 +46,27 @@ FirebaseUserController fuserCont = Get.find();
                     return Usercard(
                     user: entries[index],
                     onEventClick: () {
-                      fuserCont.addFriend(entries[index].email);
+                      openSquare(entries[index]);
                     },
                 );
               })
         ),
   );
+  }
+
+  Future openSquare(Users entrie) => showDialog(
+    context: context, 
+    builder: (context) => AlertDialog(
+      title: const Text("Pulse para añadir"),
+      content: ElevatedButton(onPressed: fuserCont.addFriend(entrie.email), child: const Text('AÑADIR')),
+      actions: [
+        TextButton(onPressed: close, child: const Text('OK'))
+      ],
+    ),
+  );
+
+  void close(){
+    Navigator.of(context).pop();
   }
 }
 
