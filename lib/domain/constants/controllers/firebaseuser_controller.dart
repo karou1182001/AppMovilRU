@@ -47,17 +47,19 @@ class FirebaseUserController extends GetxController {
       Users actualUser;
       List friends = [];
       List friendsRequest = [];
+      List friendsRequested = [];
       user.docs.forEach((element) {
         if(element['id']==authController.auth.currentUser!.email){
           actualUser = Users.fromSnapshot(element);
           friends = actualUser.friends;
           friendsRequest = actualUser.friendsRequest;
+          friendsRequested = actualUser.friendsRequested;
         }
       });
       _friendListofUser.clear();
       _userList.clear();
       user.docs.forEach((element) {
-        if(element['id']!=authController.auth.currentUser!.email && !friends.contains((element)['id']) && !friendsRequest.contains((element)['id'])){
+        if(element['id']!=authController.auth.currentUser!.email && !friends.contains((element)['id']) && !friendsRequest.contains((element)['id']) && !friendsRequested.contains((element)['id'])){
           _userList.add(Users.fromSnapshot(element));
         }
         if(friends.contains((element)['id'])){
@@ -92,11 +94,15 @@ class FirebaseUserController extends GetxController {
   }
 
   addFriend(String friendMail){
-    final userRef = userf.doc(friendMail);
-    userRef.update({
+    final friendRef = userf.doc(friendMail);
+    friendRef.update({
       "friendsRequest": FieldValue.arrayUnion([authController.auth.currentUser!.email]),
     });
-    onInit();
+    final userRef = userf.doc(authController.auth.currentUser!.email);
+    userRef.update({
+      "friendsRequested": FieldValue.arrayUnion([friendMail]),
+    });
+    
   }
 
 
