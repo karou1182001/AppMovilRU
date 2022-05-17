@@ -4,6 +4,7 @@ import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
+import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,8 +28,6 @@ class FirebaseUserController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
-    //Inicia actualizando los eventos del usuario
     subscribeUpdates();
     print("on init");
   }
@@ -83,6 +82,16 @@ class FirebaseUserController extends GetxController {
       return users;
     });
   }
+
+  addFriend(String friendMail){
+    final userRef = userf.doc(authController.auth.currentUser!.email);
+    userRef.update({
+      "friends": FieldValue.arrayUnion([friendMail]),
+    });
+    onInit();
+  }
+
+
 
  
 }

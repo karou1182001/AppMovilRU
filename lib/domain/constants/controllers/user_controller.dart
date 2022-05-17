@@ -36,8 +36,6 @@ class UserController extends GetxController {
     super.onInit();
     createUser();
     getProfileUrl();
-    findusers();
-    findfriends();
     
   }
 
@@ -165,50 +163,4 @@ class UserController extends GetxController {
     _locationSubscription = null;
   }
 
-  void findusers() async {
-    var query = userFirebase.where('email',
-        isNotEqualTo: authController.auth.currentUser!.email!);
-    QuerySnapshot usuario = await query.get();
-    List<User> users = [];
-    for (var user in usuario.docs) {
-      final _users = User.fromDocumentSnapshot(documentSnapshot: user);
-      users.add(_users);
-    }
-    usersList = users.obs;
-  }
-
-  void findfriends() async {
-    var query = userFirebase.where('email',
-        isEqualTo: authController.auth.currentUser!.email!);
-    QuerySnapshot usuario = await query.get();
-    List<dynamic> friendsMail = usuario.docs[0]['friends'];
-    List<User> friendss = [];
-    for (var friend in friendsMail) {
-      var query = userFirebase.where('id', isEqualTo: friend);
-      QuerySnapshot usuario = await query.get();
-      if (usuario.docs.isNotEmpty) {
-        String nombre = usuario.docs[0]['name'];
-        String numero = usuario.docs[0]['number'];
-        String email = usuario.docs[0]['email'];
-        String descripcion = usuario.docs[0]['description'];
-        double latitude = usuario.docs[0]['latitude'];
-        double longitude = usuario.docs[0]['longitude'];
-        String id = usuario.docs[0]['id'];
-        List<dynamic> friends = usuario.docs[0]['friends'];
-        User friendd = User(
-            name: nombre,
-            number: numero,
-            email: email,
-            description: descripcion,
-            latitude: latitude,
-            longitude: longitude,
-            id: id,
-            friends: friends);
-        friendss.add(friendd);
-        friendsList = friendss.obs;
-      } else {
-        print('No hay amigos');
-      }
-    }
-  }
 }

@@ -46,7 +46,7 @@ FirebaseUserController fuserCont = Get.find();
                     return Usercard(
                     user: entries[index],
                     onEventClick: () {
-                      null;
+                      fuserCont.addFriend(entries[index].email);
                     },
                 );
               })
