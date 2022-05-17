@@ -20,6 +20,7 @@ class UserController extends GetxController {
   RxList<User> friendsList = RxList<User>([]);
   get friendsl => friendsList;
   RxString url = ''.obs;  
+   RxString urlSchedule = ''.obs;
 
   //Usuario
   late Rx<User> user = User(
@@ -91,6 +92,18 @@ class UserController extends GetxController {
   Future<void> getProfileUrl() async {
     StorageRepo storage = StorageRepo();
     url.value = await storage.retrieveFile(); 
+    print('Soy la URL: ${url.value}');
+  }
+
+  void changeProfileSchedule(String filePath) async {
+    StorageRepo storage = StorageRepo();
+    await storage.uploadFileSchedule(filePath);
+    urlSchedule.value = await storage.retrieveFileSchedule();
+  }
+
+  Future<void> getScheduleUrl() async {
+    StorageRepo storage = StorageRepo();
+    urlSchedule.value = await storage.retrieveFileSchedule();
     print('Soy la URL: ${url.value}');
   }
 
