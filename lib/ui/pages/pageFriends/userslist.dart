@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
 import '../../../domain/constants/controllers/firebaseuser_controller.dart';
 import '../../../domain/constants/controllers/user_controller.dart';
+import '../../widgets/serchWidget.dart';
 import '../../widgets/usercard.dart';
 import 'package:get/get.dart';
 class UserList extends StatefulWidget {
@@ -15,6 +16,8 @@ class UserList extends StatefulWidget {
 
 class _UserListState extends State<UserList>{
 List<Users> entries = <Users>[];
+String query = '';
+List<Users> users = [];
 FirebaseUserController fuserCont = Get.find();
   void initState(){
     FirebaseUserController fuserCont = Get.find();
@@ -24,7 +27,7 @@ FirebaseUserController fuserCont = Get.find();
     super.initState();
   }
   loadData() async {
-    final users = await fuserCont.allUsers;
+    users = await fuserCont.allUsers;
 
     setState(() {
       entries = users;
@@ -41,7 +44,11 @@ FirebaseUserController fuserCont = Get.find();
         ),
       ),
         body: Container(
-          child: ListView.builder(
+          child: 
+          Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[
+            buildSearch(),
+          Expanded(child: 
+            ListView.builder(
                   itemCount: entries.length,
                   itemBuilder: (BuildContext ctx, int index) {
                     return Usercard(
@@ -67,8 +74,28 @@ FirebaseUserController fuserCont = Get.find();
                     },
                 );
               })
-        ),
+          )  
+        ]),
+  ));
+  }
+
+  Widget buildSearch() => SearchWidget(
+    text: query,
+    hintText: 'Name',
+    onChanged: searchUser,
   );
+
+  void searchUser(String query) {
+    final usersL = users.where((user) {
+      final nameLower = user.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return nameLower.contains(searchLower);
+    }).toList();
+
+    setState(() {
+      this.query = query;
+      this.entries = usersL;
+    });
   }
   
 

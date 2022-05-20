@@ -3,6 +3,7 @@ import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
+import 'package:app_ru/ui/widgets/serchWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -21,15 +22,17 @@ class FriendsList extends StatefulWidget {
 class _FriendsListState extends State<FriendsList> {
   final FirebaseUserController fuserCont = Get.find();
   List<Users> entries = <Users>[];
+  String query = '';
+  List<Users> users = [];
  void initState(){
+   super.initState();
     FirebaseUserController fuserCont = Get.find();
     fuserCont.onInit();
     fuserCont.subscribeUpdates();
     loadData();
-    super.initState();
   }
   loadData() async {
-    final users = await fuserCont.friendsOfUser;
+    users = await fuserCont.friendsOfUser;
     
     setState(() {
       entries = users;
@@ -39,19 +42,17 @@ class _FriendsListState extends State<FriendsList> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
+      appBar: 
+      PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
           backgroundColor: white,
           title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
-          actions: const [
-            IconButton(onPressed: null, icon: Icon(Icons.search))
-          ],
         ),
       ),
       body: Container(
         child:
-            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[
           const Padding(
               padding: EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
@@ -59,6 +60,7 @@ class _FriendsListState extends State<FriendsList> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 20),
               )),
+              buildSearch(),
           Expanded(
               child: ListView.builder(
             itemCount: entries.length,
@@ -90,5 +92,25 @@ class _FriendsListState extends State<FriendsList> {
         child: const Icon(Icons.add),
       ),
     );
+
+  }
+
+  Widget buildSearch() => SearchWidget(
+    text: query,
+    hintText: 'Name',
+    onChanged: searchFriend,
+  );
+
+  void searchFriend(String query) {
+    final friends = users.where((friend) {
+      final nameLower = friend.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return nameLower.contains(searchLower);
+    }).toList();
+
+    setState(() {
+      this.query = query;
+      this.entries = friends;
+    });
   }
 }

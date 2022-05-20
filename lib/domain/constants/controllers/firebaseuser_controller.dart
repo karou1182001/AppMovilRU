@@ -110,18 +110,28 @@ class FirebaseUserController extends GetxController {
   acceptFriend(String friendMail){
     final friendRef = userf.doc(friendMail);
     friendRef.update({
-      "friendsRequested": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+      "friendsRequest": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
       "friends": FieldValue.arrayUnion([authController.auth.currentUser!.email]),
     });
     final userRef = userf.doc(authController.auth.currentUser!.email);
     userRef.update({
-      "friendsRequest": FieldValue.arrayRemove([friendMail]),
-      "friends": FieldValue.arrayRemove([friendMail]),
+      "friendsRequested": FieldValue.arrayRemove([friendMail]),
+      "friends": FieldValue.arrayUnion([friendMail]),
     });
 
   }
 
+  declineFriend(String friendMail){
+    final friendRef = userf.doc(friendMail);
+    friendRef.update({
+      "friendsRequest": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+    });
+    final userRef = userf.doc(authController.auth.currentUser!.email);
+    userRef.update({
+      "friendsRequested": FieldValue.arrayRemove([friendMail]),
+    });
 
+  }
 
  
 }
