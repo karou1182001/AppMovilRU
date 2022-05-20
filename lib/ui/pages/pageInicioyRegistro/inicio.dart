@@ -98,6 +98,22 @@ class MenuInicio extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
+<<<<<<< Updated upstream
+=======
+                Text("O", style: generalText(Colors.grey, 15)),
+                GestureDetector(
+                    onTap: () => Get.to(() => GoogleSignInProvider()),
+                    child: MaterialButton(
+                        height: 40,
+                        minWidth: 270,
+                        onPressed: () {
+                          authController.signInWithGoogle();
+                        },
+                        color: Colors.white,
+                        child: const Text("Inicia Sesión con Google",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 1, 53, 96))))),
+>>>>>>> Stashed changes
                 const SizedBox(
                   height: 20,
                 ),
