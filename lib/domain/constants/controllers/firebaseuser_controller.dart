@@ -39,8 +39,6 @@ class FirebaseUserController extends GetxController {
   get friendsRequestOfUser => _friendRequestListofUser;
   
 
-  
-
   subscribeUpdates() async {
     //Actualiza todos los usuarios
     streamSubscription = _userStream.listen((user) {
@@ -115,28 +113,28 @@ class FirebaseUserController extends GetxController {
 
   }
 
-  acceptFriend(String friendMail){
+  acceptFriend(String friendMail)async {
     final friendRef = userf.doc(friendMail);
-    friendRef.update({
-      "friendsRequest": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+    await friendRef.update({
+      "friendsRequested": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
       "friends": FieldValue.arrayUnion([authController.auth.currentUser!.email]),
     });
     final userRef = userf.doc(authController.auth.currentUser!.email);
-    userRef.update({
-      "friendsRequested": FieldValue.arrayRemove([friendMail]),
+    await userRef.update({
+      "friendsRequest": FieldValue.arrayRemove([friendMail]),
       "friends": FieldValue.arrayUnion([friendMail]),
     });
 
   }
 
-  declineFriend(String friendMail){
+  declineFriend(String friendMail)async {
     final friendRef = userf.doc(friendMail);
-    friendRef.update({
-      "friendsRequest": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+    await friendRef.update({
+      "friendsRequested": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
     });
     final userRef = userf.doc(authController.auth.currentUser!.email);
-    userRef.update({
-      "friendsRequested": FieldValue.arrayRemove([friendMail]),
+    await userRef.update({
+      "friendsRequest": FieldValue.arrayRemove([friendMail]),
     });
 
   }

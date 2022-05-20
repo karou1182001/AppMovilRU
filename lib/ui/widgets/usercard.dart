@@ -22,7 +22,7 @@ class Usercard extends StatelessWidget {
            ListTile(
             leading: CircleAvatar(
               radius: 28,
-              backgroundImage: NetworkImage(this.user.url),
+              backgroundImage: NetworkImage(user.url),
             ),
             title: Text(this.user.name),
             subtitle: Text(this.user.email),

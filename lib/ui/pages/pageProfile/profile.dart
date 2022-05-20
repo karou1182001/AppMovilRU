@@ -23,29 +23,34 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
+  UserController userController = Get.find();
+  AuthenticationController authController = Get.find();
+
+  Future getImage() async {
+    //Pickeamos la imagen
+    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    //Añadir imagen a Firebase
+    if (image != null) {
+      userController.changeProfilePicture(image.path);
+    }
+  }
+
+  Future getImageHorario() async {
+    //Pickeamos la imagen
+    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    //Añadir imagen a Firebase
+    if (image != null) {
+      userController.changeProfileSchedule(image.path);
+    }
+  }
+
+  void initState() {
+    super.initState();
+    userController.getProfileUrl();
+  }
+
   Widget build(BuildContext context) {
     Get.put(UserController());
-    UserController userController = Get.find();
-    AuthenticationController authController = Get.find();
-
-    Future getImage() async {
-      //Pickeamos la imagen
-      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      //Añadir imagen a Firebase
-      if (image != null) {
-        userController.changeProfilePicture(image.path);
-      }
-    }
-
-    Future getImageHorario() async {
-      //Pickeamos la imagen
-      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      //Añadir imagen a Firebase
-      if (image != null) {
-        userController.changeProfileSchedule(image.path);
-      }
-    }
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
