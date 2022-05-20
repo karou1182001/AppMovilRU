@@ -9,24 +9,24 @@ class StorageRepo {
   final storage = FirebaseStorage.instance;
 
   //Imagenes del perfil de usuario
-  Future<void> uploadFile(String filePath) async {
-    String? userEmail = authController.auth.currentUser!.email;
+  Future<void> uploadFile(String filePath, String mail) async {
+    String? userEmail = mail;
     File file = File(filePath);
     try {
       await storage.ref().child('user/$userEmail/profilePic').putFile(file);
     } catch (e) {}
   }
 
-  Future<void> uploadFileSchedule(String filePath) async {
-    String? userEmail = authController.auth.currentUser!.email;
+  Future<void> uploadFileSchedule(String filePath, String mail) async {
+    String? userEmail = mail;
     File file = File(filePath);
     try {
       await storage.ref().child('user/$userEmail/schedule').putFile(file);
     } catch (e) {}
   }
 
-  Future<String> retrieveFile() async {
-    String? userEmail = authController.auth.currentUser!.email;
+  Future<String> retrieveFile(String mail) async {
+    String? userEmail = mail;
     try {
       final ref = storage.ref().child('user/$userEmail/profilePic');
       var url = await ref.getDownloadURL();
@@ -36,8 +36,8 @@ class StorageRepo {
       return '';
     }
   }
-  Future<String> retrieveFileSchedule() async {
-    String? userEmail = authController.auth.currentUser!.email;
+  Future<String> retrieveFileSchedule(String mail) async {
+    String? userEmail = mail;
     try {
       final ref = storage.ref().child('user/$userEmail/schedule');
       var url = await ref.getDownloadURL();

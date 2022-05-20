@@ -74,6 +74,14 @@ class FirebaseUserController extends GetxController {
       print("Got a total of ${_friendListofUser.length} friends");
       print("Got a total of ${_userList.length} users");
       print("Got a total of ${_friendRequestListofUser.length} friends Request");
+      _friendListofUser.forEach((friend) {
+          friend.getProfileUrl();
+          friend.getScheduleUrl();
+      });
+      _userList.forEach((user) {
+          user.getProfileUrl();
+          user.getScheduleUrl();
+      });
     });
   }
 

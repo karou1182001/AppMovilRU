@@ -58,10 +58,17 @@ FirebaseUserController fuserCont = Get.find();
                         context: context,
                         builder: (context) => Column(
                           children: [
+                            const SizedBox(height: 20),
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundImage: NetworkImage(entries[index].url),
+                            ),
+                            const SizedBox(height: 20),
                             Text(
                               entries[index].name,
                               style: const TextStyle(fontSize: 20),
                             ),
+                            const SizedBox(height: 20),
                             ElevatedButton(onPressed: () =>{
                               fuserCont.addFriend(entries[index].email),
                             Navigator.pop(context)

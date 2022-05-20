@@ -18,35 +18,18 @@ class Usercard extends StatelessWidget {
             },
         key: Key(this.user.name),
         child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              title: Row(
-                children: <Widget>[
-                  Container(),
-                  SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        this.user.name,
-                        style: TextStyle(fontSize: 17),
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        width: 250,
-                        child: Text(
-                          this.user.email,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+          child:
+           ListTile(
+            leading: CircleAvatar(
+              radius: 28,
+              backgroundImage: NetworkImage(this.user.url),
             ),
-          ),
+            title: Text(this.user.name),
+            subtitle: Text(this.user.email),
+           )    
         )
         );
   }
+
+  
 }

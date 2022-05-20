@@ -85,25 +85,25 @@ class UserController extends GetxController {
 
   void changeProfilePicture(String filePath) async {
     StorageRepo storage = StorageRepo();
-    await storage.uploadFile(filePath);
-    url.value = await storage.retrieveFile(); 
+    await storage.uploadFile(filePath,email);
+    url.value = await storage.retrieveFile(email); 
   }
 
   Future<void> getProfileUrl() async {
     StorageRepo storage = StorageRepo();
-    url.value = await storage.retrieveFile(); 
+    url.value = await storage.retrieveFile(email); 
     print('Soy la URL: ${url.value}');
   }
 
   void changeProfileSchedule(String filePath) async {
     StorageRepo storage = StorageRepo();
-    await storage.uploadFileSchedule(filePath);
-    urlSchedule.value = await storage.retrieveFileSchedule();
+    await storage.uploadFileSchedule(filePath,email);
+    urlSchedule.value = await storage.retrieveFileSchedule(email);
   }
 
   Future<void> getScheduleUrl() async {
     StorageRepo storage = StorageRepo();
-    urlSchedule.value = await storage.retrieveFileSchedule();
+    urlSchedule.value = await storage.retrieveFileSchedule(email);
     print('Soy la URL: ${url.value}');
   }
 
