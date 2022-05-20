@@ -72,6 +72,11 @@ class FirebaseEventController extends GetxController {
         })
         .then((value) => print("Evento añadido"))
         .catchError((onError) => print("No se pudo añadir"));
+        //Agregado
+        _eventList.refresh();
+        _eventListofUser.refresh();
+        update();
+
   }
 
   //Eliminar eventos de Firebase

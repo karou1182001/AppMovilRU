@@ -80,12 +80,16 @@ class MenuInicio extends StatelessWidget {
                 MaterialButton(
                   height: 40,
                   minWidth: 270,
-                  onPressed: () {
+                  onPressed: () async {
                     try {
-                      authController
-                          .login(
-                              _emailController.text, _passwordController.text)
-                          .then((value) => Get.to(() => const NavBar()));
+                      bool inicio = await authController.login(
+                          _emailController.text, _passwordController.text);
+                      if (inicio) {
+                        Get.to(() => const NavBar());
+                        print(authController.auth.currentUser!.email);
+                      } else {
+                        print('Error iniciando sesión');
+                      }
                     } catch (e) {}
                   },
                   color: const Color.fromARGB(255, 1, 53, 96),
@@ -94,25 +98,8 @@ class MenuInicio extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                Text("O", style: generalText(Colors.grey, 15)),
-                GestureDetector(
-                    onTap: () => Get.to(() => GoogleSignInProvider()),
-                    child: MaterialButton(
-                        height: 40,
-                        minWidth: 270,
-                        onPressed: () {
-                          authController.signInWithGoogle();
-                    
-                          // Get.to(() => GoogleSignInProvider());
-                          // final provider = Provider.of<GoogleSignInProvider>(context, listen:false);
-                          // provider.googleLogin();
-                        },
-                        color: Colors.white,
-                        child: const Text("Inicia Sesión con Google",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 1, 53, 96))))),
                 const SizedBox(
-                  height: 4,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
