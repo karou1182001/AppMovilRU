@@ -3,6 +3,7 @@ import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
+import 'package:app_ru/ui/widgets/refreshWidget.dart';
 import 'package:app_ru/ui/widgets/serchWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class _FriendsListState extends State<FriendsList> {
     fuserCont.subscribeUpdates();
     loadData();
   }
-  loadData() async {
+  Future loadData() async {
     users = await fuserCont.friendsOfUser;
     
     setState(() {
@@ -62,25 +63,28 @@ class _FriendsListState extends State<FriendsList> {
               )),
               buildSearch(),
           Expanded(
-              child: ListView.builder(
-            itemCount: entries.length,
-            itemBuilder: (BuildContext ctx, int index) {
-              return Usercard(
-                  user: entries[index],
-                  onEventClick: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => SelectedFriend(
-                                  selectedfriend: entries[index],
-                                )
-                              )
-                            );
+              child: RefreshWidget(
+                onRefresh: loadData,
+                child: ListView.builder(
+                  itemCount: entries.length,
+                  itemBuilder: (BuildContext ctx, int index) {
+                    return Usercard(
+                        user: entries[index],
+                        onEventClick: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SelectedFriend(
+                                        selectedfriend: entries[index],
+                                      )
+                                    )
+                                  );
+                        },
+                      );
                   },
-                );
-            },
-          ))
-          
+                )
+              )
+              )
         ]),
       ),
       floatingActionButton: FloatingActionButton(

@@ -1,6 +1,7 @@
 import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
+import 'package:app_ru/ui/widgets/refreshWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
@@ -26,7 +27,7 @@ FirebaseUserController fuserCont = Get.find();
     loadData();
     super.initState();
   }
-  loadData() async {
+  Future loadData() async {
     users = await fuserCont.allUsers;
 
     setState(() {
@@ -47,8 +48,10 @@ FirebaseUserController fuserCont = Get.find();
           child: 
           Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[
             buildSearch(),
-          Expanded(child: 
-            ListView.builder(
+          Expanded(
+            child: RefreshWidget(
+              onRefresh: loadData,
+              child:ListView.builder(
                   itemCount: entries.length,
                   itemBuilder: (BuildContext ctx, int index) {
                     return Usercard(
@@ -80,7 +83,8 @@ FirebaseUserController fuserCont = Get.find();
                       );
                     },
                 );
-              })
+              }) ,
+            ) 
           )  
         ]),
   ));
