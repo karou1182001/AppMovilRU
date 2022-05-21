@@ -72,11 +72,10 @@ class FirebaseEventController extends GetxController {
         })
         .then((value) => print("Evento añadido"))
         .catchError((onError) => print("No se pudo añadir"));
-        //Agregado
-        _eventList.refresh();
-        _eventListofUser.refresh();
-        update();
-
+    //Agregado
+    _eventList.refresh();
+    _eventListofUser.refresh();
+    update();
   }
 
   //Eliminar eventos de Firebase
@@ -96,6 +95,12 @@ class FirebaseEventController extends GetxController {
       'publico': publico,
       'color': color,
       'imgName': imgName
+    });
+  }
+
+  addConfirm(Event event, String confirm) async {
+    await event.eventId.update({
+      'confirmados': FieldValue.arrayUnion([confirm])
     });
   }
 
@@ -127,7 +132,7 @@ class FirebaseEventController extends GetxController {
     UserController userController = Get.find();
     //Consulta a realizar
     //Busca todos los eventos a los que el usuario ha confirmado asistir
-    var query = eventsFirebase.where('confirmados',
+    var query = await eventsFirebase.where('confirmados',
         arrayContains: userController.email);
     QuerySnapshot evento = await query.get();
     _eventListofUser.clear();
