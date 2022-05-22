@@ -77,7 +77,10 @@ class FirebaseEventController extends GetxController {
 
   //Eliminar eventos de Firebase
   void deleteEvent(Event event) async {
+    StorageRepo storage = StorageRepo();
     await event.eventId.delete();
+    //Eliminamos la imagen del storage
+    storage.deleteFileEvent(event.name);
     findeventsOfUser();
   }
 
@@ -112,7 +115,11 @@ class FirebaseEventController extends GetxController {
 
   Future<void> getEventUrl(String eventId) async {
     StorageRepo storage = StorageRepo();
-    url.value = await storage.retrieveFileEvent(eventId);
+    try {
+      url.value = await storage.retrieveFileEvent(eventId);
+    } catch (e) {
+      url.value = "";
+    }
   }
 
   static Stream<List<Event>> eventStream() {

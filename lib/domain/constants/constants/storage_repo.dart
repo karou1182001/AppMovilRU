@@ -69,4 +69,13 @@ class StorageRepo {
       return '';
     }
   }
+
+  Future deleteFileEvent(String eventId) async {
+    try {
+      final ref = storage.ref().child('event/$eventId/eventPic');
+      var url = await ref.getDownloadURL();
+      print('Esta es la ' + url);
+      storage.refFromURL(url).delete();
+    } catch (e) {}
+  }
 }
