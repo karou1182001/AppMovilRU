@@ -88,7 +88,11 @@ class SelectedEvent extends StatelessWidget {
                     onTap: () {
                       feventCont.addConfirm(
                           this.selectedevent, user.getUser.email);
-                      Get.to(NavBar());
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NavBar()),
+                          (route) => false);
                     },
                     child: Container(
                         margin: EdgeInsets.all(20),
