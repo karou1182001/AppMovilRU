@@ -6,41 +6,47 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
   late String name;
- late  String number;
+  late String number;
   late String email;
   late String description;
- late  double latitude;
- late  double longitude;
- late  String id;
- late List<dynamic> friends;
+  late bool ru;
+  late double latitude;
+  late double longitude;
+  late String id;
+  late List<dynamic> friends;
 
   User(
       {required this.name,
       required this.number,
       required this.email,
       required this.description,
+      required this.ru,
       required this.latitude,
       required this.longitude,
       required this.id,
-      required this.friends
-      });
+      required this.friends});
 
   get getName => name;
   get getNumber => number;
   get getEmail => email;
   get getDescription => description;
   get getFriends => friends;
+  get getRU => ru; 
 
   void changeName(String userName) {
     name = userName;
   }
-  
-  void changeNumber(String userNumber){
-    number = userNumber; 
+
+  void changeNumber(String userNumber) {
+    number = userNumber;
   }
 
   void changeDescription(String userDescription) {
     description = userDescription;
+  }
+
+  Future<void> changeRU() async {
+    ru = !ru;
   }
 
   User.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
@@ -48,6 +54,7 @@ class User {
     number = documentSnapshot['number'];
     email = documentSnapshot['email'];
     description = documentSnapshot['description'];
+    ru = documentSnapshot['ru'];
     latitude = documentSnapshot['latitude'];
     longitude = documentSnapshot['longitude'];
     id = documentSnapshot['id'];

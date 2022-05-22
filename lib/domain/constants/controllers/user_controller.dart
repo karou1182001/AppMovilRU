@@ -28,6 +28,7 @@ class UserController extends GetxController {
       number: '123',
       email: '',
       description: '',
+      ru: false,
       latitude: 0,
       longitude: 0,
       id: '',
@@ -39,10 +40,6 @@ class UserController extends GetxController {
     getProfileUrl();
     
   }
-
-  //Indicador de si está en la U o no
-  final RxBool _ru = false.obs;
-
   // variables de localizacion
   final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
@@ -52,14 +49,16 @@ class UserController extends GetxController {
   get email => user.value.getEmail;
   get name => user.value.getName;
   get number => user.value.getNumber;
-  get ru => _ru.value;
+  get ru => user.value.getRU;
   get description => user.value.getDescription;
   get friends => user.value.getFriends;
 
   //Función que cambia el estado del switch en perfil
-  void changeRU() {
-    _ru.value = !_ru.value;
-    stablishLocation(_ru.value);
+  void changeRU() async {
+    await user.value.changeRU();
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'ru': ru});
+    stablishLocation(ru);
   }
 
   //Función para que cambie el nombre
@@ -114,6 +113,7 @@ class UserController extends GetxController {
     String nombre = usuario.docs[0]['name'];
     String numero = usuario.docs[0]['number'];
     String descripcion = usuario.docs[0]['description'];
+    bool _ru = usuario.docs[0]['ru'];
     double latitude = usuario.docs[0]['latitude'];
     double longitude = usuario.docs[0]['longitude'];
     String id = usuario.docs[0]['id'];
@@ -123,6 +123,7 @@ class UserController extends GetxController {
             number: numero,
             email: authController.auth.currentUser!.email!,
             description: descripcion,
+            ru: _ru,
             latitude: latitude,
             longitude: longitude,
             id: id,
