@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -14,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../domain/constants/constants/color.dart';
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 import '../../../domain/constants/controllers/user_controller.dart';
+import 'mycalendar.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
@@ -136,13 +138,12 @@ class _EventEditingPageState extends State<EventEditingPage> {
   //Pone el título
   Widget buildTitle() => TextFormField(
         inputFormatters: [
-          LengthLimitingTextInputFormatter(23),
+        LengthLimitingTextInputFormatter(23),
         ],
         key: Key('editableTitle'),
         style: const TextStyle(fontSize: 23),
         decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
-            hintText: "Add title (Max lenght: 23)"),
+            border: UnderlineInputBorder(), hintText: "Add title (Max lenght: 23)"),
         onFieldSubmitted: (_) => saveForm(),
         validator: (title) => title != null && title.isEmpty
             ? "El título no puede estar vacío"
