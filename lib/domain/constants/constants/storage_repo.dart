@@ -36,6 +36,7 @@ class StorageRepo {
       return '';
     }
   }
+
   Future<String> retrieveFileSchedule(String mail) async {
     String? userEmail = mail;
     try {
@@ -53,7 +54,9 @@ class StorageRepo {
     File file = File(filePath);
     try {
       await storage.ref().child('event/$eventId/eventPic').putFile(file);
-    } catch (e) {}
+    } catch (e) {
+      print("No se subió");
+    }
   }
 
   Future<String> retrieveFileEvent(String eventId) async {

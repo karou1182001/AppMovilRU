@@ -213,7 +213,7 @@ class EventViewingPage extends StatelessWidget {
 
   Widget imagen() {
     FirebaseEventController feventCont = Get.find();
-    feventCont.getProfileUrl(event.name);
+    feventCont.getEventUrl(event.name);
     return Container(
         height: 115,
         width: 115,

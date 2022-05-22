@@ -104,12 +104,13 @@ class FirebaseEventController extends GetxController {
   }
 
   //Métodos para imagen
-  void changeEventPicture(String filePath, String eventId) {
+  void changeEventPicture(String filePath, String eventId) async {
     StorageRepo storage = StorageRepo();
-    storage.uploadFileEvent(filePath, eventId);
+    await storage.uploadFileEvent(filePath, eventId);
+    url.value = await storage.retrieveFileEvent(eventId);
   }
 
-  Future<void> getProfileUrl(String eventId) async {
+  Future<void> getEventUrl(String eventId) async {
     StorageRepo storage = StorageRepo();
     url.value = await storage.retrieveFileEvent(eventId);
   }
