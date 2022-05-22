@@ -26,7 +26,6 @@ class FirebaseEventController extends GetxController {
     super.onInit();
     //Inicia actualizando los eventos del usuario
     findeventsOfUser();
-    print("on init");
   }
 
   //Getters
