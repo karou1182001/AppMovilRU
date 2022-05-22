@@ -56,8 +56,8 @@ class FirebaseEventController extends GetxController {
 
   //Añadir eventos a Firebase
   void addEvent(name, from, to, description, persCreadora, invitados, publico,
-      confirmados, color, imgName) {
-    eventf
+      confirmados, color, imgName) async {
+    await eventf
         .add({
           'name': name,
           'from': from,
@@ -72,22 +72,19 @@ class FirebaseEventController extends GetxController {
         })
         .then((value) => print("Evento añadido"))
         .catchError((onError) => print("No se pudo añadir"));
-        //Agregado
-        _eventList.refresh();
-        _eventListofUser.refresh();
-        update();
-
+    findeventsOfUser();
   }
 
   //Eliminar eventos de Firebase
-  void deleteEvent(Event event) {
-    event.eventId.delete();
+  void deleteEvent(Event event) async {
+    await event.eventId.delete();
+    findeventsOfUser();
   }
 
   //Actualizar eventos de firebase
   updateEvent(name, from, to, description, persCreadora, invitados, publico,
-      color, imgName, Event event) {
-    event.eventId.update({
+      color, imgName, Event event) async {
+    await event.eventId.update({
       'name': name,
       'from': from,
       'to': to,
@@ -96,6 +93,13 @@ class FirebaseEventController extends GetxController {
       'publico': publico,
       'color': color,
       'imgName': imgName
+    });
+    findeventsOfUser();
+  }
+
+  addConfirm(Event event, String confirm) async {
+    await event.eventId.update({
+      'confirmados': FieldValue.arrayUnion([confirm])
     });
   }
 
@@ -127,7 +131,7 @@ class FirebaseEventController extends GetxController {
     UserController userController = Get.find();
     //Consulta a realizar
     //Busca todos los eventos a los que el usuario ha confirmado asistir
-    var query = eventsFirebase.where('confirmados',
+    var query = await eventsFirebase.where('confirmados',
         arrayContains: userController.email);
     QuerySnapshot evento = await query.get();
     _eventListofUser.clear();
@@ -135,6 +139,7 @@ class FirebaseEventController extends GetxController {
       _eventListofUser.add(Event.fromSnapshot(element));
       print(Event.fromSnapshot(element).name);
     });
+    update();
   }
 
   void getSearch(String text) async {
