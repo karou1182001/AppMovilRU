@@ -1,19 +1,14 @@
 import 'package:app_ru/models/event.dart';
-import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../domain/constants/constants/color.dart';
-import '../../../domain/constants/controllers/firebaseevent_controller.dart';
-import '../../../domain/constants/controllers/user_controller.dart';
 
 class SelectedEvent extends StatelessWidget {
   Event selectedevent;
+
   SelectedEvent({required this.selectedevent});
-  final UserController user = Get.find();
-  final FirebaseEventController feventCont = Get.find();
+
   @override
   Widget build(BuildContext context) {
     //APPBAR
@@ -40,10 +35,11 @@ class SelectedEvent extends StatelessWidget {
                       child: Image.asset('assets/' + "1" + '.jpg',
                           fit: BoxFit.cover, height: 200)),
                   //NOMBRE DEL EVENTO
-                  Text(selectedevent.name,
-                      key: const Key('Nombre evento'),
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 30)),
+                      Text(
+                          selectedevent.name,
+                          key: const Key('Nombre evento'),
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 30)),
                   //NOMBRE DEL CREADOR DEL EVENTO
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,59 +80,49 @@ class SelectedEvent extends StatelessWidget {
                     ],
                   ),
                   //Suscibre buttom
-                  GestureDetector(
-                    onTap: () {
-                      feventCont.addConfirm(
-                          this.selectedevent, user.getUser.email);
-                      Get.to(NavBar());
-                    },
-                    child: Container(
-                        margin: EdgeInsets.all(20),
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Color(selectedevent.color),
-                          border: Border.all(color: Colors.black26),
-                        ),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                                bottom: 0,
-                                left: 0,
-                                right: 0,
-                                child: Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        color: Color(selectedevent.color)))),
-                            Positioned(
-                                bottom: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Row(
-                                    children: [
-                                      ClipOval(
-                                        child: Container(
-                                            color: Color(selectedevent.color),
-                                            padding: const EdgeInsets.all(10),
-                                            child: const Icon(
-                                              Icons.add_outlined,
-                                              size: 15,
-                                              color: Colors.white,
-                                            )),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      const Text(
-                                        "Inscribirse",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      )
-                                    ],
-                                  ),
-                                ))
-                          ],
-                        )),
-                  ),
+                  Container(
+                      margin: EdgeInsets.all(20),
+                      height: 50,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(10)),
+                                      color: Color(selectedevent.color)))),
+                          Positioned(
+                              bottom: 0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: [
+                                    ClipOval(
+                                      child: Container(
+                                          color: Color(selectedevent.color),
+                                          padding: const EdgeInsets.all(10),
+                                          child: const Icon(
+                                            Icons.add_outlined,
+                                            size: 15,
+                                            color: Colors.white,
+                                          )),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    const Text(
+                                      "Inscribirse",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    )
+                                  ],
+                                ),
+                              ))
+                        ],
+                      )),
                 ],
               ),
             ),
