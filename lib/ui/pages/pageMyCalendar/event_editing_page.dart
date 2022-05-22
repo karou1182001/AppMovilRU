@@ -560,8 +560,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
         //eventCont.editEvent(event, widget.event!);
         feventCont.updateEvent(
             titleController.text,
-            DateFormat("yyyy-MM-dd hh:mm:ss").format(fromDate),
-            DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
+            DateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate),
+            DateFormat("yyyy-MM-dd HH:mm:ss").format(toDate),
             descController.text,
             userController.email,
             personasInvitadas,
@@ -573,8 +573,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
         //eventCont.addEvent(event);
         feventCont.addEvent(
           titleController.text,
-          DateFormat("yyyy-MM-dd hh:mm:ss").format(fromDate),
-          DateFormat("yyyy-MM-dd hh:mm:ss").format(toDate),
+          DateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate),
+          DateFormat("yyyy-MM-dd HH:mm:ss").format(toDate),
           descController.text,
           userController.email,
           personasInvitadas,
