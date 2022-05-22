@@ -33,7 +33,14 @@ class _TaskWidgetState extends State<TaskWidget> {
     return SfCalendarTheme(
       data: SfCalendarThemeData(),
       child: SfCalendar(
-        view: CalendarView.timelineDay,
+        view: CalendarView.schedule,
+        //Número de días que se mostrarán
+        // timeSlotViewSettings: const TimeSlotViewSettings(numberOfDaysInView: 3),
+        initialSelectedDate: feventCont.selectedDate,
+        scheduleViewSettings: const ScheduleViewSettings(
+          appointmentItemHeight: 70,
+        ),
+
         dataSource: EventDataSource(feventCont.eventsOfUser),
         //Para que como día inicial, se muestre el día que oprimió la persona
         initialDisplayDate: feventCont.selectedDate,
@@ -53,24 +60,32 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget appointmentBuilder(
       BuildContext context, CalendarAppointmentDetails details) {
     final event = details.appointments.first;
+    print(event.from);
     return Container(
       width: details.bounds.width,
       height: details.bounds.height,
       decoration: BoxDecoration(
           color: Color(event.color).withOpacity(0.5),
           borderRadius: BorderRadius.circular(12)),
-      child: Center(
+      //child: Center(
+      child: Container(
+        padding: const EdgeInsets.only(
+          top: 10,
+          left: 20,
+        ),
         child: Text(
-          event.name,
+          event.name +
+              "\n" +
+              event.from.substring(event.from.indexOf(" ") + 1) +
+              "-" +
+              event.to.substring(event.to.indexOf(" ") + 1),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
-            color: black,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+              color: black, fontSize: 16, fontWeight: FontWeight.w400),
         ),
       ),
+      //),
     );
   }
 }

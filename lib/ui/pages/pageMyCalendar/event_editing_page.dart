@@ -461,6 +461,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   //Pick la fecha de from
   Future pickFromDateTime({required bool pickDate}) async {
     final date = await pickDateTime(fromDate, pickDate: pickDate);
+    print(date);
 
     if (date == null) return;
 
@@ -553,7 +554,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
       Get.put(UserController());
       FirebaseEventController feventCont = Get.find();
       UserController userController = Get.find();
-
+      print("HI");
+      print(fromDate);
       if (isEditing) {
         //eventCont.editEvent(event, widget.event!);
         feventCont.updateEvent(

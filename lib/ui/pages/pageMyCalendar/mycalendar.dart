@@ -67,15 +67,12 @@ class _MyCalendarState extends State<MyCalendar> {
               backgroundColor: white,
               title:
                   Image.asset("assets/logo_appbar.png", height: 60, width: 50),
-              actions: const [
-                IconButton(onPressed: null, icon: Icon(Icons.search))
-              ],
             ),
           ),
           body: SfCalendar(
               view: CalendarView.month, //Vista de mes por defecto
+              showDatePickerButton: true,
               initialSelectedDate: feventCont.selectedDate,
-              //Pone los eventos en el calendario
               dataSource: EventDataSource(feventCont.eventsOfUser),
               onTap: (details) {
                 feventCont.setDate(details.date!);
@@ -96,8 +93,15 @@ class _MyCalendarState extends State<MyCalendar> {
               ],
               //Para que los meses se rueden de forma vertical
               monthViewSettings: const MonthViewSettings(
-                  navigationDirection: MonthNavigationDirection.vertical),
+                navigationDirection: MonthNavigationDirection.vertical,
+                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+                numberOfWeeksInView: 5,
+                showAgenda: true,
+                agendaViewHeight: 120,
+              ),
               firstDayOfWeek: 1, //Lunes
+              cellEndPadding: 5,
+
               //Decoración del día seleccionado
               selectionDecoration: BoxDecoration(
                 color: Colors.transparent,
