@@ -1,5 +1,9 @@
 import 'package:app_ru/models/event.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../domain/constants/controllers/firebaseevent_controller.dart';
 
 class Eventcard extends StatelessWidget {
   Event event;
@@ -10,6 +14,8 @@ class Eventcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseEventController feventCont = Get.find();
+    feventCont.getEventUrl(event.name);
     return GestureDetector(
       onTap: () {
         onEventClick();
@@ -21,10 +27,7 @@ class Eventcard extends StatelessWidget {
           child: Stack(
             children: [
               Positioned.fill(
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset('assets/' + this.event.imgName + '.jpg',
-                        fit: BoxFit.cover)),
+                child: images(),
               ),
               Positioned(
                   bottom: 0,
@@ -71,5 +74,16 @@ class Eventcard extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  Widget images() {
+    FirebaseEventController feventCont = Get.find();
+    feventCont.getEventUrl(event.name);
+    return ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: (feventCont.url.value != '')
+                       ? Image.network(feventCont.url.value,fit: BoxFit.cover)
+                        :Image.network(
+                    'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg',fit: BoxFit.cover));
   }
 }

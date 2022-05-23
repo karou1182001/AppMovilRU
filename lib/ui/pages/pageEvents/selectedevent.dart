@@ -18,6 +18,8 @@ class SelectedEvent extends StatelessWidget {
   final FirebaseEventController feventCont = Get.find();
   @override
   Widget build(BuildContext context) {
+    FirebaseEventController feventCont = Get.find();
+    feventCont.getEventUrl(selectedevent.name);
     //APPBAR
     return Scaffold(
         appBar: PreferredSize(
@@ -36,11 +38,7 @@ class SelectedEvent extends StatelessWidget {
               child: Column(
                 children: [
                   // IMAGEN DEL EVENTO
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      //child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
-                      child: Image.asset('assets/' + "1" + '.jpg',
-                          fit: BoxFit.cover, height: 200)),
+                  images(),
                   //NOMBRE DEL EVENTO
                   Text(selectedevent.name,
                       key: const Key('Nombre evento'),
@@ -148,5 +146,16 @@ class SelectedEvent extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  Widget images(){
+    return ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      //child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
+                      child: 
+                      (feventCont.url.value != '')
+                       ? Image.network(feventCont.url.value,fit: BoxFit.cover, height: 200)
+                        :Image.network(
+                    'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg',fit: BoxFit.cover, height: 200));
   }
 }
