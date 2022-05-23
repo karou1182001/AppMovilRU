@@ -105,9 +105,8 @@ class FirebaseUserController extends GetxController {
   void changeProfilePicture(String filePath) async {
     StorageRepo storage = StorageRepo();
     await storage.uploadFile(filePath, actualUser.email);
-    String imagePath = await storage
-        .retrieveFile(actualUser.email);
-        print('esta es la nueva imagen '+imagePath);
+    String imagePath = await storage.retrieveFile(actualUser.email);
+    print('esta es la nueva imagen ' + imagePath);
     final doc = userFirebase.doc(actualUser.email);
     await doc.update({'url': imagePath});
   }
@@ -115,8 +114,7 @@ class FirebaseUserController extends GetxController {
   void changeProfileSchedule(String filePath) async {
     StorageRepo storage = StorageRepo();
     await storage.uploadFileSchedule(filePath, actualUser.email);
-    String imagePath =
-        await storage.retrieveFileSchedule(actualUser.email);
+    String imagePath = await storage.retrieveFileSchedule(actualUser.email);
     final doc = userFirebase.doc(actualUser.email);
     await doc.update({'urlSchedule': imagePath});
   }

@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({Key? key}) : super(key: key);
-
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController numberController = TextEditingController();
@@ -47,7 +46,8 @@ class EditProfile extends StatelessWidget {
                       fontWeight: FontWeight.bold)),
               TextFormField(
                   controller: nameController,
-                  decoration: InputDecoration(hintText: userController.actualUser.name)),
+                  decoration: InputDecoration(
+                      hintText: userController.actualUser.name)),
               const SizedBox(
                 height: 15,
               ),
@@ -84,8 +84,8 @@ class EditProfile extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   controller: descriptionController,
-                  decoration:
-                      InputDecoration(hintText: userController.actualUser.description)),
+                  decoration: InputDecoration(
+                      hintText: userController.actualUser.description)),
               ElevatedButton(
                   key: Key('editar'),
                   onPressed: () {
