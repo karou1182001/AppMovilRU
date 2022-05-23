@@ -3,6 +3,7 @@
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/domain/constants/controllers/firebaseuser_controller.dart';
+import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,7 +103,6 @@ class EditProfile extends StatelessWidget {
                       userController
                           .changeUserDescription(descriptionController.text);
                     }
-
                   },
                   child: Text(
                     'Editar Datos',

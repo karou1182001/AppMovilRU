@@ -26,14 +26,14 @@ class StorageRepo {
   }
 
   Future<String> retrieveFile(String mail) async {
-    String? userEmail = mail;
+    String userEmail = mail;
     try {
       final ref = storage.ref().child('user/$userEmail/profilePic');
+      print("Soy referencia");
       var url = await ref.getDownloadURL();
-      print('Esta es la ' + url);
       return url;
     } catch (e) {
-      return '';
+      return 'hola';
     }
   }
 

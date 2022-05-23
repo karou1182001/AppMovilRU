@@ -7,13 +7,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:get/get.dart';
 
-
 import '../constants/storage_repo.dart';
 import 'authentication_controller.dart';
 import 'package:location/location.dart' as loc;
 
 class FirebaseUserController extends GetxController {
- AuthenticationController authController = Get.find();
+  AuthenticationController authController = Get.find();
   //Firestore
   CollectionReference userf = userFirebase;
   //Stream para obtener los datos de firebase
@@ -22,14 +21,13 @@ class FirebaseUserController extends GetxController {
   final RxList<dynamic> _userList = RxList<Users>([]);
   final RxList<dynamic> _friendListofUser = RxList<Users>([]);
   final RxList<dynamic> _friendRequestListofUser = RxList<Users>([]);
-  late Users actualUser ;
+  late Users actualUser;
   bool loaded = false;
-  
 
   @override
-  void onInit()  {
+  void onInit() {
     super.onInit();
-     subscribeUpdates();
+    subscribeUpdates();
     print("on init");
   }
 
@@ -41,34 +39,36 @@ class FirebaseUserController extends GetxController {
   // variables de localizacion
   final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
-  
 
   subscribeUpdates() async {
     //Actualiza todos los usuarios
-     streamSubscription =  _userStream.listen((user) {
-      actualUser = Users.fromSnapshot(user.docs.singleWhere((element) => element['id']==authController.auth.currentUser!.email));
-      List friends =  actualUser.friends;
+    streamSubscription = _userStream.listen((user) {
+      actualUser = Users.fromSnapshot(user.docs.singleWhere((element) =>
+          element['id'] == authController.auth.currentUser!.email));
+      List friends = actualUser.friends;
       List friendsRequest = actualUser.friendsRequest;
       List friendsRequested = actualUser.friendsRequested;
       _friendListofUser.clear();
       _userList.clear();
       _friendRequestListofUser.clear();
       user.docs.forEach((element) {
-        if(element['id']!=authController.auth.currentUser!.email && !friends.contains((element)['id']) && !friendsRequest.contains((element)['id']) && !friendsRequested.contains((element)['id'])){
+        if (element['id'] != authController.auth.currentUser!.email &&
+            !friends.contains((element)['id']) &&
+            !friendsRequest.contains((element)['id']) &&
+            !friendsRequested.contains((element)['id'])) {
           Users user = Users.fromSnapshot(element);
           _userList.add(user);
         }
-        if(friends.contains((element)['id'])){
+        if (friends.contains((element)['id'])) {
           Users user = Users.fromSnapshot(element);
           user.setColor();
           _friendListofUser.add(user);
         }
-        if(friendsRequest.contains((element)['id'])){
+        if (friendsRequest.contains((element)['id'])) {
           Users user = Users.fromSnapshot(element);
           _friendRequestListofUser.add(user);
         }
       });
-      
     });
     loaded = true;
   }
@@ -78,9 +78,9 @@ class FirebaseUserController extends GetxController {
   }
 
   //Función que cambia el estado del switch en perfil
-  void changeRU() async {
+  Future<void> changeRU() async {
     final doc = userFirebase.doc(authController.auth.currentUser!.email);
-    await doc.update({'ru':!this.actualUser.ru });
+    await doc.update({'ru': !this.actualUser.ru});
     stablishLocation(!this.actualUser.ru);
   }
 
@@ -102,21 +102,24 @@ class FirebaseUserController extends GetxController {
     await doc.update({'description': userDescription});
   }
 
-   void changeProfilePicture(String filePath) async {
+  void changeProfilePicture(String filePath) async {
     StorageRepo storage = StorageRepo();
-    await storage.uploadFile(filePath,actualUser.email);
-    final doc = userFirebase.doc(authController.auth.currentUser!.email);
-    await doc.update({'url': filePath});
+    await storage.uploadFile(filePath, actualUser.email);
+    String imagePath = await storage
+        .retrieveFile(actualUser.email);
+        print('esta es la nueva imagen '+imagePath);
+    final doc = userFirebase.doc(actualUser.email);
+    await doc.update({'url': imagePath});
   }
-
 
   void changeProfileSchedule(String filePath) async {
     StorageRepo storage = StorageRepo();
-    await storage.uploadFileSchedule(filePath,actualUser.email);
-    final doc = userFirebase.doc(authController.auth.currentUser!.email);
-    await doc.update({'urlSchedule': filePath});
+    await storage.uploadFileSchedule(filePath, actualUser.email);
+    String imagePath =
+        await storage.retrieveFileSchedule(actualUser.email);
+    final doc = userFirebase.doc(actualUser.email);
+    await doc.update({'urlSchedule': imagePath});
   }
-
 
   //Parte de geolocalización
   void stablishLocation(bool value) {
@@ -164,7 +167,6 @@ class FirebaseUserController extends GetxController {
     _locationSubscription = null;
   }
 
-
   static Stream<List<Users>> userStream() {
     return userFirebase.snapshots().map((QuerySnapshot query) {
       List<Users> users = [];
@@ -177,43 +179,42 @@ class FirebaseUserController extends GetxController {
     });
   }
 
-  addFriend(String friendMail){
+  addFriend(String friendMail) {
     final friendRef = userf.doc(friendMail);
     friendRef.update({
-      "friendsRequest": FieldValue.arrayUnion([authController.auth.currentUser!.email]),
+      "friendsRequest":
+          FieldValue.arrayUnion([authController.auth.currentUser!.email]),
     });
     final userRef = userf.doc(authController.auth.currentUser!.email);
     userRef.update({
       "friendsRequested": FieldValue.arrayUnion([friendMail]),
     });
-
   }
 
-  acceptFriend(String friendMail)async {
+  acceptFriend(String friendMail) async {
     final friendRef = userf.doc(friendMail);
     await friendRef.update({
-      "friendsRequested": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
-      "friends": FieldValue.arrayUnion([authController.auth.currentUser!.email]),
+      "friendsRequested":
+          FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+      "friends":
+          FieldValue.arrayUnion([authController.auth.currentUser!.email]),
     });
     final userRef = userf.doc(authController.auth.currentUser!.email);
     await userRef.update({
       "friendsRequest": FieldValue.arrayRemove([friendMail]),
       "friends": FieldValue.arrayUnion([friendMail]),
     });
-
   }
 
-  declineFriend(String friendMail)async {
+  declineFriend(String friendMail) async {
     final friendRef = userf.doc(friendMail);
     await friendRef.update({
-      "friendsRequested": FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+      "friendsRequested":
+          FieldValue.arrayRemove([authController.auth.currentUser!.email]),
     });
     final userRef = userf.doc(authController.auth.currentUser!.email);
     await userRef.update({
       "friendsRequest": FieldValue.arrayRemove([friendMail]),
     });
-
   }
-
- 
 }

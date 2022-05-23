@@ -38,6 +38,7 @@ class _ProfileState extends State<Profile> {
     //Añadir imagen a Firebase
     if (image != null) {
       userController.changeProfilePicture(image.path);
+      loadData();
     }
   }
 
@@ -47,6 +48,7 @@ class _ProfileState extends State<Profile> {
     //Añadir imagen a Firebase
     if (image != null) {
       userController.changeProfileSchedule(image.path);
+      loadData();
     }
   }
 
@@ -67,11 +69,12 @@ class _ProfileState extends State<Profile> {
     print(loaded);
   }
 
-  void changeRu(){
-    userController.changeRU();
+  void changeRu() async {
+    await userController.changeRU();
     setState(() {
       ru = userController.actualUser.ru;
     });
+    loadData();
   }
 
   Widget build(BuildContext context) {
@@ -179,7 +182,7 @@ class _ProfileState extends State<Profile> {
                               Switch(
                                   activeColor: selectColor,
                                   value: actualUser.ru,
-                                  onChanged: (value) => userController.changeRU())
+                                  onChanged: (value) => changeRu())
                             ],
                           )),
                       const SizedBox(
