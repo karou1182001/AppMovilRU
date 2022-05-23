@@ -1,15 +1,22 @@
 
+import 'dart:async';
+
 import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedFriendMap.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/domain/constants/constants/text_style.dart';
 import '../../../domain/constants/constants/color.dart';
+import '../../../domain/constants/constants/firabase_constants.dart';
 
 class SelectedFriend extends StatelessWidget {
   Users selectedfriend;
-
+  CollectionReference userf = userFirebase;
+  //Stream para obtener los datos de firebase
+  final Stream<QuerySnapshot> _userStream = userFirebase.snapshots();
+  late StreamSubscription<Object?> streamSubscription;
   SelectedFriend({required this.selectedfriend});
 
   @override
@@ -85,7 +92,7 @@ class SelectedFriend extends StatelessWidget {
                         height: 20,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          color: Colors.green,
+                          color: selectedfriend.color,
                           border: Border.all(
                             width: 1
                           )
@@ -131,9 +138,26 @@ class SelectedFriend extends StatelessWidget {
                             backgroundColor: MaterialStateColor.resolveWith(
                                 (states) => Colors.black)),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
+                          streamSubscription = _userStream.listen((user) {
+                            if(user.docs.singleWhere((element) => element['id']==selectedfriend.email)['ru']){
+                              Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   SelectedFriendMap(selectedfriend.email)));
+                            }else{
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Accion Denegada'),
+                                  content: const Text('Este usuario no esta compartiendo su localizacion'),
+                                  actions: <Widget>[
+                                    FlatButton(onPressed:() {Navigator.of(context).pop();} , child: Text('OK'))
+                                  ],
+                                )
+                              );
+                            }
+                           });
+                          
+                          
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,

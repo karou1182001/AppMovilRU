@@ -20,16 +20,15 @@ class FirebaseUserController extends GetxController {
   //Stream para obtener los datos de firebase
   final Stream<QuerySnapshot> _userStream = userFirebase.snapshots();
   late StreamSubscription<Object?> streamSubscription;
-  UserController userController = Get.find();
-  final _userList = <Users>[].obs;
-  final _friendListofUser = <Users>[].obs;
-  final _friendRequestListofUser = <Users>[].obs;
+  final RxList<dynamic> _userList = RxList<Users>([]);
+  final RxList<dynamic> _friendListofUser = RxList<Users>([]);
+  final RxList<dynamic> _friendRequestListofUser = RxList<Users>([]);
   
 
   @override
-  void onInit() {
+  void onInit()  {
     super.onInit();
-    subscribeUpdates();
+     subscribeUpdates();
     print("on init");
   }
 
@@ -41,45 +40,34 @@ class FirebaseUserController extends GetxController {
 
   subscribeUpdates() async {
     //Actualiza todos los usuarios
-    streamSubscription = _userStream.listen((user) {
-      Users actualUser;
-      List friends = [];
-      List friendsRequest = [];
-      List friendsRequested = [];
-      user.docs.forEach((element) {
-        if(element['id']==authController.auth.currentUser!.email){
-          actualUser = Users.fromSnapshot(element);
-          friends = actualUser.friends;
-          friendsRequest = actualUser.friendsRequest;
-          friendsRequested = actualUser.friendsRequested;
-          print('hola si encontre mi usuario');
-        }
-      });
+     streamSubscription =  _userStream.listen((user) {
+      Users actualUser = Users.fromSnapshot(user.docs.singleWhere((element) => element['id']==authController.auth.currentUser!.email));
+      List friends =  actualUser.friends;
+      List friendsRequest = actualUser.friendsRequest;
+      List friendsRequested = actualUser.friendsRequested;
       _friendListofUser.clear();
       _userList.clear();
       _friendRequestListofUser.clear();
       user.docs.forEach((element) {
         if(element['id']!=authController.auth.currentUser!.email && !friends.contains((element)['id']) && !friendsRequest.contains((element)['id']) && !friendsRequested.contains((element)['id'])){
-          _userList.add(Users.fromSnapshot(element));
+          Users user = Users.fromSnapshot(element);
+          user.getProfileUrl();
+          _userList.add(user);
         }
         if(friends.contains((element)['id'])){
-          _friendListofUser.add(Users.fromSnapshot(element));
-        }
-        if(friendsRequest.contains((element)['id'])){
-          _friendRequestListofUser.add(Users.fromSnapshot(element));
-        }
-      });
-      print("Got a total of ${_friendListofUser.length} friends");
-      print("Got a total of ${_userList.length} users");
-      print("Got a total of ${_friendRequestListofUser.length} friends Request");
-      _friendListofUser.forEach((friend) {
-          friend.getProfileUrl();
-          friend.getScheduleUrl();
-      });
-      _userList.forEach((user) {
+          Users user = Users.fromSnapshot(element);
           user.getProfileUrl();
           user.getScheduleUrl();
+          user.setColor();
+          _friendListofUser.add(user);
+        }
+        if(friendsRequest.contains((element)['id'])){
+          Users user = Users.fromSnapshot(element);
+          user.getProfileUrl();
+          _friendRequestListofUser.add(user);
+        }
       });
+      
     });
   }
 

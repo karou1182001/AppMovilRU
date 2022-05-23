@@ -15,10 +15,6 @@ import '../constants/firabase_constants.dart';
 
 class UserController extends GetxController {
   AuthenticationController authController = Get.find();
-  RxList<User> usersList = RxList<User>([]);
-  get users => usersList;
-  RxList<User> friendsList = RxList<User>([]);
-  get friendsl => friendsList;
   RxString url = ''.obs;  
    RxString urlSchedule = ''.obs;
 

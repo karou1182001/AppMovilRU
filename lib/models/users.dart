@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../domain/constants/constants/storage_repo.dart';
 
@@ -14,6 +15,8 @@ class Users {
  late List friends;
   late List friendsRequest;
  late List friendsRequested;
+ late bool ru;
+ Color color = Colors.red;
   String url ='https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg';
   String urlSchedule = 'https://i.pinimg.com/originals/36/1c/73/361c7372f6113e6dfb5c28f6f03194ee.png';
 Future<void> getProfileUrl() async {
@@ -32,9 +35,17 @@ Future<void> getProfileUrl() async {
     }
     print('Soy la URL: ${url}');
   }
-void init(){
-  getProfileUrl();
-  getScheduleUrl();
+
+  void setColor()async{
+    if(ru){
+      color = Colors.green;
+    }else{
+      color = Colors.red;
+    }
+}
+void init()async{
+  await getProfileUrl();
+  await getScheduleUrl();
 }
 
   Users.fromMap(Map<String, dynamic> map, {required this.userId})
@@ -45,13 +56,15 @@ void init(){
         assert(map['friends'] != null),
         assert(map['friendsRequest'] != null),
         assert(map['friendsRequested'] != null),
+        assert(map['ru'] != null),
         name = map['name'],
         number = map['number'],
         email = map['email'],
         description = map['description'],
         friends = map['friends'],
         friendsRequest = map['friendsRequest'],
-        friendsRequested = map['friendsRequested'];
+        friendsRequested = map['friendsRequested'],
+        ru = map['ru'];
 
   Users.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data() as Map<String, dynamic>,

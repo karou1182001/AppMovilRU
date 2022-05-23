@@ -23,10 +23,10 @@ class _NavBarState extends State<NavBar> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Get.put(FirebaseEventController());
+     Get.put(FirebaseEventController());
     
-    Get.put(UserController());
-    Get.put(FirebaseUserController());
+     Get.put(UserController());
+     Get.put(FirebaseUserController());
   }
 
   //Colocamos que inicie en el menú 2, para que por defecto salga el calendario
