@@ -1,6 +1,5 @@
 import 'package:app_ru/domain/constants/constants/color.dart';
-import 'package:app_ru/domain/constants/controllers/user_controller.dart';
-import 'package:app_ru/models/user.dart';
+
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
 import 'package:app_ru/ui/widgets/refreshWidget.dart';
@@ -28,13 +27,11 @@ class _FriendsListState extends State<FriendsList> {
  void initState(){
    super.initState();
     FirebaseUserController fuserCont = Get.find();
-    fuserCont.onInit();
     fuserCont.subscribeUpdates();
     loadData();
   }
   Future loadData() async {
     users = await fuserCont.friendsOfUser;
-    
     setState(() {
       entries = users;
       print('hay un total de '+entries.length.toString());

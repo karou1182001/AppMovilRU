@@ -17,8 +17,8 @@ class Users {
  late List friendsRequested;
  late bool ru;
  Color color = Colors.red;
-  String url ='https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg';
-  String urlSchedule = 'https://i.pinimg.com/originals/36/1c/73/361c7372f6113e6dfb5c28f6f03194ee.png';
+  String url ='';
+  String urlSchedule = '';
 Future<void> getProfileUrl() async {
     StorageRepo storage = StorageRepo();
     url = await storage.retrieveFile(email); 

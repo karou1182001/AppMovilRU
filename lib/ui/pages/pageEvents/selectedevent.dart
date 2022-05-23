@@ -1,3 +1,4 @@
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,12 +8,13 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../domain/constants/constants/color.dart';
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
-import '../../../domain/constants/controllers/user_controller.dart';
+
 
 class SelectedEvent extends StatelessWidget {
   Event selectedevent;
   SelectedEvent({required this.selectedevent});
-  final UserController user = Get.find();
+  AuthenticationController authController = Get.find();
+  
   final FirebaseEventController feventCont = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class SelectedEvent extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       feventCont.addConfirm(
-                          this.selectedevent, user.getUser.email);
+                          this.selectedevent, authController.auth.currentUser!.email);
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(

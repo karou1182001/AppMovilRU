@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../constants/storage_repo.dart';
-import 'user_controller.dart';
 
 class FirebaseEventController extends GetxController {
   DateTime _selectedDate = DateTime.now();
@@ -99,7 +98,7 @@ class FirebaseEventController extends GetxController {
     findeventsOfUser();
   }
 
-  addConfirm(Event event, String confirm) async {
+  addConfirm(Event event, String? confirm) async {
     await event.eventId.update({
       'confirmados': FieldValue.arrayUnion([confirm])
     });
@@ -134,12 +133,12 @@ class FirebaseEventController extends GetxController {
   }
 
   void findeventsOfUser() async {
-    Get.put(UserController());
-    UserController userController = Get.find();
+    Get.put(AuthenticationController());
+    AuthenticationController authController = Get.find();
     //Consulta a realizar
     //Busca todos los eventos a los que el usuario ha confirmado asistir
     var query = await eventsFirebase.where('confirmados',
-        arrayContains: userController.email);
+        arrayContains: authController.auth.currentUser!.email);
     QuerySnapshot evento = await query.get();
     _eventListofUser.clear();
     evento.docs.forEach((element) {

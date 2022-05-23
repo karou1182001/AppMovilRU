@@ -1,7 +1,7 @@
 
 import 'dart:async';
 
-import 'package:app_ru/models/user.dart';
+
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedFriendMap.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

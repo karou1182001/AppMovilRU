@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
-import 'package:app_ru/models/event.dart';
-import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
-import 'package:app_ru/ui/pages/pageFriends/friends.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+
 
 import '../constants/storage_repo.dart';
 import 'authentication_controller.dart';
-import 'user_controller.dart';
+import 'package:location/location.dart' as loc;
 
 class FirebaseUserController extends GetxController {
  AuthenticationController authController = Get.find();
@@ -23,6 +22,8 @@ class FirebaseUserController extends GetxController {
   final RxList<dynamic> _userList = RxList<Users>([]);
   final RxList<dynamic> _friendListofUser = RxList<Users>([]);
   final RxList<dynamic> _friendRequestListofUser = RxList<Users>([]);
+  late Users actualUser ;
+  bool loaded = false;
   
 
   @override
@@ -36,12 +37,18 @@ class FirebaseUserController extends GetxController {
   get allUsers => _userList;
   get friendsOfUser => _friendListofUser;
   get friendsRequestOfUser => _friendRequestListofUser;
+
+  // variables de localizacion
+  final loc.Location location = loc.Location();
+  StreamSubscription<loc.LocationData>? _locationSubscription;
   
 
   subscribeUpdates() async {
     //Actualiza todos los usuarios
      streamSubscription =  _userStream.listen((user) {
-      Users actualUser = Users.fromSnapshot(user.docs.singleWhere((element) => element['id']==authController.auth.currentUser!.email));
+      actualUser = Users.fromSnapshot(user.docs.singleWhere((element) => element['id']==authController.auth.currentUser!.email));
+      actualUser.getProfileUrl();
+      actualUser.getScheduleUrl();
       List friends =  actualUser.friends;
       List friendsRequest = actualUser.friendsRequest;
       List friendsRequested = actualUser.friendsRequested;
@@ -69,12 +76,97 @@ class FirebaseUserController extends GetxController {
       });
       
     });
+    loaded = true;
   }
 
   unsubscribeUpdates() {
     streamSubscription.cancel();
   }
 
+  //Función que cambia el estado del switch en perfil
+  void changeRU() async {
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'ru':!this.actualUser.ru });
+    stablishLocation(!this.actualUser.ru);
+  }
+
+  //Función para que cambie el nombre
+  Future<void> changeUserName(String userName) async {
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'name': userName});
+  }
+
+  //Función para cambiar el número
+  Future<void> changeUserNumber(String userNumber) async {
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'number': userNumber});
+  }
+
+  //Función para cambiar la descripción
+  Future<void> changeUserDescription(String userDescription) async {
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'description': userDescription});
+  }
+
+   void changeProfilePicture(String filePath) async {
+    StorageRepo storage = StorageRepo();
+    await storage.uploadFile(filePath,actualUser.email);
+    actualUser.getProfileUrl();
+  }
+
+
+  void changeProfileSchedule(String filePath) async {
+    StorageRepo storage = StorageRepo();
+    await storage.uploadFileSchedule(filePath,actualUser.email);
+    actualUser.getScheduleUrl();
+  }
+
+
+  //Parte de geolocalización
+  void stablishLocation(bool value) {
+    if (value == true) {
+      getLocation();
+      listenLocation();
+    } else {
+      stopListeningLocation();
+    }
+  }
+
+  void getLocation() async {
+    try {
+      final loc.LocationData _locationResult = await location.getLocation();
+      await FirebaseFirestore.instance
+          .collection('usuario')
+          .doc(actualUser.email)
+          .set({
+        'latitude': _locationResult.latitude,
+        'longitude': _locationResult.longitude,
+      }, SetOptions(merge: true));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> listenLocation() async {
+    _locationSubscription = location.onLocationChanged.handleError((onError) {
+      print(onError);
+      _locationSubscription?.cancel();
+      _locationSubscription = null;
+    }).listen((loc.LocationData currentlocation) async {
+      await FirebaseFirestore.instance
+          .collection('usuario')
+          .doc(actualUser.email)
+          .set({
+        'latitude': currentlocation.latitude,
+        'longitude': currentlocation.longitude,
+      }, SetOptions(merge: true));
+    });
+  }
+
+  stopListeningLocation() {
+    _locationSubscription?.cancel();
+    _locationSubscription = null;
+  }
 
 
   static Stream<List<Users>> userStream() {

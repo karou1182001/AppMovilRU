@@ -1,4 +1,4 @@
-import 'package:app_ru/models/user.dart';
+
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:app_ru/ui/widgets/refreshWidget.dart';
@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
 import '../../../domain/constants/controllers/firebaseuser_controller.dart';
-import '../../../domain/constants/controllers/user_controller.dart';
 import '../../widgets/serchWidget.dart';
 import '../../widgets/usercard.dart';
 import 'package:get/get.dart';

@@ -1,6 +1,4 @@
 import 'package:app_ru/domain/constants/controllers/firebaseuser_controller.dart';
-import 'package:app_ru/domain/constants/controllers/user_controller.dart';
-import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

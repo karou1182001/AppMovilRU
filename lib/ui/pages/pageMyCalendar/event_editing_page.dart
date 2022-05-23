@@ -1,6 +1,7 @@
 //En esta clase podemos crear un evento nuevo y editar sus datos
 import 'dart:io';
 
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
@@ -13,7 +14,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../domain/constants/constants/color.dart';
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
-import '../../../domain/constants/controllers/user_controller.dart';
+
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
@@ -42,6 +43,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   late FocusNode textFocusNodeAttendee;
   bool isEditingEmail = false;
   XFile? image;
+  AuthenticationController authController = Get.find();
 
   @override
   void initState() {
@@ -548,9 +550,9 @@ class _EventEditingPageState extends State<EventEditingPage> {
       final isEditing = widget.event != null;
       //LLmando al controlador, añadimos el evento a la lista de controladores
       Get.put(FirebaseEventController());
-      Get.put(UserController());
+      
       FirebaseEventController feventCont = Get.find();
-      UserController userController = Get.find();
+      
       if (isEditing) {
         //eventCont.editEvent(event, widget.event!);
         feventCont.updateEvent(
@@ -558,7 +560,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
             DateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate),
             DateFormat("yyyy-MM-dd HH:mm:ss").format(toDate),
             descController.text,
-            userController.email,
+            authController.auth.currentUser!.email,
             personasInvitadas,
             publico,
             colorEvento.value,
@@ -571,10 +573,10 @@ class _EventEditingPageState extends State<EventEditingPage> {
           DateFormat("yyyy-MM-dd HH:mm:ss").format(fromDate),
           DateFormat("yyyy-MM-dd HH:mm:ss").format(toDate),
           descController.text,
-          userController.email,
+          authController.auth.currentUser!.email,
           personasInvitadas,
           publico,
-          [userController.email],
+          [authController.auth.currentUser!.email],
           colorEvento.value,
           "1",
         );

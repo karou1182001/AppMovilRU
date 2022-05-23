@@ -1,5 +1,5 @@
 //En esta clase podemos ver un evento que ya ha sido editado
-import 'package:app_ru/domain/constants/controllers/user_controller.dart';
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/event_editing_page.dart';
 import 'package:app_ru/ui/pages/pageMyCalendar/utils.dart';
@@ -12,8 +12,9 @@ import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 
 class EventViewingPage extends StatelessWidget {
   final Event event;
+  AuthenticationController authController = Get.find();
 
-  const EventViewingPage({Key? key, required this.event}) : super(key: key);
+  EventViewingPage({Key? key, required this.event}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -153,8 +154,8 @@ class EventViewingPage extends StatelessWidget {
   }
 
   List<Widget> buildViewingActions(BuildContext context, Event event) {
-    UserController userController = Get.find();
-    if (userController.email == event.persCreadora) {
+    
+    if (authController.auth.currentUser!.email == event.persCreadora) {
       return <Widget>[
         IconButton(
           icon: const Icon(Icons.edit),
@@ -186,8 +187,8 @@ class EventViewingPage extends StatelessWidget {
           icon: const Icon(Icons.playlist_remove_sharp),
           onPressed: () {
             //Eliminamos al usuario de los invitados y y confirmados del evento
-            event.invitados.remove(userController.email);
-            event.confirmados.remove(userController.email);
+            event.invitados.remove(authController.auth.currentUser!.email);
+            event.confirmados.remove(authController.auth.currentUser!.email);
             //Actualizamos la base de datos
             event.eventId.update({
               'invitados': event.invitados,

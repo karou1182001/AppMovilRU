@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
-import 'package:app_ru/domain/constants/controllers/user_controller.dart';
 import 'package:app_ru/domain/constants/constants/text_style.dart';
+import 'package:app_ru/domain/constants/controllers/firebaseuser_controller.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,8 +18,8 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(UserController());
-    UserController userController = Get.find();
+    Get.put(FirebaseUserController());
+    FirebaseUserController userController = Get.find();
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -45,9 +45,9 @@ class EditProfile extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() => TextFormField(
+              TextFormField(
                   controller: nameController,
-                  decoration: InputDecoration(hintText: userController.name))),
+                  decoration: InputDecoration(hintText: userController.actualUser.name)),
               const SizedBox(
                 height: 15,
               ),
@@ -67,10 +67,10 @@ class EditProfile extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() => TextFormField(
+              TextFormField(
                   controller: numberController,
                   decoration: InputDecoration(
-                      hintText: userController.number.toString()))),
+                      hintText: userController.actualUser.number.toString())),
               const SizedBox(
                 height: 15,
               ),
@@ -80,12 +80,12 @@ class EditProfile extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              Obx(() => TextField(
+              TextField(
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   controller: descriptionController,
                   decoration:
-                      InputDecoration(hintText: userController.description))),
+                      InputDecoration(hintText: userController.actualUser.description)),
               ElevatedButton(
                   key: Key('editar'),
                   onPressed: () {

@@ -1,14 +1,13 @@
-import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
-import 'package:app_ru/domain/constants/controllers/user_controller.dart';
+
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../ui/pages/pageInicioyRegistro/inicio.dart';
-import '../../../ui/pages/pageInicioyRegistro/registro.dart';
+
 
 class AuthenticationController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;

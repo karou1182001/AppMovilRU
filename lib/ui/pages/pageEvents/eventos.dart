@@ -1,5 +1,5 @@
 import 'package:app_ru/domain/constants/constants/color.dart';
-import 'package:app_ru/domain/constants/controllers/user_controller.dart';
+import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/pages/pageEvents/selectedevent.dart';
 import 'package:app_ru/ui/widgets/refreshWidget.dart';
@@ -19,14 +19,15 @@ class EventosList extends StatefulWidget {
 }
 
 class _EventosListState extends State<EventosList> {
-  final UserController user = Get.find();
+  
   final FirebaseEventController feventCont = Get.find();
+  AuthenticationController authController = Get.find();
   List<Event> entries = <Event>[];
   List<Event> entrie = <Event>[];
   String query = '';
   void initState() {
     super.initState();
-    UserController user = Get.find();
+    
     FirebaseEventController feventCont = Get.find();
     //feventCont.onInit();
     //feventCont.subscribeUpdates();
@@ -37,8 +38,8 @@ class _EventosListState extends State<EventosList> {
     print("LoadData");
     entrie = await feventCont.allEvents
         .where((e) =>
-            (e.persCreadora != user.email) == true &&
-            e.confirmados.contains(user.email) == false &&
+            (e.persCreadora != authController.auth.currentUser!.email) == true &&
+            e.confirmados.contains(authController.auth.currentUser!.email) == false &&
             e.publico == true)
         .toList();
 
