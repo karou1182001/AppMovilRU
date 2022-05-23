@@ -53,7 +53,7 @@ class ProfileState extends State<Profile> {
     loadData();
   }
 
-  Future loadData() async {
+   loadData() async {
     Users actualUsers = userController.actualUser;
     setState(() {
       actualUser = actualUsers;

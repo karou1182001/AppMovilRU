@@ -1,31 +1,28 @@
+import 'package:app_ru/domain/constants/controllers/firebaseevent_controller.dart';
 import 'package:app_ru/domain/constants/controllers/firebaseuser_controller.dart';
-import 'package:app_ru/models/users.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../domain/constants/constants/color.dart';
+import '../../models/event.dart';
 
-class UsercardRequest extends StatelessWidget {
-  Users user;
-  FirebaseUserController firebaseUserController = Get.find();
+class EventInvitationCard extends StatelessWidget {
+  Event event;
+  FirebaseEventController firebaseEventController = Get.find();
 
-  UsercardRequest({required this.user});
+  EventInvitationCard({required this.event});
 
   @override
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: CircleAvatar(
-        radius: 25,
-        backgroundImage: NetworkImage(user.url),
-      ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
             child: Container(
               child: Text(
-                "${user.name}",
+                event.name,
                 style: TextStyle(fontSize: 17),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -49,9 +46,9 @@ class UsercardRequest extends StatelessWidget {
                     borderRadius: BorderRadius.circular(18)))),
         onPressed: () async {
           if (aceptar) {
-            firebaseUserController.acceptFriend(user.email);
+            firebaseEventController.acceptInvitation(event.name);
           } else {
-            firebaseUserController.declineFriend(user.email); 
+            firebaseEventController.denyInvitation(event.name);
           }
         },
         child: Text(

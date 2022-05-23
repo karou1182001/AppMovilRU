@@ -19,18 +19,21 @@ class FirebaseEventController extends GetxController {
   final _eventListofUser = <Event>[].obs;
   final _eventsearch = <Event>[].obs;
   RxString url = ''.obs;
+  final RxList<dynamic> _invitedEventsList = RxList<Event>([]);
 
   @override
   void onInit() {
     super.onInit();
     //Inicia actualizando los eventos del usuario
     findeventsOfUser();
+    findInvitation();
   }
 
   //Getters
   get allEvents => _eventList;
   get eventsOfUser => _eventListofUser;
   DateTime get selectedDate => _selectedDate;
+  get invitedList => _invitedEventsList;
 
   void setDate(DateTime date) {
     _selectedDate = date;
@@ -120,6 +123,44 @@ class FirebaseEventController extends GetxController {
     }
   }
 
+  findInvitation() async {
+    AuthenticationController authController = Get.find();
+    var queryInvited = await eventsFirebase.where('invitados',
+        arrayContains: authController.auth.currentUser!.email);
+    QuerySnapshot invited = await queryInvited.get();
+    _invitedEventsList.clear();
+    invited.docs.forEach((element) {
+      _invitedEventsList.add(Event.fromSnapshot(element));
+      print(Event.fromSnapshot(element).name);
+    });
+  }
+
+  acceptInvitation(String eventName) async {
+    AuthenticationController authController = Get.find();
+    var queryAcceptInvite = eventsFirebase.where('name', isEqualTo: eventName);
+    QuerySnapshot inviteAccepted = await queryAcceptInvite.get();
+    inviteAccepted.docs.forEach((element) {
+      element.reference.update({
+        'invitados':
+            FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+        'confirmados':
+            FieldValue.arrayUnion([authController.auth.currentUser!.email])
+      });
+    });
+  }
+
+  denyInvitation(String eventName) async {
+    AuthenticationController authController = Get.find();
+    var queryAcceptInvite = eventsFirebase.where('name', isEqualTo: eventName);
+    QuerySnapshot inviteAccepted = await queryAcceptInvite.get();
+    inviteAccepted.docs.forEach((element) {
+      element.reference.update({
+        'invitados':
+            FieldValue.arrayRemove([authController.auth.currentUser!.email]),
+      });
+    });
+  }
+
   static Stream<List<Event>> eventStream() {
     return eventsFirebase.snapshots().map((QuerySnapshot query) {
       List<Event> events = [];
@@ -133,11 +174,10 @@ class FirebaseEventController extends GetxController {
   }
 
   void findeventsOfUser() async {
-    Get.put(AuthenticationController());
     AuthenticationController authController = Get.find();
     //Consulta a realizar
     //Busca todos los eventos a los que el usuario ha confirmado asistir
-    var query = await eventsFirebase.where('confirmados',
+    var query = eventsFirebase.where('confirmados',
         arrayContains: authController.auth.currentUser!.email);
     QuerySnapshot evento = await query.get();
     _eventListofUser.clear();

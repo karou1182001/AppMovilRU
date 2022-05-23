@@ -40,7 +40,7 @@ class FirebaseUserController extends GetxController {
   final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
 
-  subscribeUpdates() async {
+  subscribeUpdates() {
     //Actualiza todos los usuarios
     streamSubscription = _userStream.listen((user) {
       actualUser = Users.fromSnapshot(user.docs.singleWhere((element) =>
