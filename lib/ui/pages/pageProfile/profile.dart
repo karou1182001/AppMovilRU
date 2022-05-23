@@ -25,6 +25,7 @@ class _ProfileState extends State<Profile> {
   @override
   UserController userController = Get.find();
   AuthenticationController authController = Get.find();
+  bool ru = false;
 
   Future getImage() async {
     //Pickeamos la imagen
@@ -47,6 +48,14 @@ class _ProfileState extends State<Profile> {
   void initState() {
     super.initState();
     userController.getProfileUrl();
+  }
+
+  void changeRU() {
+    ru = userController.ru;
+    userController.changeRU();
+    setState(() {
+      ru = userController.ru;
+    });
   }
 
   Widget build(BuildContext context) {
@@ -156,7 +165,7 @@ class _ProfileState extends State<Profile> {
                         Obx(() => Switch(
                             activeColor: selectColor,
                             value: userController.ru,
-                            onChanged: (value) => userController.changeRU()))
+                            onChanged: (value) => changeRU()))
                       ],
                     )),
                 const SizedBox(
