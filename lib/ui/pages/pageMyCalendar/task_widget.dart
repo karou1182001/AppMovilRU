@@ -33,7 +33,7 @@ class _TaskWidgetState extends State<TaskWidget> {
     return SfCalendarTheme(
       data: SfCalendarThemeData(),
       child: SfCalendar(
-        view: CalendarView.schedule,
+        view: CalendarView.day,
         //Número de días que se mostrarán
         // timeSlotViewSettings: const TimeSlotViewSettings(numberOfDaysInView: 3),
         initialSelectedDate: feventCont.selectedDate,
@@ -60,7 +60,6 @@ class _TaskWidgetState extends State<TaskWidget> {
   Widget appointmentBuilder(
       BuildContext context, CalendarAppointmentDetails details) {
     final event = details.appointments.first;
-    print(event.from);
     return Container(
       width: details.bounds.width,
       height: details.bounds.height,

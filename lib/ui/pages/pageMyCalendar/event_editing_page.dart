@@ -14,7 +14,10 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../domain/constants/constants/color.dart';
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
+import '../../../domain/constants/controllers/firebaseuser_controller.dart';
+import '../../../models/users.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
@@ -44,6 +47,9 @@ class _EventEditingPageState extends State<EventEditingPage> {
   bool isEditingEmail = false;
   XFile? image;
   AuthenticationController authController = Get.find();
+  final FirebaseUserController fuserCont = Get.find();
+  List<Users> friendsOfUser = [];
+  String? selectedValue;
 
   @override
   void initState() {
@@ -67,6 +73,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
     }
     textControllerAttendee = TextEditingController();
     textFocusNodeAttendee = FocusNode();
+    friendsOfUser = fuserCont.friendsOfUser;
   }
 
   @override
@@ -190,6 +197,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              /*
               Expanded(
                 child: TextField(
                   enabled: true,
@@ -238,6 +246,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
                   ),
                 ),
               ),
+              */
+              Expanded(child: listadeAmigos()),
               IconButton(
                 icon: const Icon(
                   Icons.check_circle,
@@ -269,6 +279,60 @@ class _EventEditingPageState extends State<EventEditingPage> {
         ],
       );
 
+  Widget listadeAmigos() => DropdownButtonFormField2(
+        decoration: InputDecoration(
+          //Add isDense true and zero Padding.
+          //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+          isDense: true,
+          contentPadding: EdgeInsets.zero,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+
+          //Add more decoration as you want here
+          //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
+        ),
+        isExpanded: true,
+        hint: const Text(
+          'Seleccione usuarios a invitar',
+          style: TextStyle(fontSize: 14),
+        ),
+        icon: const Icon(
+          Icons.arrow_drop_down,
+          color: Colors.black45,
+        ),
+        iconSize: 30,
+        buttonHeight: 50,
+        buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+        dropdownDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        items: friendsOfUser
+            .map((item) => DropdownMenuItem<String>(
+                  value: item.email,
+                  child: Text(
+                    item.email,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ))
+            .toList(),
+        validator: (value) {
+          if (value == null) {
+            return 'Seleccione usuarios';
+          }
+        },
+        onChanged: (value) {
+          //Do something when changing the item if you want.
+          setState(() {
+            currentEmail = value.toString();
+          });
+        },
+        onSaved: (value) {
+          selectedValue = value.toString();
+        },
+      );
   //Público o no público
   Widget switchPublico() => Container(
       padding: const EdgeInsets.only(left: 10),
@@ -550,9 +614,9 @@ class _EventEditingPageState extends State<EventEditingPage> {
       final isEditing = widget.event != null;
       //LLmando al controlador, añadimos el evento a la lista de controladores
       Get.put(FirebaseEventController());
-      
+
       FirebaseEventController feventCont = Get.find();
-      
+
       if (isEditing) {
         //eventCont.editEvent(event, widget.event!);
         feventCont.updateEvent(
