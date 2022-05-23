@@ -159,6 +159,8 @@ class MenuRegistro extends StatelessWidget {
                               'friends':friends,
                               'friendsRequest' :friendsRequest,
                               'friendsRequested':friendsRequested,
+                              'url' :'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg',
+                              'urlSchedule' : 'https://i.pinimg.com/originals/36/1c/73/361c7372f6113e6dfb5c28f6f03194ee.png',
                             }, SetOptions(merge: true));
                             //Enviamos un mensaje exitoso
                             showDialog(

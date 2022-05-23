@@ -47,8 +47,6 @@ class FirebaseUserController extends GetxController {
     //Actualiza todos los usuarios
      streamSubscription =  _userStream.listen((user) {
       actualUser = Users.fromSnapshot(user.docs.singleWhere((element) => element['id']==authController.auth.currentUser!.email));
-      actualUser.getProfileUrl();
-      actualUser.getScheduleUrl();
       List friends =  actualUser.friends;
       List friendsRequest = actualUser.friendsRequest;
       List friendsRequested = actualUser.friendsRequested;
@@ -58,19 +56,15 @@ class FirebaseUserController extends GetxController {
       user.docs.forEach((element) {
         if(element['id']!=authController.auth.currentUser!.email && !friends.contains((element)['id']) && !friendsRequest.contains((element)['id']) && !friendsRequested.contains((element)['id'])){
           Users user = Users.fromSnapshot(element);
-          user.getProfileUrl();
           _userList.add(user);
         }
         if(friends.contains((element)['id'])){
           Users user = Users.fromSnapshot(element);
-          user.getProfileUrl();
-          user.getScheduleUrl();
           user.setColor();
           _friendListofUser.add(user);
         }
         if(friendsRequest.contains((element)['id'])){
           Users user = Users.fromSnapshot(element);
-          user.getProfileUrl();
           _friendRequestListofUser.add(user);
         }
       });
@@ -111,14 +105,16 @@ class FirebaseUserController extends GetxController {
    void changeProfilePicture(String filePath) async {
     StorageRepo storage = StorageRepo();
     await storage.uploadFile(filePath,actualUser.email);
-    actualUser.getProfileUrl();
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'url': filePath});
   }
 
 
   void changeProfileSchedule(String filePath) async {
     StorageRepo storage = StorageRepo();
     await storage.uploadFileSchedule(filePath,actualUser.email);
-    actualUser.getScheduleUrl();
+    final doc = userFirebase.doc(authController.auth.currentUser!.email);
+    await doc.update({'urlSchedule': filePath});
   }
 
 

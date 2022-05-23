@@ -62,8 +62,16 @@ class _ProfileState extends State<Profile> {
     setState(() {
       actualUser = actualUsers;
       loaded = userController.loaded;
+      ru = userController.actualUser.ru; 
     });
     print(loaded);
+  }
+
+  void changeRu(){
+    userController.changeRU();
+    setState(() {
+      ru = userController.actualUser.ru;
+    });
   }
 
   Widget build(BuildContext context) {

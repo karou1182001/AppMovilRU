@@ -15,11 +15,10 @@ class EditProfile extends StatelessWidget {
   TextEditingController numberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   AuthenticationController authController = Get.find();
+  FirebaseUserController userController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    Get.put(FirebaseUserController());
-    FirebaseUserController userController = Get.find();
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -104,7 +103,6 @@ class EditProfile extends StatelessWidget {
                           .changeUserDescription(descriptionController.text);
                     }
 
-                    Get.to(() => NavBar());
                   },
                   child: Text(
                     'Editar Datos',

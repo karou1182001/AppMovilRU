@@ -16,25 +16,9 @@ class Users {
   late List friendsRequest;
  late List friendsRequested;
  late bool ru;
- Color color = Colors.red;
-  String url ='';
-  String urlSchedule = '';
-Future<void> getProfileUrl() async {
-    StorageRepo storage = StorageRepo();
-    url = await storage.retrieveFile(email); 
-    if(url==""){
-      url ='https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg';
-    }
-    print('Soy la URL: ${url}');
-  }
-  Future<void> getScheduleUrl() async {
-    StorageRepo storage = StorageRepo();
-    urlSchedule = await storage.retrieveFileSchedule(email);
-    if(urlSchedule == ''){
-      urlSchedule = 'https://i.pinimg.com/originals/36/1c/73/361c7372f6113e6dfb5c28f6f03194ee.png';
-    }
-    print('Soy la URL: ${url}');
-  }
+ late Color color = Colors.red;
+  late String url ;
+  late String urlSchedule;
 
   void setColor()async{
     if(ru){
@@ -44,8 +28,7 @@ Future<void> getProfileUrl() async {
     }
 }
 void init()async{
-  await getProfileUrl();
-  await getScheduleUrl();
+ 
 }
 
   Users.fromMap(Map<String, dynamic> map, {required this.userId})
@@ -57,6 +40,8 @@ void init()async{
         assert(map['friendsRequest'] != null),
         assert(map['friendsRequested'] != null),
         assert(map['ru'] != null),
+        assert(map['url'] != null),
+        assert(map['urlSchedule'] != null),
         name = map['name'],
         number = map['number'],
         email = map['email'],
@@ -64,7 +49,9 @@ void init()async{
         friends = map['friends'],
         friendsRequest = map['friendsRequest'],
         friendsRequested = map['friendsRequested'],
-        ru = map['ru'];
+        ru = map['ru'],
+        url = map['url'],
+        urlSchedule = map['urlSchedule'];
 
   Users.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data() as Map<String, dynamic>,
