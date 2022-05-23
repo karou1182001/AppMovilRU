@@ -42,7 +42,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   FirebaseEventController feventCont = Get.find();
   List<dynamic> personasInvitadas = [];
   String currentEmail = "";
-  late TextEditingController textControllerAttendee;
+  //late TextEditingController textControllerAttendee;
   late FocusNode textFocusNodeAttendee;
   bool isEditingEmail = false;
   XFile? image;
@@ -71,7 +71,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
       personasInvitadas = event.invitados;
       publico = event.publico;
     }
-    textControllerAttendee = TextEditingController();
+    //textControllerAttendee = TextEditingController();
     textFocusNodeAttendee = FocusNode();
     friendsOfUser = fuserCont.friendsOfUser;
   }
@@ -261,12 +261,10 @@ class _EventEditingPageState extends State<EventEditingPage> {
                   if (_validateEmail(currentEmail) == "email validado") {
                     setState(() {
                       textFocusNodeAttendee.unfocus();
-                      //calendar.EventAttendee eventAttendee = calendar.EventAttendee();
-                      //eventAttendee.email = currentEmail;
 
                       personasInvitadas.add(currentEmail);
 
-                      textControllerAttendee.text = '';
+                      //textControllerAttendee.text = '';
                       currentEmail = "";
                       isEditingEmail = false;
                     });
@@ -281,16 +279,11 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
   Widget listadeAmigos() => DropdownButtonFormField2(
         decoration: InputDecoration(
-          //Add isDense true and zero Padding.
-          //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
           isDense: true,
           contentPadding: EdgeInsets.zero,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-
-          //Add more decoration as you want here
-          //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
         ),
         isExpanded: true,
         hint: const Text(
@@ -318,20 +311,20 @@ class _EventEditingPageState extends State<EventEditingPage> {
                   ),
                 ))
             .toList(),
-        validator: (value) {
+        /*validator: (value) {
           if (value == null) {
             return 'Seleccione usuarios';
           }
-        },
+        },*/
         onChanged: (value) {
           //Do something when changing the item if you want.
           setState(() {
             currentEmail = value.toString();
           });
         },
-        onSaved: (value) {
+        /*onSaved: (value) {
           selectedValue = value.toString();
-        },
+        },*/
       );
   //Público o no público
   Widget switchPublico() => Container(
@@ -646,7 +639,9 @@ class _EventEditingPageState extends State<EventEditingPage> {
         );
       }
       //Añadir imagen a Firebase
-      feventCont.changeEventPicture(image!.path, titleController.text);
+      if (image != null) {
+        feventCont.changeEventPicture(image!.path, titleController.text);
+      }
 
       //Volvemos a la página anterior
       Navigator.pushAndRemoveUntil(
