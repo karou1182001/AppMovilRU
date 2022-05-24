@@ -201,6 +201,9 @@ class ProfileState extends State<Profile> {
 
             Row(
                 children: [
+                  const SizedBox(
+              width: 32,
+            ),
                   
                   Container(
                 padding: const EdgeInsets.only(left: 10),
@@ -226,7 +229,8 @@ class ProfileState extends State<Profile> {
                           Get.to(() => EditProfile());
                         },
                         key: const Key('edit'),
-                        child: const Icon(Icons.logout, color: colorp1),
+                        child: const Icon(Icons.edit_note, color: colorp1),
+                        style: ButtonStyle(),
                   ),
                 ),),
 
