@@ -214,7 +214,10 @@ class ProfileState extends State<Profile> {
                       onPressed: () async {
                         await getImageHorario();
                       },
-                      child: const Icon(Icons.add_a_photo, color: colorp1),),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateColor.resolveWith(
+                            (states) => colorp2)),
+                      child: const Icon(Icons.add_a_photo, color: Colors.white),),
                 ),
               ),
 
@@ -229,8 +232,10 @@ class ProfileState extends State<Profile> {
                           Get.to(() => EditProfile());
                         },
                         key: const Key('edit'),
-                        child: const Icon(Icons.edit_note, color: colorp1),
-                        style: ButtonStyle(),
+                        style: ButtonStyle(
+                        backgroundColor: MaterialStateColor.resolveWith(
+                            (states) => colorp2)),
+                        child: const Icon(Icons.edit_note, color: Colors.white),
                   ),
                 ),),
 
@@ -245,7 +250,10 @@ class ProfileState extends State<Profile> {
                       authController.signOut();
                       Get.to(() => MenuInicio());
                     },
-                    child: const Icon(Icons.logout, color: colorp1),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateColor.resolveWith(
+                            (states) => colorp2)),
+                    child: const Icon(Icons.logout, color: Colors.white),
                     ),
               ),
             ),
