@@ -126,7 +126,7 @@ class EditProfile extends StatelessWidget {
                             actions: [
                               TextButton(
                                   onPressed: () {
-                                    Get.to(const NavBar());
+                                    Navigator.of(context).pop();
                                   },
                                   child: const Text('OK'))
                             ],
