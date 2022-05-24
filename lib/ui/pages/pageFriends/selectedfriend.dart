@@ -115,54 +115,47 @@ class SelectedFriend extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 220),
-                    child: ElevatedButton(
-                        key: const Key('Track Friend'),
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18))),
-                            backgroundColor: MaterialStateColor.resolveWith(
-                                (states) => Colors.black)),
-                        onPressed: () {
-                          streamSubscription = _userStream.listen((user) {
-                            if(user.docs.singleWhere((element) => element['id']==selectedfriend.email)['ru']){
-                              Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  SelectedFriendMap(selectedfriend.email)));
-                            }else{
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: const Text('Accion Denegada'),
-                                  content: const Text('Este usuario no esta compartiendo su localizacion'),
-                                  actions: <Widget>[
-                                    FlatButton(onPressed:() {Navigator.of(context).pop();} , child: Text('OK'))
-                                  ],
-                                )
-                              );
-                            }
-                           });
-                          
-                          
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Icon(Icons.directions, color: Colors.white),
-                            const SizedBox(width: 10),
-                            Text(
-                              'Track',
-                              style: generalText(Colors.white, 15),
-                            ),
-                          ],
-                        )),
-                  ),
-                ),
+            Row(
+              children: [
+                const SizedBox(
+              width: 20,
+            ),
+                Container(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 220),
+                                    child: ElevatedButton(
+                                        key: const Key('Track Friend'),
+                                        onPressed: () {
+                                          streamSubscription = _userStream.listen((user) {
+                                            if(user.docs.singleWhere((element) => element['id']==selectedfriend.email)['ru']){
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SelectedFriendMap(selectedfriend.email)));
+                                            }else{
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) => AlertDialog(
+                                                  title: const Text('Accion Denegada'),
+                                                  content: const Text('Este usuario no esta compartiendo su localizacion'),
+                                                  actions: <Widget>[
+                                                    FlatButton(onPressed:() {Navigator.of(context).pop();} , child: Text('OK'))
+                                                  ],
+                                                )
+                                              );
+                                            }
+                                          });
+                                          
+                                          
+                                        },
+                                        child: const Icon(Icons.edit_location, color: colorp1),
+                                        ),
+                                  ),
+                                ),
+
+              ],
+            ),
+            
           ],
         ),
       ),
