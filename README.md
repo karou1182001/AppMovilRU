@@ -22,6 +22,8 @@ Enlace vídeo explicativo entrega de Backend:
 https://drive.google.com/file/d/1El95_RypeuSGFKG777Mc71wCu7Q10PxF/view?usp=sharing
 
 
+ENTREGA FINAL:
+
 
 Enlace vídeo explicativo últimos cambios: 
 https://drive.google.com/file/d/1dHPtx_BzD78yUIM6gaL-_FNgpNcm9uEO/view?usp=sharing
