@@ -6,7 +6,6 @@ import 'package:app_ru/ui/widgets/refreshWidget.dart';
 import 'package:app_ru/ui/widgets/serchWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:app_ru/ui/pages/pageFriends/userslist.dart';
 
 import '../../../domain/constants/controllers/firebaseuser_controller.dart';

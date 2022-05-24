@@ -1,5 +1,3 @@
-import 'package:app_ru/domain/constants/constants/color.dart';
-import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:flutter/material.dart';
 
 void main () {
