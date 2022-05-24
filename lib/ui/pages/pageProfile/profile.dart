@@ -195,106 +195,62 @@ class ProfileState extends State<Profile> {
                 height: MediaQuery.of(context).size.height * 0.2,
                 child: Image(
                     image: NetworkImage(actualUser.urlSchedule, scale: 1))),
-            Container(
-              padding: const EdgeInsets.only(left: 10),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 220),
-                child: ElevatedButton(
-                    key: const Key('changeschedule'),
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18))),
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.black)),
-                    onPressed: () async {
-                      await getImageHorario();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.logout, color: Colors.white),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Añadir Horario',
-                          style: generalText(Colors.white, 15),
-                        ),
-                      ],
-                    )),
-              ),
-            ),
             const SizedBox(
               height: 15,
             ),
-            Container(
-              padding: const EdgeInsets.only(left: 10),
-              child: Padding(
-                padding: const EdgeInsets.only(right: 220),
-                child: ElevatedButton(
-                    key: const Key('edit'),
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18))),
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.black)),
-                    onPressed: () {
-                      print('Navegar hacia la pantalla de editar perfil');
-                      Get.testMode = true;
-                      Get.to(() => EditProfile());
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Editar Perfil',
-                          style: generalText(Colors.white, 15),
-                        )
-                      ],
-                    )),
+
+            Row(
+                children: [
+                  
+                  Container(
+                padding: const EdgeInsets.only(left: 10),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 50),
+                  child: ElevatedButton(
+                      key: const Key('changeschedule'),
+                      onPressed: () async {
+                        await getImageHorario();
+                      },
+                      child: const Icon(Icons.add_a_photo, color: colorp1),),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
+
+                Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 50),
+                    child: ElevatedButton(
+                        onPressed: () {
+                        print('Navegar hacia la pantalla de editar perfil');
+                          Get.testMode = true;
+                          Get.to(() => EditProfile());
+                        },
+                        key: const Key('edit'),
+                        child: const Icon(Icons.logout, color: colorp1),
+                  ),
+                ),),
+
+                Container(
               padding: const EdgeInsets.only(left: 10),
               child: Padding(
-                padding: const EdgeInsets.only(right: 220),
+                padding: const EdgeInsets.only(right: 50),
                 child: ElevatedButton(
                     key: const Key('logout'),
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18))),
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.black)),
                     onPressed: () {
                       print('Navegar hacia la pantalla de inicio de sesión');
                       authController.signOut();
                       Get.to(() => MenuInicio());
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.logout, color: Colors.white),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Cerrar Sesión',
-                          style: generalText(Colors.white, 15),
-                        ),
-                      ],
-                    )),
+                    child: const Icon(Icons.logout, color: colorp1),
+                    ),
               ),
             ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            
           ],
         )),
       );
