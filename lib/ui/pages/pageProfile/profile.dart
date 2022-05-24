@@ -226,7 +226,7 @@ class ProfileState extends State<Profile> {
                           Get.to(() => EditProfile());
                         },
                         key: const Key('edit'),
-                        child: const Icon(Icons.logout, color: colorp1),
+                        child: const Icon(Icons.edit, color: colorp1),
                   ),
                 ),),
 
