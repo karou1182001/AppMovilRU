@@ -57,7 +57,7 @@ class EditProfile extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              TextFormField(controller: passwordController),
+              TextFormField(controller: passwordController, obscureText: true,),
               const SizedBox(
                 height: 15,
               ),
@@ -103,6 +103,22 @@ class EditProfile extends StatelessWidget {
                       userController
                           .changeUserDescription(descriptionController.text);
                     }
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Perfil Editado Correctamente'),
+                            content: const Text('👍👍👍'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Get.to(const NavBar());
+                                  },
+                                  child: const Text('OK'))
+                            ],
+                          );
+                        });
                   },
                   child: Text(
                     'Editar Datos',
