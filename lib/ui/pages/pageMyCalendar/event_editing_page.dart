@@ -262,7 +262,9 @@ class _EventEditingPageState extends State<EventEditingPage> {
                     setState(() {
                       textFocusNodeAttendee.unfocus();
 
-                      personasInvitadas.add(currentEmail);
+                      if (!personasInvitadas.contains(currentEmail)) {
+                        personasInvitadas.add(currentEmail);
+                      }
 
                       //textControllerAttendee.text = '';
                       currentEmail = "";
