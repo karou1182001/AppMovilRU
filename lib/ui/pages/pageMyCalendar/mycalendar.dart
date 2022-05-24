@@ -64,6 +64,7 @@ class _MyCalendarState extends State<MyCalendar> {
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(70.0),
             child: AppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: white,
               title:
                   Image.asset("assets/logo_appbar.png", height: 60, width: 50),

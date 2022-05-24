@@ -64,7 +64,10 @@ class EditProfile extends StatelessWidget {
                       color: Colors.black,
                       fontSize: 15,
                       fontWeight: FontWeight.bold)),
-              TextFormField(controller: passwordController, obscureText: true,),
+              TextFormField(
+                controller: passwordController,
+                obscureText: true,
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -93,14 +96,14 @@ class EditProfile extends StatelessWidget {
                   controller: descriptionController,
                   decoration: InputDecoration(
                       hintText: userController.actualUser.description)),
-                      const SizedBox(
-              height: 15,
-            ),
+              const SizedBox(
+                height: 15,
+              ),
               ElevatedButton(
                   key: Key('editar'),
                   style: ButtonStyle(
-                                          backgroundColor: MaterialStateColor.resolveWith(
-                                              (states) => colorp2)),
+                      backgroundColor:
+                          MaterialStateColor.resolveWith((states) => colorp2)),
                   onPressed: () {
                     if (nameController.text != '') {
                       userController.changeUserName(nameController.text);
@@ -126,7 +129,7 @@ class EditProfile extends StatelessWidget {
                             actions: [
                               TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Get.to(() => const NavBar());
                                   },
                                   child: const Text('OK'))
                             ],

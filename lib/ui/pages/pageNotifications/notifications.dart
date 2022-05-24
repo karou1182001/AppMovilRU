@@ -50,6 +50,7 @@ class _NotificationsState extends State<Notifications> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(70.0),
           child: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: white,
             title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
           ),
