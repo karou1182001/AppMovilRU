@@ -1,11 +1,8 @@
 
 import 'dart:async';
-
-
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedFriendMap.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app_ru/domain/constants/constants/text_style.dart';
 import '../../../domain/constants/constants/color.dart';

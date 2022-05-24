@@ -1,11 +1,8 @@
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/models/event.dart';
 import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../../domain/constants/constants/color.dart';
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 

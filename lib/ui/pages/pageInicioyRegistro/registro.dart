@@ -1,17 +1,11 @@
-import 'package:app_ru/domain/constants/constants/color.dart';
-import 'package:app_ru/domain/constants/constants/firabase_constants.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
-import 'package:app_ru/domain/constants/constants/text_style.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/condiciones.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/inicio.dart';
-import 'package:app_ru/ui/pages/pageProfile/profile.dart';
 import 'package:app_ru/ui/pages/pageInicioyRegistro/terminos.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-
 import '../../../domain/constants/controllers/authentication_controller.dart';
 
 void main() {

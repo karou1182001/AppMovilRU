@@ -2,8 +2,6 @@ import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/controllers/firebaseevent_controller.dart';
 import 'package:app_ru/domain/constants/controllers/firebaseuser_controller.dart';
 import 'package:app_ru/models/event.dart';
-import 'package:app_ru/ui/widgets/eventInvitationCard.dart';
-import 'package:app_ru/ui/widgets/userCardRequest.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
