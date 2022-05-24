@@ -29,7 +29,6 @@ class _NotificationsState extends State<Notifications> {
     super.initState();
     firebaseUserController.onInit();
     firebaseUserController.subscribeUpdates();
-    findInvitation();
     loadData();
   }
 
@@ -38,6 +37,7 @@ class _NotificationsState extends State<Notifications> {
   }
 
   loadData() async {
+    await firebaseEventController.findInvitation();
     usersRequest = await firebaseUserController.friendsRequestOfUser;
     invited = await firebaseEventController.invitedList;
     setState(() {
@@ -72,9 +72,7 @@ class _NotificationsState extends State<Notifications> {
                     shrinkWrap: true,
                     itemCount: friendsRequest.length,
                     itemBuilder: (BuildContext ctx, int index) {
-                      return UsercardRequest(
-                        user: friendsRequest[index],
-                      );
+                      return userCardReq(friendsRequest[index]);
                     },
                   ),
                 ),
@@ -90,13 +88,109 @@ class _NotificationsState extends State<Notifications> {
                     shrinkWrap: true,
                     itemCount: invitedRequest.length,
                     itemBuilder: (BuildContext ctx, int index) {
-                      return EventInvitationCard(
-                        event: invitedRequest[index],
-                      );
+                      return invitationCard(invitedRequest[index]);
                     },
                   ),
                 )
               ]),
+        ));
+  }
+
+//Widgets
+
+  Card userCardReq(Users user) {
+    return Card(
+        child: ListTile(
+      leading: CircleAvatar(
+        radius: 25,
+        backgroundImage: NetworkImage(user.url),
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: Container(
+              child: Text(
+                "${user.name}",
+                style: TextStyle(fontSize: 17),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          estiloBtn('Aceptar', selectColor, white, true, user),
+          estiloBtn('Rechazar', black, white, false, user)
+        ],
+      ),
+    ));
+  }
+
+  ElevatedButton estiloBtn(
+      String text, Color color, Color txtColor, bool aceptar, Users user) {
+    return ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.resolveWith((states) => color),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)))),
+        onPressed: () async {
+          if (aceptar) {
+            await firebaseUserController.acceptFriend(user.email);
+            loadData();
+          } else {
+            await firebaseUserController.declineFriend(user.email);
+            loadData();
+          }
+        },
+        child: Text(
+          text,
+          style: TextStyle(color: txtColor),
+        ));
+  }
+
+  Card invitationCard(Event event) {
+    return Card(
+        child: ListTile(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: Container(
+              child: Text(
+                event.name,
+                style: TextStyle(fontSize: 17),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          estiloBtnInvite('Aceptar', selectColor, white, true, event),
+          estiloBtnInvite('Rechazar', black, white, false, event)
+        ],
+      ),
+    ));
+  }
+
+  ElevatedButton estiloBtnInvite(
+      String text, Color color, Color txtColor, bool aceptar, Event event) {
+    return ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.resolveWith((states) => color),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)))),
+        onPressed: () async {
+          if (aceptar) {
+            await firebaseEventController.acceptInvitation(event.name);
+            loadData();
+          } else {
+            await firebaseEventController.denyInvitation(event.name);
+            loadData();
+          }
+        },
+        child: Text(
+          text,
+          style: TextStyle(color: txtColor),
         ));
   }
 }
