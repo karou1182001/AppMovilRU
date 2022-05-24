@@ -121,15 +121,15 @@ class SelectedFriend extends StatelessWidget {
               width: 20,
             ),
                 Container(
-                                  padding: const EdgeInsets.only(left: 10),
+                                  
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 220),
+                                    padding: const EdgeInsets.only(left: 150),
                                     child: ElevatedButton(
                                         key: const Key('Track Friend'),
                                         style: ButtonStyle(
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (states) => colorp2)),
-                        child: const Icon(Icons.edit_location, color: Colors.white),
+                                          backgroundColor: MaterialStateColor.resolveWith(
+                                              (states) => colorp2)),
+                                          child: const Icon(Icons.edit_location, color: Colors.white),
                                         onPressed: () {
                                           streamSubscription = _userStream.listen((user) {
                                             if(user.docs.singleWhere((element) => element['id']==selectedfriend.email)['ru']){

@@ -7,6 +7,8 @@ import 'package:app_ru/ui/widgets/navbar/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../domain/constants/constants/color.dart';
+
 class EditProfile extends StatelessWidget {
   EditProfile({Key? key}) : super(key: key);
   TextEditingController nameController = TextEditingController();
@@ -19,7 +21,13 @@ class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70.0),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          title: Image.asset("assets/logo_appbar.png", height: 60, width: 50),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.fromLTRB(50, 80, 50, 0),
@@ -85,8 +93,14 @@ class EditProfile extends StatelessWidget {
                   controller: descriptionController,
                   decoration: InputDecoration(
                       hintText: userController.actualUser.description)),
+                      const SizedBox(
+              height: 15,
+            ),
               ElevatedButton(
                   key: Key('editar'),
+                  style: ButtonStyle(
+                                          backgroundColor: MaterialStateColor.resolveWith(
+                                              (states) => colorp2)),
                   onPressed: () {
                     if (nameController.text != '') {
                       userController.changeUserName(nameController.text);
