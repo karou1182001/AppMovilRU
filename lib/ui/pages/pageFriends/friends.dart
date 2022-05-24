@@ -53,7 +53,7 @@ class _FriendsListState extends State<FriendsList> {
           const Padding(
               padding: EdgeInsets.only(top: 10, bottom: 10),
               child: Text(
-                'Friends',
+                'Amigos',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 20),
               )),
@@ -97,7 +97,7 @@ class _FriendsListState extends State<FriendsList> {
 
   Widget buildSearch() => SearchWidget(
     text: query,
-    hintText: 'Name',
+    hintText: 'nombre',
     onChanged: searchFriend,
   );
 

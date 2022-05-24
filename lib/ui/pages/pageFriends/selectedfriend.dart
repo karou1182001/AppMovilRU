@@ -30,14 +30,8 @@ class SelectedFriend extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(15),
-              child: Center(
-                child: Text(
-                  'Profile',
-                  style: generalText(Colors.black, 32),
-                ),
-              ),
+            const SizedBox(
+              height: 15,
             ),
             //Imagen de perfil
               SizedBox(
