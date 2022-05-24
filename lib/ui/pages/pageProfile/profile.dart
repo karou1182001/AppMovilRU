@@ -218,7 +218,7 @@ class ProfileState extends State<Profile> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateColor.resolveWith(
                             (states) => colorp2)),
-                      child: const Icon(Icons.add_a_photo, color: Colors.white),),
+                      child: const Icon(Icons.edit_calendar, color: Colors.white),),
                 ),
               ),
 
