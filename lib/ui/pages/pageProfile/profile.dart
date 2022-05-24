@@ -242,7 +242,7 @@ class ProfileState extends State<Profile> {
                 Container(
               padding: const EdgeInsets.only(left: 10),
               child: Padding(
-                padding: const EdgeInsets.only(right: 50),
+                padding: const EdgeInsets.only(right: 5),
                 child: ElevatedButton(
                     key: const Key('logout'),
                     onPressed: () {
