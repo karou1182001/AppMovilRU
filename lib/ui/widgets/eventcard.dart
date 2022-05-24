@@ -7,10 +7,11 @@ import '../../domain/constants/controllers/firebaseevent_controller.dart';
 
 class Eventcard extends StatelessWidget {
   Event event;
-
+  String url;
   Function onEventClick;
 
-  Eventcard({required this.event, required this.onEventClick});
+  Eventcard(
+      {required this.event, required this.url, required this.onEventClick});
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +78,12 @@ class Eventcard extends StatelessWidget {
   }
 
   Widget images() {
-    FirebaseEventController feventCont = Get.find();
-    feventCont.getEventUrl(event.name);
     return ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: (feventCont.url.value != '')
-                       ? Image.network(feventCont.url.value,fit: BoxFit.cover)
-                        :Image.network(
-                    'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg',fit: BoxFit.cover));
+        borderRadius: BorderRadius.circular(20),
+        child: (url != '')
+            ? Image.network(url, fit: BoxFit.cover)
+            : Image.network(
+                'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg',
+                fit: BoxFit.cover));
   }
 }

@@ -9,12 +9,12 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../domain/constants/constants/color.dart';
 import '../../../domain/constants/controllers/firebaseevent_controller.dart';
 
-
 class SelectedEvent extends StatelessWidget {
   Event selectedevent;
-  SelectedEvent({required this.selectedevent});
+  String url;
+  SelectedEvent({required this.selectedevent, required this.url});
   AuthenticationController authController = Get.find();
-  
+
   final FirebaseEventController feventCont = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -86,8 +86,8 @@ class SelectedEvent extends StatelessWidget {
                   //Suscibre buttom
                   GestureDetector(
                     onTap: () {
-                      feventCont.addConfirm(
-                          this.selectedevent, authController.auth.currentUser!.email);
+                      feventCont.addConfirm(this.selectedevent,
+                          authController.auth.currentUser!.email);
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
@@ -148,14 +148,15 @@ class SelectedEvent extends StatelessWidget {
         ));
   }
 
-  Widget images(){
+  Widget images() {
     return ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      //child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
-                      child: 
-                      (feventCont.url.value != '')
-                       ? Image.network(feventCont.url.value,fit: BoxFit.cover, height: 200)
-                        :Image.network(
-                    'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg',fit: BoxFit.cover, height: 200));
+        borderRadius: BorderRadius.circular(20),
+        //child: Image.asset('assets/' + selectedevent.imgName + '.jpg',
+        child: (url != '')
+            ? Image.network(url, fit: BoxFit.cover, height: 200)
+            : Image.network(
+                'https://www.meteorologiaenred.com/wp-content/uploads/2018/02/olas.jpg',
+                fit: BoxFit.cover,
+                height: 200));
   }
 }

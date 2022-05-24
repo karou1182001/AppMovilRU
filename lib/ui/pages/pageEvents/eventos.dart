@@ -19,18 +19,18 @@ class EventosList extends StatefulWidget {
 }
 
 class _EventosListState extends State<EventosList> {
-  
   final FirebaseEventController feventCont = Get.find();
   AuthenticationController authController = Get.find();
   List<Event> entries = <Event>[];
   List<Event> entrie = <Event>[];
+  List<String> url = <String>[];
   String query = '';
   void initState() {
     super.initState();
-    
+
     FirebaseEventController feventCont = Get.find();
-    //feventCont.onInit();
-    //feventCont.subscribeUpdates();
+    feventCont.onInit();
+    feventCont.subscribeUpdates();
     loadData();
   }
 
@@ -38,11 +38,17 @@ class _EventosListState extends State<EventosList> {
     print("LoadData");
     entrie = await feventCont.allEvents
         .where((e) =>
-            (e.persCreadora != authController.auth.currentUser!.email) == true &&
-            e.confirmados.contains(authController.auth.currentUser!.email) == false &&
+            (e.persCreadora != authController.auth.currentUser!.email) ==
+                true &&
+            e.confirmados.contains(authController.auth.currentUser!.email) ==
+                false &&
             e.publico == true)
         .toList();
-
+    int ind = 0;
+    for (var evn in entrie) {
+      await feventCont.getEventUrl(evn.name);
+      url.add(feventCont.url.value);
+    }
     setState(() {
       //Filtro eventos distintos del creador
       entries = entrie;
@@ -81,12 +87,14 @@ class _EventosListState extends State<EventosList> {
                       //EventCard
                       return Eventcard(
                         event: entries[index],
+                        url: url[index],
                         onEventClick: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SelectedEvent(
                                         selectedevent: entries[index],
+                                        url: url[index],
                                       )));
                         },
                       );
