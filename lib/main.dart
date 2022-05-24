@@ -1,3 +1,4 @@
+import 'package:app_ru/domain/constants/constants/color.dart';
 import 'package:app_ru/domain/constants/constants/storage_repo.dart';
 import 'package:app_ru/domain/constants/controllers/authentication_controller.dart';
 import 'package:app_ru/domain/constants/controllers/firebaseuser_controller.dart';
@@ -9,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'domain/constants/controllers/authentication_controller.dart';
 import 'domain/constants/controllers/firebaseevent_controller.dart';
+import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,8 +56,24 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(child: Text("Loading")),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(child: Container(
+        child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/logo_appbar.png"),
+                          )
+                        )
+                    ),
+                    const Text("Loading",
+                        style: TextStyle(
+                            color: colorp1,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold)),])))
     );
   }
 }

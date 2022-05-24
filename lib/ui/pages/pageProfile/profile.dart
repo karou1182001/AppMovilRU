@@ -107,7 +107,7 @@ class ProfileState extends State<Profile> {
                       width: 35,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.amber,
+                          color: colorp1,
                           border: Border.all(width: 3, color: Colors.black)),
                       child: const Icon(Icons.edit, color: Colors.black),
                     ),

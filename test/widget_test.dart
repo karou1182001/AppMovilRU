@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:app_ru/models/user.dart';
 import 'package:app_ru/models/users.dart';
 import 'package:app_ru/ui/pages/pageFriends/friends.dart';
 import 'package:app_ru/ui/pages/pageFriends/selectedfriend.dart';
