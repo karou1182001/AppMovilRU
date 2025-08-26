@@ -2,7 +2,6 @@
 
 RU is a **mobile application** designed to help university students easily find campus events, connect with peers, and engage in a more active campus life.  
 
-The app not only improved communication but also **boosted student engagement by 30%**, becoming a central tool for event participation and social interaction.  
 
 ---
 
@@ -35,14 +34,6 @@ This stack was chosen to ensure **fast development**, **real-time synchronizatio
 
 ---
 
-## 🚀 Key Achievements
-- 🎓 Designed to enhance **university life** and peer-to-peer connections  
-- 📈 Increased student engagement by **30%**  
-- 👩‍💻 Led full-stack development of the entire application  
-- 🏆 Positive impact recognized by students and faculty  
-
----
-
 ## 🎥 Demo Video
 <a href="https://drive.google.com/file/d/1Yw07hLMWMkX7oZCyzF6mkarDHmg58CbK/view?usp=sharing" target="_blank">
   <img src="assets/RUMobileapp.png" alt="RU Demo Video" width="500"/>
@@ -55,15 +46,3 @@ This stack was chosen to ensure **fast development**, **real-time synchronizatio
 ## 📥 Explanation Video
 👉 [Explanation video – latest changes](https://drive.google.com/file/d/1dHPtx_BzD78yUIM6gaL-_FNgpNcm9uEO/view?usp=sharing)  
 
----
-
-## 👩‍💻 Team & Roles
-- Led **full-stack development** (frontend + backend integration)  
-- Collaborated with peers on UI/UX and feature testing  
-- Focused on scalability and ease-of-use for student adoption  
-
----
-
-## 🏆 Impact
-RU showcased how student-driven innovation can transform campus life.  
-By merging technology with real student needs, it created a platform that made participation in university activities more accessible, social, and engaging.  
